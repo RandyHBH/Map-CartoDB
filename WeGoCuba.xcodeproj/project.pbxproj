@@ -7,14 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */; };
+		8B273CC01F61C5C1008FA023 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBF1F61C5C1008FA023 /* Events.swift */; };
+		8B6416631F6196E600D5184D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416621F6196E600D5184D /* GLKit.framework */; };
+		8B6416651F61977300D5184D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416641F61977300D5184D /* libc++.tbd */; };
+		8B6416671F61978900D5184D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416661F61978900D5184D /* libz.tbd */; };
 		8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A000F1F55A42900330631 /* AppDelegate.swift */; };
 		8B9A00121F55A42900330631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A00111F55A42900330631 /* ViewController.swift */; };
 		8B9A00151F55A42900330631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00131F55A42900330631 /* Main.storyboard */; };
 		8B9A00171F55A42900330631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00161F55A42900330631 /* Assets.xcassets */; };
 		8B9A001A1F55A42900330631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00181F55A42900330631 /* LaunchScreen.storyboard */; };
+		D53FED525E0A8C0206484CAB /* Pods_WeGoCuba.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 919D3E9F52A0F47479A16E13 /* Pods_WeGoCuba.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A2E8AADD279108FAB6C941D /* Pods-WeGoCuba.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeGoCuba.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba.release.xcconfig"; sourceTree = "<group>"; };
+		34463DE8C6C21A28EED69B9C /* Pods-WeGoCuba.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeGoCuba.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba.debug.xcconfig"; sourceTree = "<group>"; };
+		8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMarkers.swift; path = Marcadores/AddMarkers.swift; sourceTree = "<group>"; };
+		8B273CBF1F61C5C1008FA023 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Events.swift; path = Listeners/Events.swift; sourceTree = "<group>"; };
+		8B6416621F6196E600D5184D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		8B6416641F61977300D5184D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		8B6416661F61978900D5184D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B9A000C1F55A42900330631 /* WeGoCuba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeGoCuba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9A000F1F55A42900330631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B9A00111F55A42900330631 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +35,8 @@
 		8B9A00161F55A42900330631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B9A00191F55A42900330631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B9A001B1F55A42900330631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BD6B4E11F61816600C86085 /* WeGoCuba-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeGoCuba-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		919D3E9F52A0F47479A16E13 /* Pods_WeGoCuba.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeGoCuba.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +44,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B6416671F61978900D5184D /* libz.tbd in Frameworks */,
+				8B6416651F61977300D5184D /* libc++.tbd in Frameworks */,
+				8B6416631F6196E600D5184D /* GLKit.framework in Frameworks */,
+				D53FED525E0A8C0206484CAB /* Pods_WeGoCuba.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FB4CA656BB8242F416F74DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B6416661F61978900D5184D /* libz.tbd */,
+				8B6416641F61977300D5184D /* libc++.tbd */,
+				8B6416621F6196E600D5184D /* GLKit.framework */,
+				919D3E9F52A0F47479A16E13 /* Pods_WeGoCuba.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8B9A00031F55A42900330631 = {
 			isa = PBXGroup;
 			children = (
 				8B9A000E1F55A42900330631 /* WeGoCuba */,
 				8B9A000D1F55A42900330631 /* Products */,
+				8CF7926FE7007A1084D1039B /* Pods */,
+				1FB4CA656BB8242F416F74DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +88,24 @@
 			children = (
 				8B9A000F1F55A42900330631 /* AppDelegate.swift */,
 				8B9A00111F55A42900330631 /* ViewController.swift */,
+				8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */,
+				8B273CBF1F61C5C1008FA023 /* Events.swift */,
 				8B9A00131F55A42900330631 /* Main.storyboard */,
 				8B9A00161F55A42900330631 /* Assets.xcassets */,
 				8B9A00181F55A42900330631 /* LaunchScreen.storyboard */,
 				8B9A001B1F55A42900330631 /* Info.plist */,
+				8BD6B4E11F61816600C86085 /* WeGoCuba-Bridging-Header.h */,
 			);
 			path = WeGoCuba;
+			sourceTree = "<group>";
+		};
+		8CF7926FE7007A1084D1039B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				34463DE8C6C21A28EED69B9C /* Pods-WeGoCuba.debug.xcconfig */,
+				1A2E8AADD279108FAB6C941D /* Pods-WeGoCuba.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B9A001E1F55A42900330631 /* Build configuration list for PBXNativeTarget "WeGoCuba" */;
 			buildPhases = (
+				F4BE0A359239E21AAA32E89B /* [CP] Check Pods Manifest.lock */,
 				8B9A00081F55A42900330631 /* Sources */,
 				8B9A00091F55A42900330631 /* Frameworks */,
 				8B9A000A1F55A42900330631 /* Resources */,
+				496A036033A528694C4459CE /* [CP] Embed Pods Frameworks */,
+				B02308005D41D7AA908B9567 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,13 +179,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		496A036033A528694C4459CE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B02308005D41D7AA908B9567 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4BE0A359239E21AAA32E89B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WeGoCuba-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B9A00081F55A42900330631 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B273CC01F61C5C1008FA023 /* Events.swift in Sources */,
 				8B9A00121F55A42900330631 /* ViewController.swift in Sources */,
 				8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */,
+				8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -247,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -257,6 +357,7 @@
 		};
 		8B9A001F1F55A42900330631 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34463DE8C6C21A28EED69B9C /* Pods-WeGoCuba.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LJ9SF6A6MP;
@@ -264,12 +365,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cu.bartumeu.WeGoCuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeGoCuba-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		8B9A00201F55A42900330631 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A2E8AADD279108FAB6C941D /* Pods-WeGoCuba.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LJ9SF6A6MP;
@@ -277,6 +380,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cu.bartumeu.WeGoCuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeGoCuba-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -300,6 +404,7 @@
 				8B9A00201F55A42900330631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
