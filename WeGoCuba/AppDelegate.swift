@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    
     var License: String = "XTUMwQ0ZCa2NMZWR0U1lBbHBDS21nSHYzbHJwc2pYUzhBaFVBdzdmRFljdkhUL2EzcjMvd1NpVCt6bUxjeDNnPQoKYXBwVG9rZW49ODhiMTI5MWYtOGM2MC00OWQyLWExYmMtNmNhNTFiMzI0Njk5CmJ1bmRsZUlkZW50aWZpZXI9Y3UuYmFydHVtZXUuV2VHb0N1YmEKb25saW5lTGljZW5zZT0xCnByb2R1Y3RzPXNkay1pb3MtNC4qCndhdGVybWFyaz1jYXJ0b2RiCg=="    
 
 
@@ -20,9 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NTMapView.registerLicense(License);
         
-        window?.rootViewController = UINavigationController(rootViewController: ViewController());
-        window?.makeKeyAndVisible();
-
+        
+        
         return true
     }
 

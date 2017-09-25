@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0E8B721F788C8B00BD08D1 /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E8B701F788C8B00BD08D1 /* PopupButton.swift */; };
+		8B0E8B731F788C8B00BD08D1 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E8B711F788C8B00BD08D1 /* SwitchButton.swift */; };
+		8B0E8B751F788D0C00BD08D1 /* StateSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E8B741F788D0C00BD08D1 /* StateSwitch.swift */; };
+		8B0E8B781F788D9900BD08D1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E8B771F788D9900BD08D1 /* Colors.swift */; };
+		8B0E8B7A1F788E1400BD08D1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E8B791F788E1400BD08D1 /* Extensions.swift */; };
+		8B0E8B861F78A24D00BD08D1 /* icon_compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E8B831F78A24D00BD08D1 /* icon_compass.png */; };
+		8B0E8B871F78A24D00BD08D1 /* icon_track_location_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E8B841F78A24D00BD08D1 /* icon_track_location_off.png */; };
+		8B0E8B881F78A24D00BD08D1 /* icon_track_location_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E8B851F78A24D00BD08D1 /* icon_track_location_on.png */; };
 		8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */; };
 		8B273CC01F61C5C1008FA023 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBF1F61C5C1008FA023 /* Events.swift */; };
+		8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4142761F68E5320002AD80 /* BoundingBox.swift */; };
 		8B6416631F6196E600D5184D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416621F6196E600D5184D /* GLKit.framework */; };
 		8B6416651F61977300D5184D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416641F61977300D5184D /* libc++.tbd */; };
 		8B6416671F61978900D5184D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416661F61978900D5184D /* libz.tbd */; };
+		8B724FF51F715DF70075270C /* cuba.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B724FF11F715DF70075270C /* cuba.mbtiles */; };
 		8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A000F1F55A42900330631 /* AppDelegate.swift */; };
 		8B9A00121F55A42900330631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A00111F55A42900330631 /* ViewController.swift */; };
 		8B9A00151F55A42900330631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00131F55A42900330631 /* Main.storyboard */; };
@@ -23,11 +33,21 @@
 /* Begin PBXFileReference section */
 		1A2E8AADD279108FAB6C941D /* Pods-WeGoCuba.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeGoCuba.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba.release.xcconfig"; sourceTree = "<group>"; };
 		34463DE8C6C21A28EED69B9C /* Pods-WeGoCuba.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeGoCuba.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba.debug.xcconfig"; sourceTree = "<group>"; };
+		8B0E8B701F788C8B00BD08D1 /* PopupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupButton.swift; sourceTree = "<group>"; };
+		8B0E8B711F788C8B00BD08D1 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
+		8B0E8B741F788D0C00BD08D1 /* StateSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateSwitch.swift; sourceTree = "<group>"; };
+		8B0E8B771F788D9900BD08D1 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8B0E8B791F788E1400BD08D1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8B0E8B831F78A24D00BD08D1 /* icon_compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_compass.png; sourceTree = "<group>"; };
+		8B0E8B841F78A24D00BD08D1 /* icon_track_location_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_track_location_off.png; sourceTree = "<group>"; };
+		8B0E8B851F78A24D00BD08D1 /* icon_track_location_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_track_location_on.png; sourceTree = "<group>"; };
 		8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMarkers.swift; path = Marcadores/AddMarkers.swift; sourceTree = "<group>"; };
 		8B273CBF1F61C5C1008FA023 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Events.swift; path = Listeners/Events.swift; sourceTree = "<group>"; };
+		8B4142761F68E5320002AD80 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		8B6416621F6196E600D5184D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8B6416641F61977300D5184D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8B6416661F61978900D5184D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8B724FF11F715DF70075270C /* cuba.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = cuba.mbtiles; sourceTree = "<group>"; };
 		8B9A000C1F55A42900330631 /* WeGoCuba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeGoCuba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9A000F1F55A42900330631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B9A00111F55A42900330631 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,9 +85,67 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8B0E8B6F1F788C8B00BD08D1 /* SlideInPopup */ = {
+			isa = PBXGroup;
+			children = (
+				8B0E8B741F788D0C00BD08D1 /* StateSwitch.swift */,
+				8B0E8B701F788C8B00BD08D1 /* PopupButton.swift */,
+				8B0E8B711F788C8B00BD08D1 /* SwitchButton.swift */,
+			);
+			path = SlideInPopup;
+			sourceTree = "<group>";
+		};
+		8B0E8B761F788D9900BD08D1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8B0E8B791F788E1400BD08D1 /* Extensions.swift */,
+				8B0E8B771F788D9900BD08D1 /* Colors.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8B0E8B821F78A24D00BD08D1 /* IMG */ = {
+			isa = PBXGroup;
+			children = (
+				8B0E8B831F78A24D00BD08D1 /* icon_compass.png */,
+				8B0E8B841F78A24D00BD08D1 /* icon_track_location_off.png */,
+				8B0E8B851F78A24D00BD08D1 /* icon_track_location_on.png */,
+			);
+			path = IMG;
+			sourceTree = "<group>";
+		};
+		8B58A58E1F68754500F15888 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8B9A00111F55A42900330631 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8B58A58F1F6875EA00F15888 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8B273CBF1F61C5C1008FA023 /* Events.swift */,
+				8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */,
+				8B4142761F68E5320002AD80 /* BoundingBox.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		8B724FF01F715DF70075270C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B0E8B821F78A24D00BD08D1 /* IMG */,
+				8BA3B9961F71B69E0020EB51 /* Vectorial */,
+				8BA3B9951F71B6850020EB51 /* Raster */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8B9A00031F55A42900330631 = {
 			isa = PBXGroup;
 			children = (
+				8B724FF01F715DF70075270C /* Resources */,
 				8B9A000E1F55A42900330631 /* WeGoCuba */,
 				8B9A000D1F55A42900330631 /* Products */,
 				8CF7926FE7007A1084D1039B /* Pods */,
@@ -87,16 +165,32 @@
 			isa = PBXGroup;
 			children = (
 				8B9A000F1F55A42900330631 /* AppDelegate.swift */,
-				8B9A00111F55A42900330631 /* ViewController.swift */,
-				8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */,
-				8B273CBF1F61C5C1008FA023 /* Events.swift */,
 				8B9A00131F55A42900330631 /* Main.storyboard */,
+				8B58A58E1F68754500F15888 /* Controller */,
+				8B58A58F1F6875EA00F15888 /* Components */,
+				8B0E8B6F1F788C8B00BD08D1 /* SlideInPopup */,
+				8B0E8B761F788D9900BD08D1 /* Utils */,
 				8B9A00161F55A42900330631 /* Assets.xcassets */,
 				8B9A00181F55A42900330631 /* LaunchScreen.storyboard */,
 				8B9A001B1F55A42900330631 /* Info.plist */,
 				8BD6B4E11F61816600C86085 /* WeGoCuba-Bridging-Header.h */,
 			);
 			path = WeGoCuba;
+			sourceTree = "<group>";
+		};
+		8BA3B9951F71B6850020EB51 /* Raster */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Raster;
+			sourceTree = "<group>";
+		};
+		8BA3B9961F71B69E0020EB51 /* Vectorial */ = {
+			isa = PBXGroup;
+			children = (
+				8B724FF11F715DF70075270C /* cuba.mbtiles */,
+			);
+			name = Vectorial;
 			sourceTree = "<group>";
 		};
 		8CF7926FE7007A1084D1039B /* Pods */ = {
@@ -172,8 +266,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9A001A1F55A42900330631 /* LaunchScreen.storyboard in Resources */,
+				8B0E8B861F78A24D00BD08D1 /* icon_compass.png in Resources */,
+				8B724FF51F715DF70075270C /* cuba.mbtiles in Resources */,
 				8B9A00171F55A42900330631 /* Assets.xcassets in Resources */,
+				8B0E8B881F78A24D00BD08D1 /* icon_track_location_on.png in Resources */,
 				8B9A00151F55A42900330631 /* Main.storyboard in Resources */,
+				8B0E8B871F78A24D00BD08D1 /* icon_track_location_off.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,10 +333,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */,
+				8B0E8B781F788D9900BD08D1 /* Colors.swift in Sources */,
+				8B0E8B721F788C8B00BD08D1 /* PopupButton.swift in Sources */,
 				8B273CC01F61C5C1008FA023 /* Events.swift in Sources */,
+				8B0E8B731F788C8B00BD08D1 /* SwitchButton.swift in Sources */,
+				8B0E8B7A1F788E1400BD08D1 /* Extensions.swift in Sources */,
 				8B9A00121F55A42900330631 /* ViewController.swift in Sources */,
 				8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */,
 				8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */,
+				8B0E8B751F788D0C00BD08D1 /* StateSwitch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

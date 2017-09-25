@@ -6,6 +6,8 @@
 //  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
 //
 
+import Foundation
+
 extension NTMapView {
     
     func emptyPositionMarker(projection: NTProjection) -> NTMarker {
