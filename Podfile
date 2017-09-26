@@ -6,7 +6,7 @@ target 'WeGoCuba' do
   use_frameworks!
 
   # Pods for WeGoCuba
-  pod 'CartoMobileSDK', '4.0.2'
+  pod 'CartoMobileSDK', '4.1.0-rc.2'
 
 end
 
