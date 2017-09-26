@@ -21,24 +21,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xh6-g3-XDh">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-sL-wiY" customClass="SwitchButton" customModule="WeGoCuba" customModuleProvider="target">
+                                <rect key="frame" x="300" y="405" width="50" height="52"/>
+                                <state key="normal" image="icon_track_location_on.png"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LRM-sL-wiY" secondAttribute="bottom" constant="210" id="1Kf-tN-9zH"/>
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="D1r-53-AOg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xh6-g3-XDh" secondAttribute="bottom" id="F5p-RW-wJg"/>
+                            <constraint firstAttribute="trailing" secondItem="LRM-sL-wiY" secondAttribute="trailing" constant="25" id="I2c-k8-RPl"/>
                             <constraint firstAttribute="trailing" secondItem="Xh6-g3-XDh" secondAttribute="trailing" id="JDp-0b-Pxr"/>
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="caf-3l-hWk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MIm-UM-n80">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="p8r-5m-QMh"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="4Mz-Nb-LDi"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="MIm-UM-n80"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="map" destination="Xh6-g3-XDh" id="Vim-Dd-81W"/>
+                        <outlet property="switchButton" destination="LRM-sL-wiY" id="95J-nH-qnZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -64,4 +69,7 @@
             <point key="canvasLocation" x="309.60000000000002" y="16.641679160419791"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_track_location_on.png" width="50" height="52"/>
+    </resources>
 </document>

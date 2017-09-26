@@ -14,13 +14,12 @@ class SwitchButton : PopupButton {
     var delegate: SwitchDelegate?
     
     func isOnline() -> Bool {
-        return imageView.image == image
+        return imageView!.image == image
     }
     
     var offImage: UIImage!
     
-    convenience init(onImageUrl: String, offImageUrl: String) {
-        self.init(frame: CGRect.zero)
+    func initialize(onImageUrl: String, offImageUrl: String) {
         
         initialize(imageUrl: onImageUrl)
         offImage = UIImage(named: offImageUrl)
@@ -35,10 +34,10 @@ class SwitchButton : PopupButton {
     }
     
     func toggle() {
-        if (imageView.image == image) {
-            imageView.image = offImage
+        if (imageView?.image == image) {
+            imageView?.image = offImage
         } else {
-            imageView.image = image
+            imageView?.image = image
         }
     }
     

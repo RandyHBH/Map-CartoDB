@@ -21,11 +21,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     var source: NTLocalVectorDataSource!
     
     var buttons : [PopupButton]?
-    var switchButton: SwitchButton!
     
     var manager: CLLocationManager!
     var latestLocation: CLLocation!
     
+    @IBOutlet var switchButton: SwitchButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         map.frame = view.bounds
         
         //Need to add as a subview
-        view.addSubview(map)
+        view.insertSubview(map, at: 1)
         
         // Load MBTiles Raster Tiles o MBTiles Vector Tiles
         if RASTER_IMAGE {
@@ -53,12 +53,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         
         
         //Creating a botton & add to array for later given a position
-        switchButton = SwitchButton(onImageUrl: "icon_track_location_on.png", offImageUrl: "icon_track_location_off.png")
+        switchButton.initialize(onImageUrl: "icon_track_location_on.png", offImageUrl: "icon_track_location_off.png")
         switchButton.delegate = self
-        addButton(button: switchButton)
         
-        layoutSubviews()
         
+        // FOCUS IN CUBA
         map?.setFocus(projection?.fromWgs84(NTMapPos(x: -82.2906, y: 23.0469)), durationSeconds: 3)
         map?.setZoom(6, durationSeconds: 3)
         
@@ -110,6 +109,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     
     //MARK: END SWITCH BUTTON DELEGATE & LOCATION UPDATE START/STOP
     
+    //MARK: LOCATION METHODS
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Latest location saved as class variable to get bearing to adjust compass
+        latestLocation = locations[0]
+        
+        // Not "online", but reusing the online switch to achieve location tracking functionality
+        if (switchButton.isOnline()) {
+            showUserAt(location: latestLocation)
+        }
+    }
+    
+    //MARK: END LOCATION METHODS
+    
     //MARK: RASTER METHODS
     
     func loadRasterDataSource() {
@@ -136,11 +149,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     func loadVectorDataSource() {
         // Create a local vector data source
         let source: NTTileDataSource? = createTileDataSource()
+        let newbaseLayer = NTCartoOfflineVectorTileLayer(dataSource: source, style: .CARTO_BASEMAP_STYLE_VOYAGER)
+
+//        let baseLayer = NTCartoOnlineVectorTileLayer(style: .CARTO_BASEMAP_STYLE_VOYAGER)
+//        let decoder: NTVectorTileDecoder? = baseLayer?.getTileDecoder()
+//        let layer = NTVectorTileLayer(dataSource: source, decoder: decoder)
         
-        let baseLayer = NTCartoOnlineVectorTileLayer(style: .CARTO_BASEMAP_STYLE_VOYAGER)
-        let decoder: NTVectorTileDecoder? = baseLayer?.getTileDecoder()
-        let layer = NTVectorTileLayer(dataSource: source, decoder: decoder)
-        map?.getLayers()?.add(layer)
+        map?.getLayers()?.add(newbaseLayer)
     }
     
     func createTileDataSource() -> NTTileDataSource {
@@ -154,19 +169,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     
     //MARK: END VECTOR METHODS
     
-    //MARK: LOCATION METHODS
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Latest location saved as class variable to get bearing to adjust compass
-        latestLocation = locations[0]
-        
-        // Not "online", but reusing the online switch to achieve location tracking functionality
-        if (switchButton.isOnline()) {
-            showUserAt(location: latestLocation)
-        }
-    }
-    
-    //MARK: END LOCATION METHODS
     
     var userMarker: NTPoint!
     var accuracyMarker: NTPolygon!
@@ -180,7 +183,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
         
         map.setFocus(position, durationSeconds: 1)
-        map.setZoom(9, durationSeconds: 1)
+        map.setZoom(6, durationSeconds: 1)
         
         let builder = NTPolygonStyleBuilder()
         builder?.setColor(Colors.lightTransparentAppleBlue.toNTColor())
@@ -239,46 +242,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     
     //MARK: END LOCATION METHODS
     
-    //MARK: BUTTONS
-    
-    func addButton(button: PopupButton) {
-        
-        if (buttons == nil) {
-            buttons = [PopupButton]()
-        }
-        
-        buttons!.append(button)
-        view.addSubview(button)
-    }
-    
-    //MARK: END BUTTONS
-    
-    //MARK: LAYOUT SUBVIEWS
-    
-    let bottomLabelHeight: CGFloat = 25
-    let smallPadding: CGFloat = 5
-    
-    func layoutSubviews() {
-        
-        let count = CGFloat(self.buttons!.count)
-        
-        let buttonWidth: CGFloat = 40
-        let innerPadding: CGFloat = 15
-        
-        let totalArea = buttonWidth * count + (innerPadding * (count - 1))
-        
-        let w: CGFloat = buttonWidth
-        let h: CGFloat = w
-        let y: CGFloat = view.frame.height - (bottomLabelHeight + h + smallPadding)
-        var x: CGFloat = view.frame.width / 2 - totalArea / 2
-        
-        for button in buttons! {
-            button.frame = CGRect(x: x, y: y, width: w, height: h)
-            
-            x += w + innerPadding
-        }
-        
-        
-    }
     
 }

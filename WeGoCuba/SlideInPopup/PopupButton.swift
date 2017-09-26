@@ -9,42 +9,21 @@
 import Foundation
 import UIKit
 
-class PopupButton : UIView {
+class PopupButton : UIButton {
     
     let duration: Double = 200
 
-    var imageView: UIImageView!
     var image: UIImage!
-    
-    convenience init(imageUrl: String) {
-        self.init(frame: CGRect.zero)
-        
-        initialize(imageUrl: imageUrl)
-    }
     
     func initialize(imageUrl: String) {
         backgroundColor = UIColor.white
         
-        imageView = UIImageView()
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView?.clipsToBounds = true
+        imageView?.contentMode = .scaleAspectFit
         
         image = UIImage(named: imageUrl)
-        imageView.image = image
+        imageView?.image = image
         
-        addSubview(imageView)
-    }
-    
-    var isEnabled = true
-    
-    func enable() {
-        isEnabled = true
-        alpha = 1.0
-    }
-    
-    func disable() {
-        isEnabled = false
-        alpha = 0.5
     }
     
     override func layoutSubviews() {
@@ -55,7 +34,7 @@ class PopupButton : UIView {
         
         let padding: CGFloat = frame.height / 3.5
         
-        imageView.frame = CGRect(x: padding, y: padding, width: frame.width - 2 * padding, height: frame.height - 2 * padding)
+        imageView?.frame = CGRect(x: padding, y: padding, width: frame.width - 2 * padding, height: frame.height - 2 * padding)
         
         addRoundShadow()
     }
