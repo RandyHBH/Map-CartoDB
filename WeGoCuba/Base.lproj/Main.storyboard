@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Awo-2B-AH5">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -17,49 +17,163 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xh6-g3-XDh">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-sL-wiY" customClass="SwitchButton" customModule="WeGoCuba" customModuleProvider="target">
-                                <rect key="frame" x="300" y="405" width="50" height="52"/>
-                                <state key="normal" image="icon_track_location_on.png"/>
+                            <button opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-sL-wiY" customClass="LocationButton" customModule="WeGoCuba" customModuleProvider="target">
+                                <rect key="frame" x="270" y="190" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="oyv-cc-FUJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="zTQ-51-6VU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" image="icon_track_location_off.png"/>
                             </button>
+                            <button opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcG-3s-ECL" customClass="RotationResetButton" customModule="WeGoCuba" customModuleProvider="target">
+                                <rect key="frame" x="270" y="30" width="40" height="40"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2zQ-NT-ENk"/>
+                                    <constraint firstAttribute="height" constant="40" id="VFB-46-cwf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" image="icon_compass.png"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="nyJ-pQ-4vr" appends="YES" id="zez-iN-3Ig"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.64999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlU-hr-sfS" userLabel="Route Button" customClass="RouteButton" customModule="WeGoCuba" customModuleProvider="target">
+                                <rect key="frame" x="270" y="240" width="40" height="40"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2Bc-Js-UQ8"/>
+                                    <constraint firstAttribute="height" constant="40" id="sWK-09-wsI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" image="route.png"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qE-dD-NUM" customClass="ScaleBar" customModule="WeGoCuba" customModuleProvider="target">
+                                <rect key="frame" x="256" y="440" width="54" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="0JJ-3Z-v0x"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="6Ps-6G-ShW"/>
+                                    <constraint firstAttribute="height" constant="20" id="Ee7-Tj-33J"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="SlW-2q-6wX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LRM-sL-wiY" secondAttribute="bottom" constant="210" id="1Kf-tN-9zH"/>
+                            <constraint firstAttribute="trailing" secondItem="4qE-dD-NUM" secondAttribute="trailing" constant="10" id="1Fq-H9-gtD"/>
+                            <constraint firstAttribute="trailing" secondItem="DcG-3s-ECL" secondAttribute="trailing" constant="10" id="1U2-JX-ehW"/>
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="D1r-53-AOg"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LRM-sL-wiY" secondAttribute="bottom" constant="150" id="Dkp-eT-pQh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xh6-g3-XDh" secondAttribute="bottom" id="F5p-RW-wJg"/>
-                            <constraint firstAttribute="trailing" secondItem="LRM-sL-wiY" secondAttribute="trailing" constant="25" id="I2c-k8-RPl"/>
+                            <constraint firstAttribute="trailing" secondItem="LRM-sL-wiY" secondAttribute="trailing" constant="10" id="IcG-2T-14F"/>
                             <constraint firstAttribute="trailing" secondItem="Xh6-g3-XDh" secondAttribute="trailing" id="JDp-0b-Pxr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4qE-dD-NUM" secondAttribute="bottom" constant="20" id="K7Y-Hg-eTB"/>
+                            <constraint firstItem="DcG-3s-ECL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="P1c-nG-P5A"/>
+                            <constraint firstItem="BlU-hr-sfS" firstAttribute="top" secondItem="LRM-sL-wiY" secondAttribute="bottom" constant="10" id="STW-QZ-bfX"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4qE-dD-NUM" secondAttribute="bottom" constant="20" id="U6T-q1-n1O"/>
+                            <constraint firstItem="DcG-3s-ECL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="Z5h-kh-HUr"/>
+                            <constraint firstItem="Xh6-g3-XDh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="a2g-eT-PTz"/>
+                            <constraint firstAttribute="trailing" secondItem="Xh6-g3-XDh" secondAttribute="trailing" id="cKj-0I-gNe"/>
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="caf-3l-hWk"/>
+                            <constraint firstAttribute="trailing" secondItem="4qE-dD-NUM" secondAttribute="trailing" constant="10" id="i2M-4D-3ci"/>
+                            <constraint firstAttribute="trailing" secondItem="BlU-hr-sfS" secondAttribute="trailing" constant="10" id="iQY-BH-Egt"/>
+                            <constraint firstAttribute="trailing" secondItem="LRM-sL-wiY" secondAttribute="trailing" constant="10" id="myJ-Hi-kQN"/>
+                            <constraint firstAttribute="trailing" secondItem="DcG-3s-ECL" secondAttribute="trailing" constant="10" id="otd-ax-q7s"/>
+                            <constraint firstItem="Xh6-g3-XDh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qLi-Aq-qYw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xh6-g3-XDh" secondAttribute="bottom" id="tfJ-2B-iMV"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LRM-sL-wiY" secondAttribute="bottom" constant="250" id="xL9-4D-Xbh"/>
                         </constraints>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="D1r-53-AOg"/>
+                                <exclude reference="JDp-0b-Pxr"/>
+                                <include reference="a2g-eT-PTz"/>
+                                <include reference="cKj-0I-gNe"/>
+                                <exclude reference="caf-3l-hWk"/>
+                                <include reference="qLi-Aq-qYw"/>
+                                <include reference="1U2-JX-ehW"/>
+                                <include reference="P1c-nG-P5A"/>
+                                <exclude reference="Z5h-kh-HUr"/>
+                                <exclude reference="otd-ax-q7s"/>
+                                <exclude reference="IcG-2T-14F"/>
+                                <include reference="myJ-Hi-kQN"/>
+                                <include reference="Dkp-eT-pQh"/>
+                                <exclude reference="F5p-RW-wJg"/>
+                                <exclude reference="K7Y-Hg-eTB"/>
+                                <include reference="U6T-q1-n1O"/>
+                                <include reference="tfJ-2B-iMV"/>
+                                <exclude reference="xL9-4D-Xbh"/>
+                                <include reference="1Fq-H9-gtD"/>
+                                <exclude reference="i2M-4D-3ci"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="D1r-53-AOg"/>
+                                <include reference="JDp-0b-Pxr"/>
+                                <exclude reference="a2g-eT-PTz"/>
+                                <exclude reference="cKj-0I-gNe"/>
+                                <include reference="caf-3l-hWk"/>
+                                <exclude reference="qLi-Aq-qYw"/>
+                                <exclude reference="1U2-JX-ehW"/>
+                                <exclude reference="P1c-nG-P5A"/>
+                                <include reference="Z5h-kh-HUr"/>
+                                <include reference="otd-ax-q7s"/>
+                                <include reference="IcG-2T-14F"/>
+                                <exclude reference="myJ-Hi-kQN"/>
+                                <exclude reference="Dkp-eT-pQh"/>
+                                <include reference="F5p-RW-wJg"/>
+                                <include reference="K7Y-Hg-eTB"/>
+                                <exclude reference="U6T-q1-n1O"/>
+                                <exclude reference="tfJ-2B-iMV"/>
+                                <include reference="xL9-4D-Xbh"/>
+                                <exclude reference="1Fq-H9-gtD"/>
+                                <include reference="i2M-4D-3ci"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="MIm-UM-n80"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="locationButton" destination="LRM-sL-wiY" id="bWo-9o-RuG"/>
                         <outlet property="map" destination="Xh6-g3-XDh" id="Vim-Dd-81W"/>
-                        <outlet property="switchButton" destination="LRM-sL-wiY" id="95J-nH-qnZ"/>
+                        <outlet property="rotationResetButton" destination="DcG-3s-ECL" id="Fck-Lv-vys"/>
+                        <outlet property="routeButton" destination="BlU-hr-sfS" id="Gj4-aE-N1D"/>
+                        <outlet property="scaleBar" destination="4qE-dD-NUM" id="x8n-lI-24f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="nyJ-pQ-4vr">
+                    <connections>
+                        <action selector="rotate:" destination="BYZ-38-t0r" id="Xqr-if-KVc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1151" y="17"/>
+            <point key="canvasLocation" x="1036" y="16.641679160419791"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tzN-9i-Uwt">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Awo-2B-AH5" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Awo-2B-AH5" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lLD-ny-mdN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i6H-3S-CoP">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uck-24-R5b"/>
                     </connections>
@@ -70,6 +184,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_track_location_on.png" width="50" height="52"/>
+        <image name="icon_compass.png" width="16" height="40"/>
+        <image name="icon_track_location_off.png" width="50" height="52"/>
+        <image name="route.png" width="512" height="512"/>
     </resources>
 </document>

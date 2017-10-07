@@ -6,16 +6,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "libs/graphhopper-ios/src/com/graphhopper/util/Helper.m"
+            timestampString = "528984077.886199"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
+            landmarkName = "Helper_getLocaleWithNSString_()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeGoCuba/Routing.swift"
+            timestampString = "529023898.406649"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "Routing"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeGoCuba/Routing.swift"
+            timestampString = "528995901.333531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "show(result:lineColor:complete:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WeGoCuba/ViewController.swift"
-            timestampString = "528050363.234964"
+            timestampString = "528998348.095631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "switchChanged()"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "showRoute(start:stop:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +73,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WeGoCuba/SlideInPopup/PopupButton.swift"
-            timestampString = "528050754.56334"
+            filePath = "WeGoCuba/ViewController.swift"
+            timestampString = "528998351.0888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "showRoute(start:stop:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WeGoCuba.ViewController.(showRoute (start : __ObjC.NTMapPos, stop : __ObjC.NTMapPos) -&gt; ()).(closure #1)"
+                  moduleName = "WeGoCuba"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/Develop/iOS%20Development/Maps/Maps-SDK-Examples/Test%202%20-%20CartoDB/WeGoCuba/WeGoCuba/ViewController.swift"
+                  timestampString = "529024911.653088"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "196"
+                  endingLineNumber = "196"
+                  offsetFromSymbolStart = "1600">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WeGoCuba.ViewController.(showRoute (start : __ObjC.NTMapPos, stop : __ObjC.NTMapPos) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "WeGoCuba"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/Develop/iOS%20Development/Maps/Maps-SDK-Examples/Test%202%20-%20CartoDB/WeGoCuba/WeGoCuba/ViewController.swift"
+                  timestampString = "529024911.655845"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeGoCuba/Routing.swift"
+            timestampString = "528998839.848022"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "getResult(startPos:stopPos:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WeGoCuba/SlideInPopup/PopupButton.swift"
-            timestampString = "528050757.499408"
+            filePath = "WeGoCuba/Routing.swift"
+            timestampString = "529023898.406649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "touchesEnded(_:with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WeGoCuba/SlideInPopup/PopupButton.swift"
-            timestampString = "528050758.41136"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "touchesCancelled(_:with:)"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "initGraphhoper()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

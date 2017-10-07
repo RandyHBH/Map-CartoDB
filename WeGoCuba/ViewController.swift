@@ -10,38 +10,47 @@ import UIKit
 import CoreLocation
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegate {
-    
-    let RASTER_IMAGE = false
-    let SEARCH = true
+class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, LocationButtonDelegate,RouteButtonDelegate, RouteMapEventDelegate {
     
     @IBOutlet var map: NTMapView!
+    @IBOutlet var locationButton: LocationButton!
+    @IBOutlet var routeButton: RouteButton!
+    @IBOutlet var scaleBar: ScaleBar!
+    @IBOutlet var rotationResetButton: RotationResetButton!
+    
+
+    // BASIC MAP DECLARATION
     
     var projection: NTProjection!
     var source: NTLocalVectorDataSource!
     
-    var buttons : [PopupButton]?
+    // BASIC BRUJALA DECLARATION
+    var rotationListener: RotationListener!
     
+    // BASIC GPS LOCALIZATION DECLARATION
     var manager: CLLocationManager!
     var latestLocation: CLLocation!
     
-    @IBOutlet var switchButton: SwitchButton!
+    // BASIC DECLARATION FOR OFFLINE ROUTE
+    var progressLabel: ProgressLabel!
+    var mapListener: RouteMapEventListener!
+    var routing: Routing!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         map = NTMapView()
-        map.frame = view.bounds
+        let cartoTitleOff = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height + 50)
+        map.frame = cartoTitleOff
+        
+        map.getOptions().setZoomGestures(true)
+        map.getOptions().setPanningMode(NTPanningMode.PANNING_MODE_STICKY)
         
         //Need to add as a subview
         view.insertSubview(map, at: 1)
         
         // Load MBTiles Raster Tiles o MBTiles Vector Tiles
-        if RASTER_IMAGE {
-            loadRasterDataSource()
-        } else {
-            loadVectorDataSource()
-        }
+        loadVectorDataSource()
         
         // Get base projection from mapView
         projection = map.getOptions().getBaseProjection();
@@ -50,11 +59,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         source =  NTLocalVectorDataSource(projection: projection)
         let layer = NTVectorLayer(dataSource: source)
         map.getLayers().add(layer)
-        
-        
-        //Creating a botton & add to array for later given a position
-        switchButton.initialize(onImageUrl: "icon_track_location_on.png", offImageUrl: "icon_track_location_off.png")
-        switchButton.delegate = self
         
         
         // FOCUS IN CUBA
@@ -81,68 +85,121 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         if #available(iOS 9.0, *) {
             manager.allowsBackgroundLocationUpdates = true
         }
-        map.getOptions().setPanningMode(NTPanningMode.PANNING_MODE_STICKY)
         
-        startLocationUpdate()
+        rotationResetButton.resetDuration = rotationDuration
+        
+        scaleBar.initialize()
+        scaleBar.map = map
+        
+        rotationListener = RotationListener()
+        rotationListener.map = map
+        
+        locationButton.initialize(onImageUrl: "icon_track_location_on.png", offImageUrl: "icon_track_location_off.png")
+        
+        routeButton.initialize(onImageUrl: "route.png", offImageUrl: "route.png")
+        
+        progressLabel = ProgressLabel()
+        view.addSubview(progressLabel)
+        
+        mapListener = RouteMapEventListener()
         
     }
     
-    //MARK: SWITCH BUTTON DELEGATE & LOCATION UPDATE START/STOP
-    internal func switchChanged() {
-        
-        if switchButton.isOnline() {
-            startLocationUpdate()
-        } else {
-            stopLocationUpdate()
-        }
+    
+    // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        let cartoTitleOff = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 50)
+        map.frame = cartoTitleOff
     }
     
-    func startLocationUpdate() {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         manager.startUpdatingLocation()
         manager.startUpdatingHeading()
-    }
-    
-    func stopLocationUpdate() {
-        manager.stopUpdatingLocation()
-        manager.stopUpdatingHeading()
-    }
-    
-    //MARK: END SWITCH BUTTON DELEGATE & LOCATION UPDATE START/STOP
-    
-    //MARK: LOCATION METHODS
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Latest location saved as class variable to get bearing to adjust compass
-        latestLocation = locations[0]
         
-        // Not "online", but reusing the online switch to achieve location tracking functionality
-        if (switchButton.isOnline()) {
-            showUserAt(location: latestLocation)
+        rotationListener?.delegate = self
+        map.setMapEventListener(rotationListener)
+        
+        locationButton.delegate = self
+        routeButton.delegate = self
+    }
+    
+    // MARK: LOCATION BUTTON DELEGATE
+    func locationSwitchTapped(){
+        if (locationButton.isActive()){
+            manager.startUpdatingLocation()
+            manager.startUpdatingHeading()
+        } else {
+            manager.stopUpdatingLocation()
+            manager.stopUpdatingHeading()
         }
     }
     
-    //MARK: END LOCATION METHODS
-    
-    //MARK: RASTER METHODS
-    
-    func loadRasterDataSource() {
-        // Create a local raster data source
-        let source: String? = createRasterDataSource()
+    // MARK: ROUTE BUTTON DELEGATE
+    func routeSwitchTapped() {
+        let actualEventsSave = map.getMapEventListener()
         
-        let tileDataSource = NTMBTilesTileDataSource(minZoom: 0, maxZoom: 14, path: source)
-        let rasterLayer = NTRasterTileLayer(dataSource: tileDataSource)
-        map?.getLayers()?.add(rasterLayer)
+        if (routeButton.isActive()){
+            layoutLabel()
+            mapListener.delegate = self
+            map.setMapEventListener(mapListener)
+            routing = Routing(mapView: map)
+        } else {
+            mapListener.delegate = nil
+            map.setMapEventListener(nil)
+            map.setMapEventListener(actualEventsSave)
+        }
     }
     
-    func createRasterDataSource() -> String {
-        let name: String = "cuba.output"
-        let format : String = "mbtiles"
-        // file-based local offline datasource
-        let source: String? = Bundle.main.path(forResource: name, ofType: format)
-        return source!
+    func layoutLabel() {
+        
+        let w: CGFloat = view.frame.width
+        let h: CGFloat = 40
+        let x: CGFloat = 0
+        let y: CGFloat = view.frame.height - h
+        
+        progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
     }
     
-    //MARK: END RASTER METHODS
+    func singleTap() {
+        // No actions for single tap
+    }
+    
+    func startClicked(event: RouteMapEvent) {
+        DispatchQueue.main.async(execute: {
+            self.routing.setStartMarker(position: event.clickPosition)
+            self.progressLabel.hide()
+        })
+    }
+    
+    func stopClicked(event: RouteMapEvent) {
+        routing.setStopMarker(position: event.clickPosition)
+        showRoute(start: event.startPosition, stop: event.stopPosition)
+    }
+    
+    func showRoute(start: NTMapPos, stop: NTMapPos) {
+        DispatchQueue.global().async {
+            
+            let result: GHResponse? = self.routing.getResult(startPos: start, stopPos: stop)
+            
+            
+            if (result == nil) {
+                self.progressLabel.complete(message: "Routing failed. Please try again")
+                return
+            } else {
+                self.progressLabel.complete(message: self.routing.getMessage(result: result!))
+            }
+            
+            let color = NTColor(r: 14, g: 122, b: 254, a: 150)
+            self.routing.show(result: result!, lineColor: color!, complete: {
+                (route: Route) in
+                
+            })
+            
+        }
+    }
     
     //MARK: VECTOR METHODS
     
@@ -150,10 +207,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         // Create a local vector data source
         let source: NTTileDataSource? = createTileDataSource()
         let newbaseLayer = NTCartoOfflineVectorTileLayer(dataSource: source, style: .CARTO_BASEMAP_STYLE_VOYAGER)
-
-//        let baseLayer = NTCartoOnlineVectorTileLayer(style: .CARTO_BASEMAP_STYLE_VOYAGER)
-//        let decoder: NTVectorTileDecoder? = baseLayer?.getTileDecoder()
-//        let layer = NTVectorTileLayer(dataSource: source, decoder: decoder)
         
         map?.getLayers()?.add(newbaseLayer)
     }
@@ -169,7 +222,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     
     //MARK: END VECTOR METHODS
     
+    //MARK: LOCATION MANAGER METHOD DELEGATE
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Latest location saved as class variable to get bearing to adjust compass
+        latestLocation = locations[0]
+        
+        // Not "online", but reusing the online switch to achieve location tracking functionality
+        if (locationButton.isActive()) {
+            showUserAt(location: latestLocation)
+        }
+    }
+    
+    //MARK: END LOCATION MANAGER
+    
+    //MARK: LOCATION METHODS
     
     var userMarker: NTPoint!
     var accuracyMarker: NTPolygon!
@@ -183,10 +250,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
         let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
         
         map.setFocus(position, durationSeconds: 1)
-        map.setZoom(6, durationSeconds: 1)
+        map.setZoom(14, durationSeconds: 1)
         
         let builder = NTPolygonStyleBuilder()
         builder?.setColor(Colors.lightTransparentAppleBlue.toNTColor())
+        
         let borderBuilder = NTLineStyleBuilder()
         borderBuilder?.setColor(Colors.darkTransparentAppleBlue.toNTColor())
         borderBuilder?.setWidth(1)
@@ -243,4 +311,31 @@ class ViewController: UIViewController, CLLocationManagerDelegate, SwitchDelegat
     //MARK: END LOCATION METHODS
     
     
+    @IBAction func rotate(_ sender: UITapGestureRecognizer) {
+        isRotationInProgress = true
+        map.setRotation(0, durationSeconds: rotationDuration)
+        rotationResetButton.reset()
+        Timer.scheduledTimer(timeInterval: TimeInterval(rotationDuration + 0.1), target: self, selector: #selector(onRotationCompleted), userInfo: nil, repeats: false)
+    }
+    
+    let rotationDuration: Float = 0.4
+    var isRotationInProgress = false
+    
+    func onRotationCompleted() {
+        isRotationInProgress = false
+    }
+    
+    func rotated(angle: CGFloat) {
+        if (self.isRotationInProgress) {
+            // Do not rotate when rotation reset animation is in progress
+            return
+        }
+        self.rotationResetButton.rotate(angle: angle)
+    }
+    
+    func zoomed(zoom: CGFloat) {
+        self.scaleBar.update()
+    }
+    
+
 }

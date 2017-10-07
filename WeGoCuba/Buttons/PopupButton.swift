@@ -12,23 +12,16 @@ import UIKit
 class PopupButton : UIButton {
     
     let duration: Double = 200
-
-    var image: UIImage!
     
-    func initialize(imageUrl: String) {
-        backgroundColor = UIColor.white
-        
-        imageView?.clipsToBounds = true
-        imageView?.contentMode = .scaleAspectFit
-        
-        image = UIImage(named: imageUrl)
-        imageView?.image = image
-        
-    }
     
     override func layoutSubviews() {
 
         super.layoutSubviews()
+        
+        backgroundColor = UIColor.white
+        
+        imageView!.clipsToBounds = true
+        imageView!.contentMode = .scaleAspectFit
         
         layer.cornerRadius = frame.width / 2
         
@@ -37,6 +30,8 @@ class PopupButton : UIButton {
         imageView?.frame = CGRect(x: padding, y: padding, width: frame.width - 2 * padding, height: frame.height - 2 * padding)
         
         addRoundShadow()
+        
+        alpha = 0.8
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -49,7 +44,7 @@ class PopupButton : UIButton {
             return
         }
         
-        alpha = 1.0
+        alpha = 0.8
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,7 +53,17 @@ class PopupButton : UIButton {
             return
         }
         
+        alpha = 0.8
+    }
+    
+    func enable() {
+        isEnabled = true
         alpha = 1.0
+    }
+    
+    func disable() {
+        isEnabled = false
+        alpha = 0.5
     }
     
 }

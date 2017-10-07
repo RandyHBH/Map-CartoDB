@@ -29,8 +29,7 @@ class ScaleBar: UIView {
     
     let label = UILabel()
     
-    convenience init() {
-        self.init(frame: CGRect.zero)
+    func initialize() {
         
         label.textColor = UIColor.gray
         label.font = UIFont(name: "HelveticaNeue", size: 12)

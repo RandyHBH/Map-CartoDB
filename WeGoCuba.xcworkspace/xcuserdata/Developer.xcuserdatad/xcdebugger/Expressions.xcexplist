@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "SwitchButton.isOnline() -&gt; Bool:SwitchButton.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.locationManager(CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ():ViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

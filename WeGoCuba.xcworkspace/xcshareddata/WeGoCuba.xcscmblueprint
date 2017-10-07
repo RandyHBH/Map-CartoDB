@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "56604FB7AFB90B2CE79474D7EC802038C16F3178",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "56604FB7AFB90B2CE79474D7EC802038C16F3178" : 9223372036854775807,
+    "EC490DD9243F2670DADD00F6C1CC8EC40DC7DEE5" : 9223372036854775807,
+    "81186D01911189FC961274628E19895D6D8AE899" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6FC4EF15-F64B-4077-B86D-AD831BF3A79F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "56604FB7AFB90B2CE79474D7EC802038C16F3178" : "WeGoCuba\/",
+    "EC490DD9243F2670DADD00F6C1CC8EC40DC7DEE5" : "WeGoCuba\/libs\/graphhopper-ios\/graphhopper\/",
+    "81186D01911189FC961274628E19895D6D8AE899" : "WeGoCuba\/libs\/graphhopper-ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "WeGoCuba",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "WeGoCuba.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RandyHBH\/cartodb-ios-map-example.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "56604FB7AFB90B2CE79474D7EC802038C16F3178"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/graphhopper\/graphhopper-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "81186D01911189FC961274628E19895D6D8AE899"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/graphhopper\/graphhopper",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EC490DD9243F2670DADD00F6C1CC8EC40DC7DEE5"
+    }
+  ]
+}
