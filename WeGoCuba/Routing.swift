@@ -47,7 +47,7 @@ class Routing {
         mapView.getLayers().add(vectorLayer)
         
         // Set visible zoom range for the vector layer
-        vectorLayer?.setVisibleZoom(NTMapRange(min: 0, max: 22))
+        vectorLayer?.setVisibleZoom(NTMapRange(min: 0, max: 24))
         
         let markerBuilder = NTMarkerStyleBuilder()
         markerBuilder?.setBitmap(start)
@@ -98,20 +98,29 @@ class Routing {
         let vector = NTMapPosVector()
         
         let count = instructions.size()
+        
         for i in stride(from: 0, to: count, by: 1) {
 
             let instruction : Instruction = instructions.getWith(i)
             
-            let xLatitud = instruction.getPoints().getLatitudeWith(i)
-            let yLongitud = instruction.getPoints().getLongitudeWith(i)
+            let cantPointInstruction = instruction.getPoints().size()
             
-            let position = NTMapPos(x: xLatitud, y: yLongitud)
-            
-            if (showTurns) {
-                createRoutePoint(position: position!, instruction: instruction, source: routeDataSource!)
+            var j : jint = 0
+            while j < cantPointInstruction {
+                
+                let xLongitud = instruction.getPoints().getLongitudeWith(j)
+                let yLatitud = instruction.getPoints().getLatitudeWith(j)
+                
+                let position = projection.fromWgs84(NTMapPos(x: xLongitud, y: yLatitud))
+                
+                if (showTurns) {
+                    createRoutePoint(position: position!, instruction: instruction, source: routeDataSource!)
+                }
+                
+                vector?.add(position)
+                j += 1
             }
             
-            vector?.add(position)
         }
         
         let polygon = NTPolygon(poses: vector, style: NTPolygonStyleBuilder().buildStyle())
@@ -127,9 +136,9 @@ class Routing {
     func getMessage(result: GHResponse) -> String {
         
         let path : PathWrapper = result.getBest()
-        let distancePath = path.getDistance()
-        let distance = round( distancePath / 1000 * 100) / 100
-        let message = "Your route is " + String(distance) + "km"
+        let pathDistance = path.getDistance()
+        let distanceKM = round( pathDistance / 1000 * 100) / 100
+        let message = "Your route is " + String(distanceKM) + "km"
         return message
     }
     
@@ -182,11 +191,12 @@ class Routing {
         builder?.setWidth(7)
         
         let points = result.getBest().getPoints()!
+        let size = points.size()
         let linePoses = NTMapPosVector()
         
         var i : jint = 0
-        while i <= points.size() {
-            linePoses?.add(projection.fromWgs84(NTMapPos(x: points.getLatitudeWith(i), y: points.getLongitudeWith(i))))
+        while i < size {
+            linePoses?.add(projection.fromWgs84(NTMapPos(x: points.getLongitudeWith(i), y: points.getLatitudeWith(i))))
             i += 1
         }
         
@@ -209,12 +219,16 @@ class Routing {
         let location: String? = Bundle.main.path(forResource: "graph-data", ofType: "osm-gh")
         self.hopper = GraphHopper()
         self.hopper!.setCHEnabledWithBoolean(true)
-//        self.hopper!.setEnableInstructionsWithBoolean(true)
+        self.hopper!.setEnableInstructionsWithBoolean(true)
         self.hopper!.setAllowWritesWithBoolean(true)
         self.hopper!.setEncodingManagerWith(EncodingManager.init(nsString: "car"))
         self.hopper!.forMobile()
         self.hopper!.load__(with: location)
         print(self.hopper!.getStorage().getBounds())
+        
+    }
+    
+    func cleaning() {
         
     }
 }

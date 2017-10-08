@@ -18,7 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     @IBOutlet var scaleBar: ScaleBar!
     @IBOutlet var rotationResetButton: RotationResetButton!
     
-
+    
     // BASIC MAP DECLARATION
     
     var projection: NTProjection!
@@ -142,18 +142,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         let actualEventsSave = map.getMapEventListener()
         
         if (routeButton.isActive()){
-            layoutLabel()
+            layoutProgressLabel()
             mapListener.delegate = self
             map.setMapEventListener(mapListener)
             routing = Routing(mapView: map)
         } else {
+            
             mapListener.delegate = nil
             map.setMapEventListener(nil)
             map.setMapEventListener(actualEventsSave)
         }
     }
     
-    func layoutLabel() {
+    func layoutProgressLabel() {
         
         let w: CGFloat = view.frame.width
         let h: CGFloat = 40
@@ -184,20 +185,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
             
             let result: GHResponse? = self.routing.getResult(startPos: start, stopPos: stop)
             
-            
-            if (result == nil) {
-                self.progressLabel.complete(message: "Routing failed. Please try again")
-                return
-            } else {
-                self.progressLabel.complete(message: self.routing.getMessage(result: result!))
-            }
-            
-            let color = NTColor(r: 14, g: 122, b: 254, a: 150)
-            self.routing.show(result: result!, lineColor: color!, complete: {
-                (route: Route) in
+            DispatchQueue.main.async(execute: {
+                if (result == nil) {
+                    self.progressLabel.complete(message: "Routing failed. Please try again")
+                    return
+                } else {
+                    self.progressLabel.complete(message: self.routing.getMessage(result: result!))
+                }
                 
+                let color = NTColor(r: 14, g: 122, b: 254, a: 150)
+                self.routing.show(result: result!, lineColor: color!, complete: {
+                    (route: Route) in
+                    
+                })
             })
-            
         }
     }
     
@@ -337,5 +338,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         self.scaleBar.update()
     }
     
-
+    
 }
