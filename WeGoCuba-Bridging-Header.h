@@ -63,6 +63,8 @@
 
 #import "com/graphhopper/routing/util/AllEdgesIterator.h"
 #import "com/graphhopper/routing/util/DataFlagEncoder.h"
+#import "com/graphhopper/routing/util/DefaultEdgeFilter.h"
+#import "com/graphhopper/routing/util/EdgeFilter.h"
 #import "com/graphhopper/routing/util/EncodingManager.h"
 #import "com/graphhopper/routing/util/FlagEncoder.h"
 #import "com/graphhopper/routing/util/FlagEncoderFactory.h"
@@ -88,17 +90,24 @@
 #import "com/graphhopper/storage/Lock.h"
 #import "com/graphhopper/storage/LockFactory.h"
 #import "com/graphhopper/storage/NativeFSLockFactory.h"
+#import "com/graphhopper/storage/NodeAccess.h"
 #import "com/graphhopper/storage/SimpleFSLockFactory.h"
 #import "com/graphhopper/storage/StorableProperties.h"
 #import "com/graphhopper/storage/TurnCostExtension.h"
+
 #import "com/graphhopper/storage/index/LocationIndex.h"
 #import "com/graphhopper/storage/index/LocationIndexTree.h"
+#import "com/graphhopper/storage/index/QueryResult.h"
 
 #import "com/graphhopper/util/AngleCalc.h"
 #import "com/graphhopper/util/CmdArgs.h"
 #import "com/graphhopper/util/ConfigMap.h"
 #import "com/graphhopper/util/Constants.h"
 #import "com/graphhopper/util/DouglasPeucker.h"
+#import "com/graphhopper/util/DistancePlaneProjection.h"
+#import "com/graphhopper/util/EdgeExplorer.h"
+#import "com/graphhopper/util/EdgeIterator.h"
+#import "com/graphhopper/util/EdgeIteratorState.h"
 #import "com/graphhopper/util/GHUtility.h"
 #import "com/graphhopper/util/Helper.h"
 #import "com/graphhopper/util/Instruction.h"
@@ -117,6 +126,12 @@
 
 #import "com/graphhopper/util/shapes/BBox.h"
 #import "com/graphhopper/util/shapes/GHPoint.h"
+#import "com/graphhopper/util/shapes/GHPoint3D.h"
+
+#import "gnu/trove/list/array/TIntArrayList.h"
+#import "gnu/trove/map/TIntObjectMap.h"
+#import "gnu/trove/map/hash/TIntObjectHashMap.h"
+#import "gnu/trove/set/hash/TIntHashSet.h"
 
 #import "java/io/File.h"
 #import "java/io/IOException.h"
@@ -130,6 +145,7 @@
 #import "java/lang/Integer.h"
 #import "java/lang/RuntimeException.h"
 #import "java/lang/Throwable.h"
+#import "java/lang/Math.h"
 #import "java/lang/UnsupportedOperationException.h"
 
 #import "java/text/DateFormat.h"
@@ -138,9 +154,11 @@
 #import "java/util/ArrayList.h"
 #import "java/util/Collections.h"
 #import "java/util/Date.h"
+#import "java/util/HashMap.h"
 #import "java/util/LinkedHashSet.h"
 #import "java/util/List.h"
 #import "java/util/Locale.h"
+#import "java/util/Map.h"
 #import "java/util/Set.h"
 
 #import "org/slf4j/Logger.h"
