@@ -16,6 +16,8 @@
 		8B12CCAF1F8731D9000550C2 /* libgraphhopper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B12CCAC1F8731D9000550C2 /* libgraphhopper.a */; };
 		8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */; };
 		8B273CC01F61C5C1008FA023 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBF1F61C5C1008FA023 /* Events.swift */; };
+		8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27B68D1F8C5748009F4722 /* RouteController.swift */; };
+		8B27B6901F8C73C0009F4722 /* DestinationClickListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27B68F1F8C73C0009F4722 /* DestinationClickListener.swift */; };
 		8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4142761F68E5320002AD80 /* BoundingBox.swift */; };
 		8B419A911F83C1430036FBC2 /* graph-data.osm-gh in Resources */ = {isa = PBXBuildFile; fileRef = 8B419A901F83C1430036FBC2 /* graph-data.osm-gh */; };
 		8B419A9B1F83E3090036FBC2 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B419A9A1F83E3090036FBC2 /* Routing.swift */; };
@@ -27,6 +29,10 @@
 		8B6416631F6196E600D5184D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416621F6196E600D5184D /* GLKit.framework */; };
 		8B6416651F61977300D5184D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416641F61977300D5184D /* libc++.tbd */; };
 		8B6416671F61978900D5184D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416661F61978900D5184D /* libz.tbd */; };
+		8B689FE01F8BD6FE0033B95E /* TurnByTurnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FDF1F8BD6FE0033B95E /* TurnByTurnViewController.swift */; };
+		8B689FE21F8BECB70033B95E /* TurnbyTurnClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE11F8BECB70033B95E /* TurnbyTurnClient.swift */; };
+		8B689FE41F8BF3CF0033B95E /* LocationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */; };
+		8B689FE61F8BFB8B0033B95E /* BaseMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE51F8BFB8B0033B95E /* BaseMap.swift */; };
 		8B724FF51F715DF70075270C /* cuba.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B724FF11F715DF70075270C /* cuba.mbtiles */; };
 		8B900C2E1F83461A00FCCEB8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B900C2D1F83461A00FCCEB8 /* Security.framework */; };
 		8B900C301F83464B00FCCEB8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B900C2F1F83464B00FCCEB8 /* libicucore.tbd */; };
@@ -111,6 +117,8 @@
 		8B12CCAC1F8731D9000550C2 /* libgraphhopper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgraphhopper.a; path = build/libgraphhopper.a; sourceTree = "<group>"; };
 		8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMarkers.swift; path = Marcadores/AddMarkers.swift; sourceTree = "<group>"; };
 		8B273CBF1F61C5C1008FA023 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Events.swift; path = Listeners/Events.swift; sourceTree = "<group>"; };
+		8B27B68D1F8C5748009F4722 /* RouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteController.swift; sourceTree = "<group>"; };
+		8B27B68F1F8C73C0009F4722 /* DestinationClickListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationClickListener.swift; sourceTree = "<group>"; };
 		8B4142761F68E5320002AD80 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		8B419A901F83C1430036FBC2 /* graph-data.osm-gh */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "graph-data.osm-gh"; path = "libs/graphhopper-ios/graphhopper/graph-data.osm-gh"; sourceTree = SOURCE_ROOT; };
 		8B419A9A1F83E3090036FBC2 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
@@ -122,6 +130,10 @@
 		8B6416621F6196E600D5184D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8B6416641F61977300D5184D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8B6416661F61978900D5184D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8B689FDF1F8BD6FE0033B95E /* TurnByTurnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnByTurnViewController.swift; sourceTree = "<group>"; };
+		8B689FE11F8BECB70033B95E /* TurnbyTurnClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnbyTurnClient.swift; sourceTree = "<group>"; };
+		8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationMarker.swift; path = ../LocationMarker.swift; sourceTree = "<group>"; };
+		8B689FE51F8BFB8B0033B95E /* BaseMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMap.swift; sourceTree = "<group>"; };
 		8B724FF11F715DF70075270C /* cuba.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = cuba.mbtiles; sourceTree = "<group>"; };
 		8B900BF41F8343C100FCCEB8 /* graphhopper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = graphhopper.xcodeproj; path = "libs/graphhopper-ios/graphhopper.xcodeproj"; sourceTree = "<group>"; };
 		8B900C2D1F83461A00FCCEB8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -226,6 +238,7 @@
 			children = (
 				8B0E8B791F788E1400BD08D1 /* Extensions.swift */,
 				8B0E8B771F788D9900BD08D1 /* Colors.swift */,
+				8B689FE51F8BFB8B0033B95E /* BaseMap.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -255,12 +268,21 @@
 			path = "libs/graphhopper-ios";
 			sourceTree = "<group>";
 		};
+		8B27B68C1F8C5711009F4722 /* Turn-by-Turn-Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				8B689FE11F8BECB70033B95E /* TurnbyTurnClient.swift */,
+			);
+			name = "Turn-by-Turn-Navigation";
+			sourceTree = "<group>";
+		};
 		8B42D52F1F7DD030002C93F0 /* GPS Location */ = {
 			isa = PBXGroup;
 			children = (
 				8B42D52D1F7DCF71002C93F0 /* ScaleBar.swift */,
 				8B41E2C01F7D96CA003BC7EA /* RotationListener.swift */,
 				8B42D5301F7DD05D002C93F0 /* LocationExtensions.swift */,
+				8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */,
 			);
 			name = "GPS Location";
 			path = Utils;
@@ -272,6 +294,7 @@
 				8B419A9C1F83E36B0036FBC2 /* Route.swift */,
 				8B419A9A1F83E3090036FBC2 /* Routing.swift */,
 				8B41E2BE1F7D78E7003BC7EA /* RouteMapEventListener.swift */,
+				8B27B68F1F8C73C0009F4722 /* DestinationClickListener.swift */,
 			);
 			name = "Route Search";
 			sourceTree = "<group>";
@@ -280,6 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				8B9A00111F55A42900330631 /* ViewController.swift */,
+				8B27B68D1F8C5748009F4722 /* RouteController.swift */,
+				8B689FDF1F8BD6FE0033B95E /* TurnByTurnViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -344,6 +369,7 @@
 				8B9A00181F55A42900330631 /* LaunchScreen.storyboard */,
 				8B58A58E1F68754500F15888 /* Controller */,
 				8B42D52F1F7DD030002C93F0 /* GPS Location */,
+				8B27B68C1F8C5711009F4722 /* Turn-by-Turn-Navigation */,
 				8B42D53A1F7DEE33002C93F0 /* Route Search */,
 				8B0E8B761F788D9900BD08D1 /* Utils */,
 				8B58A58F1F6875EA00F15888 /* Components */,
@@ -620,6 +646,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B689FE41F8BF3CF0033B95E /* LocationMarker.swift in Sources */,
 				8BFED7F31F85143300544FB1 /* LocationButton.swift in Sources */,
 				8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */,
 				8B42D5311F7DD05D002C93F0 /* LocationExtensions.swift in Sources */,
@@ -627,12 +654,17 @@
 				8BFED7F51F85143300544FB1 /* RotationResetButton.swift in Sources */,
 				8BFED7FE1F85177F00544FB1 /* ProgressLabel.swift in Sources */,
 				8B0E8B781F788D9900BD08D1 /* Colors.swift in Sources */,
+				8B689FE01F8BD6FE0033B95E /* TurnByTurnViewController.swift in Sources */,
+				8B689FE61F8BFB8B0033B95E /* BaseMap.swift in Sources */,
 				8BFED7F71F85143300544FB1 /* SwitchButton.swift in Sources */,
 				8B273CC01F61C5C1008FA023 /* Events.swift in Sources */,
 				8B0E8B7A1F788E1400BD08D1 /* Extensions.swift in Sources */,
+				8B689FE21F8BECB70033B95E /* TurnbyTurnClient.swift in Sources */,
 				8B41E2BF1F7D78E7003BC7EA /* RouteMapEventListener.swift in Sources */,
 				8B419A9D1F83E36B0036FBC2 /* Route.swift in Sources */,
 				8BFED7F91F85149300544FB1 /* AlertBaseView.swift in Sources */,
+				8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */,
+				8B27B6901F8C73C0009F4722 /* DestinationClickListener.swift in Sources */,
 				8B42D52E1F7DCF71002C93F0 /* ScaleBar.swift in Sources */,
 				8B9A00121F55A42900330631 /* ViewController.swift in Sources */,
 				8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */,
