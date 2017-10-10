@@ -229,7 +229,9 @@ class Routing {
     }
     
     func cleaning() {
-        
+        routeDataSource?.clear()
+        stopMarker?.setVisible(false)
+        startMarker?.setVisible(false)
     }
 }
 

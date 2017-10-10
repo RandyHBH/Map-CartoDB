@@ -31,13 +31,6 @@ extension String {
         return substring(with: startIndex..<endIndex)
     }
     
-    func index(of: Character) -> Int {
-        guard let index = characters.index(of: of) else {
-            return -1
-        }
-        return distance(from: startIndex, to: index)
-    }
-    
     func lastIndexOf(s: String) -> Int {
         
         if let r: Range<Index> = range(of: s) {
