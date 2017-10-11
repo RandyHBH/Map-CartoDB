@@ -11,7 +11,6 @@ import Foundation
 class RouteController: NSObject, RouteMapEventDelegate {
     
     var map : NTMapView!
-    
     var routing: Routing!
     var mapListener: RouteMapEventListener!
     var actualEventsSave : NTMapEventListener!
@@ -25,12 +24,14 @@ class RouteController: NSObject, RouteMapEventDelegate {
         mapListener = RouteMapEventListener()
     }
     
-    func startRoute() {
+    func startRoute(event: RouteMapEvent) {
         actualEventsSave = map.getMapEventListener()
+        map.setMapEventListener(mapListener)
         
         mapListener.delegate = self
-        map.setMapEventListener(mapListener)
-        routing = Routing(mapView: self.map)
+        mapListener.startPosition = event.clickPosition
+        routing = Routing(mapView: self.map, hopper: GraphHopper)
+        startClicked(event: event)
     }
     
     func finishRoute(){
@@ -41,7 +42,11 @@ class RouteController: NSObject, RouteMapEventDelegate {
     }
     
     func singleTap() {
-        // No actions for single tap
+        finishRoute()
+    }
+    
+    func longTap() {
+        // No action for long tap
     }
     
     func startClicked(event: RouteMapEvent) {

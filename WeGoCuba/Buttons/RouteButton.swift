@@ -6,30 +6,48 @@
 //  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class RouteButton : SwitchButton {
+@IBDesignable
+class RouteButton : UIButton {
     
     var delegate: RouteButtonDelegate?
     
-    
-    func initialize(onImageUrl: String, offImageUrl: String) {
-        
-        onImage = UIImage(named: onImageUrl)
-        offImage = UIImage(named: offImageUrl)
+    func addRecognizer() {
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.switchChanged(_:)))
         addGestureRecognizer(recognizer)
     }
     
     func switchChanged(_ sender: UITapGestureRecognizer) {
-        toggle()
-        delegate?.routeSwitchTapped()
+        delegate?.routeButtonTapped()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        alpha = 0.5
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if (!isEnabled) {
+            return
+        }
+        
+        alpha = 0.8
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if (!isEnabled) {
+            return
+        }
+        
+        alpha = 0.8
     }
     
 }
 
 
 protocol RouteButtonDelegate {
-    func routeSwitchTapped()
+    func routeButtonTapped()
 }

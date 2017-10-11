@@ -31,9 +31,4 @@ class RotationListener: NTMapEventListener {
     }
 }
 
-protocol RotationDelegate {
-    
-    func rotated(angle: CGFloat)
-    
-    func zoomed(zoom: CGFloat)
-}
+

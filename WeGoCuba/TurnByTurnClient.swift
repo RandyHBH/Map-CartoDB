@@ -13,22 +13,19 @@ class TurnByTurnClient: NSObject, CLLocationManagerDelegate {
     
     let manager : CLLocationManager = CLLocationManager()
     
-    var map : NTMapView!
+    var mapView : NTMapView!
     var marker : LocationMarker!
     var latest : CLLocation!
-    var routingController : RouteController!
-    var progressLabel : ProgressLabel!
+    var routing : Routing!
     
     let destinationListener = DestinationClickListener()
     
-    init(mapView : NTMapView, progressLabel : ProgressLabel!) {
+    init(mapView : NTMapView) {
         super.init()
         
-        self.map = mapView
-        self.progressLabel = progressLabel
+        self.mapView = mapView
         
-        marker = LocationMarker(mapView: self.map)
-        routingController = RouteController(mapView: self.map, progressLabel: progressLabel)
+        marker = LocationMarker(mapView: self.mapView, progressLabel: progressLabel)
         
         manager.pausesLocationUpdatesAutomatically = false
         manager.desiredAccuracy = 1
@@ -82,16 +79,7 @@ class TurnByTurnClient: NSObject, CLLocationManagerDelegate {
         
         marker.showUserAt(location: location)
         
-        // Zoom & focus is enabled by default, disable after initial location is set
-        marker.focus = false
         
-        let destination = destinationListener?.destination
-        
-        if (destination != nil) {
-            let position = marker.projection.fromLat(latitude, lng: longitude)
-            
-            routingController.showRoute(start: position!, stop: destination!)
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {

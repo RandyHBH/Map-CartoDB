@@ -15,37 +15,34 @@ class RouteMapEventListener : NTMapEventListener {
     
     var delegate: RouteMapEventDelegate?
     
-    var startPosition, endPosition: NTMapPos!
+    var position, startPosition, endPosition: NTMapPos!
     
     override func onMapClicked(_ mapClickInfo: NTMapClickInfo!) {
         
-        if (mapClickInfo.getClickType() != NTClickType.CLICK_TYPE_LONG) {
-            // Only listen to long clicks
-            delegate?.singleTap()
+        if (mapClickInfo.getClickType() == NTClickType.CLICK_TYPE_LONG) {
+            // Only listen to single clicks
+            delegate?.longTap()
             return
         }
         
-        let position = mapClickInfo.getClickPos()
+        position = mapClickInfo.getClickPos()
         
         let event = RouteMapEvent()
         
-        if (startPosition == nil) {
-            startPosition = position
-            
-            event.clickPosition = position
-            
-            delegate?.startClicked(event: event)
-        } else {
+        if (endPosition == nil) {
             endPosition = position
             
             event.clickPosition = position
             event.startPosition = startPosition
             event.stopPosition = endPosition
-            
+
             delegate?.stopClicked(event: event)
             
+        } else {
             startPosition = nil
             endPosition = nil
+            delegate?.singleTap()
+            
         }
     }
 }
@@ -57,6 +54,8 @@ protocol RouteMapEventDelegate {
     func stopClicked(event: RouteMapEvent)
     
     func singleTap()
+    
+    func longTap()
 }
 
 class RouteMapEvent : NSObject {

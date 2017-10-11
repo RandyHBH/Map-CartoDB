@@ -13,13 +13,15 @@ class TurnByTurnViewController: NSObject {
     
     var mapView : NTMapView!
     var client : TurnByTurnClient!
+    var progressLabel : ProgressLabel!
     
-    init(mapView : NTMapView) {
+    init(mapView : NTMapView, progressLabel : ProgressLabel!) {
         super.init()
         
         self.mapView = mapView
+        self.progressLabel = progressLabel
         
-        client = TurnByTurnClient(mapView: mapView)
+        client = TurnByTurnClient(mapView: mapView, progressLabel: progressLabel)
     }
     
     func onResume() {

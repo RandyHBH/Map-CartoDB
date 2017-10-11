@@ -114,7 +114,7 @@ class Routing {
                 let position = projection.fromWgs84(NTMapPos(x: xLongitud, y: yLatitud))
                 
                 if (showTurns) {
-                    createRoutePoint(position: position!, instruction: instruction, source: routeDataSource!)
+//                    createRoutePoint(position: position!, instruction: instruction, source: routeDataSource!)
                 }
                 
                 vector?.add(position)
@@ -220,7 +220,7 @@ class Routing {
         self.hopper = GraphHopper()
         self.hopper!.setCHEnabledWithBoolean(true)
         self.hopper!.setEnableInstructionsWithBoolean(true)
-        self.hopper!.setAllowWritesWithBoolean(true)
+        self.hopper!.setAllowWritesWithBoolean(false)
         self.hopper!.setEncodingManagerWith(EncodingManager.init(nsString: "car"))
         self.hopper!.forMobile()
         self.hopper!.load__(with: location)

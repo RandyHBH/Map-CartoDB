@@ -10,13 +10,13 @@ import UIKit
 import CoreLocation
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, LocationButtonDelegate,RouteButtonDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var locationButton: LocationButton!
-    @IBOutlet var routeButton: RouteButton!
     @IBOutlet var scaleBar: ScaleBar!
     @IBOutlet var rotationResetButton: RotationResetButton!
+    @IBOutlet var routeButton: RouteButton!
     
     
     // BASIC MAP DECLARATION
@@ -26,8 +26,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     // LOCATIONS MARKERS
     var locationMarker : LocationMarker!
     
+    
     // BASIC BRUJALA DECLARATION
-    var rotationListener: RotationListener!
+    var basicEvents: BasicMapEvents!
     
     // BASIC GPS LOCALIZATION DECLARATION
     var manager: CLLocationManager!
@@ -69,7 +70,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         manager = CLLocationManager()
         manager.delegate = self
         manager.pausesLocationUpdatesAutomatically = false
-        manager.desiredAccuracy = 1
+        //        manager.desiredAccuracy = 1
+        
         
         /*
          * In addition to requesting background location updates, you need to add the following lines to your Info.plist:
@@ -83,27 +85,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
             manager.requestAlwaysAuthorization()
         }
         
-        if #available(iOS 9.0, *) {
-            manager.allowsBackgroundLocationUpdates = true
-        }
+        //        if #available(iOS 9.0, *) {
+        //            manager.allowsBackgroundLocationUpdates = true
+        //        }
         
         rotationResetButton.resetDuration = rotationDuration
         
         scaleBar.initialize()
         scaleBar.map = map
         
-        rotationListener = RotationListener()
-        rotationListener.map = map
+        basicEvents = BasicMapEvents()
+        basicEvents.map = map
         
-        locationButton.initialize(onImageUrl: "icon_track_location_on.png", offImageUrl: "icon_track_location_off.png")
-        
-        routeButton.initialize(onImageUrl: "route.png", offImageUrl: "route.png")
+        locationButton.addRecognizer()
         
         progressLabel = ProgressLabel()
         view.addSubview(progressLabel)
+        layoutProgressLabel()
         
         routeController = RouteController(mapView: self.map, progressLabel: self.progressLabel)
         
+        self.routeButton.alpha = 0
     }
     
     
@@ -117,14 +119,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        manager.startUpdatingLocation()
-//        manager.startUpdatingHeading()
+        manager.startUpdatingLocation()
+        manager.startUpdatingHeading()
         
-        rotationListener?.delegate = self
-        map.setMapEventListener(rotationListener)
+        basicEvents?.delegateRotate = self
+        basicEvents?.delegateBasicMapEvents = self
+        
+        map.setMapEventListener(basicEvents)
         
         locationButton.delegate = self
+        
+        routeButton.addRecognizer()
         routeButton.delegate = self
+        
     }
     
     // MARK: LOCATION BUTTON DELEGATE
@@ -139,13 +146,42 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     }
     
     // MARK: ROUTE BUTTON DELEGATE
-    func routeSwitchTapped() {
-        if (routeButton.isActive()){
-            layoutProgressLabel()
-            routeController.startRoute()
+    
+    
+    func routeButtonTapped() {
+        if ( routeController.mapListener.startPosition != nil) {
+            let event = RouteMapEvent()
+            
+            let latitude = Double(latestLocation.coordinate.latitude)
+            let longitude = Double(latestLocation.coordinate.longitude)
+            
+            let startPosition = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+            
+            let endPosition = routeController.mapListener.startPosition
+            routeController.mapListener.endPosition = endPosition
+            routeController.mapListener.startPosition = startPosition
+            
+            event.startPosition = startPosition
+            event.stopPosition = endPosition
+            event.clickPosition = endPosition
+            
+            routeController.stopClicked(event: event)
         } else {
-            routeController.finishRoute()
+            self.progressLabel.complete(message: "You need to set a final position")
         }
+        
+    }
+    
+    // MARK: BASIC MAP EVENTS DELEGATE
+    func startClicked(event: RouteMapEvent){
+        UIButton.animate(withDuration: 2) { 
+            self.routeButton.alpha = 1
+        }
+        routeController.startRoute(event: event)
+    }
+    
+    func longTap(){
+        // NO RESPONDER A LOS LONG-TAPS
     }
     
     // TODO : NECESITO HACERLO EL DISEÑO EN EL STORYBOARD
@@ -159,7 +195,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
     }
     
-
+    
     //MARK: LOCATION MANAGER METHOD DELEGATE
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -168,11 +204,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         
         // Not "online", but reusing the online switch to achieve location tracking functionality
         if (locationButton.isActive()) {
+            locationMarker.focus = true
             locationMarker.showUserAt(location: latestLocation)
         }
     }
     
+    
+    
     //MARK: END LOCATION MANAGER
+    
+    // ROTATE BUTTON
     
     @IBAction func rotate(_ sender: UITapGestureRecognizer) {
         isRotationInProgress = true
@@ -199,16 +240,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     func zoomed(zoom: CGFloat) {
         self.scaleBar.update()
     }
-    
-    
-     // MARK: - Navigation
-    
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-
     
     
 }
