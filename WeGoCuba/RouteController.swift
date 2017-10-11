@@ -11,6 +11,7 @@ import Foundation
 class RouteController: NSObject, RouteMapEventDelegate {
     
     var map : NTMapView!
+    var hopper: GraphHopper?
     var routing: Routing!
     var mapListener: RouteMapEventListener!
     var actualEventsSave : NTMapEventListener!
@@ -81,5 +82,18 @@ class RouteController: NSObject, RouteMapEventDelegate {
                 })
             })
         }
+    }
+    
+    func initGraphhoper(){
+        let location: String? = Bundle.main.path(forResource: "graph-data", ofType: "osm-gh")
+        self.hopper = GraphHopper()
+        self.hopper!.setCHEnabledWithBoolean(true)
+        self.hopper!.setEnableInstructionsWithBoolean(true)
+        self.hopper!.setAllowWritesWithBoolean(false)
+        self.hopper!.setEncodingManagerWith(EncodingManager.init(nsString: "car"))
+        self.hopper!.forMobile()
+        self.hopper!.load__(with: location)
+        print(self.hopper!.getStorage().getBounds())
+        
     }
 }

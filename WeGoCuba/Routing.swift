@@ -22,11 +22,10 @@ class Routing {
     
     var showTurns: Bool = true
     
-    init(mapView: NTMapView) {
-        
-        initGraphhoper()
+    init(mapView: NTMapView, hopper: GraphHopper) {
         
         self.mapView = mapView
+        self.hopper = hopper
         projection = mapView.getOptions().getBaseProjection()
         
         let start = NTBitmapFromString(path: "icon_pin_red.png")
@@ -215,18 +214,7 @@ class Routing {
         stopMarker?.setVisible(true)
     }
     
-    func initGraphhoper(){
-        let location: String? = Bundle.main.path(forResource: "graph-data", ofType: "osm-gh")
-        self.hopper = GraphHopper()
-        self.hopper!.setCHEnabledWithBoolean(true)
-        self.hopper!.setEnableInstructionsWithBoolean(true)
-        self.hopper!.setAllowWritesWithBoolean(false)
-        self.hopper!.setEncodingManagerWith(EncodingManager.init(nsString: "car"))
-        self.hopper!.forMobile()
-        self.hopper!.load__(with: location)
-        print(self.hopper!.getStorage().getBounds())
-        
-    }
+    
     
     func cleaning() {
         routeDataSource?.clear()
