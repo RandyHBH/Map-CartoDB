@@ -11,39 +11,44 @@ import Foundation
 class RouteController: NSObject, RouteMapEventDelegate {
     
     var map : NTMapView!
-    var hopper: GraphHopper?
+    var hopper: GraphHopper!
     var routing: Routing!
     var mapListener: RouteMapEventListener!
     var actualEventsSave : NTMapEventListener!
     var progressLabel : ProgressLabel!
     
     init(mapView : NTMapView, progressLabel : ProgressLabel) {
+        super.init()
         
         self.map = mapView
         self.progressLabel = progressLabel
         
+        initGraphhoper()
+        
         mapListener = RouteMapEventListener()
+        routing = Routing(mapView: self.map, hopper: self.hopper)
     }
     
-    func startRoute(event: RouteMapEvent) {
-        actualEventsSave = map.getMapEventListener()
-        map.setMapEventListener(mapListener)
+    func onePointRoute(event: RouteMapEvent) {
         
+        routing.setStopMarker(position: event.clickPosition)
+    }
+    
+    func startRoute() {
+        map.setMapEventListener(mapListener)
         mapListener.delegate = self
-        mapListener.startPosition = event.clickPosition
-        routing = Routing(mapView: self.map, hopper: GraphHopper)
-        startClicked(event: event)
+        routing = Routing(mapView: self.map, hopper: self.hopper)
     }
     
     func finishRoute(){
         routing.cleaning()
-        mapListener.delegate = nil
-        map.setMapEventListener(nil)
-        map.setMapEventListener(actualEventsSave)
     }
     
     func singleTap() {
         finishRoute()
+        mapListener.delegate = nil
+        map.setMapEventListener(nil)
+        map.setMapEventListener(actualEventsSave)
     }
     
     func longTap() {
@@ -61,6 +66,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
         routing.setStopMarker(position: event.clickPosition)
         showRoute(start: event.startPosition, stop: event.stopPosition)
     }
+    
     
     func showRoute(start: NTMapPos, stop: NTMapPos) {
         DispatchQueue.global().async {

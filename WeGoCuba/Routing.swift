@@ -214,8 +214,6 @@ class Routing {
         stopMarker?.setVisible(true)
     }
     
-    
-    
     func cleaning() {
         routeDataSource?.clear()
         stopMarker?.setVisible(false)

@@ -147,40 +147,39 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     
     // MARK: ROUTE BUTTON DELEGATE
     
-    
     func routeButtonTapped() {
-        if ( routeController.mapListener.startPosition != nil) {
-            let event = RouteMapEvent()
+        if ( basicEvents.stopPosition != nil) {
             
             let latitude = Double(latestLocation.coordinate.latitude)
             let longitude = Double(latestLocation.coordinate.longitude)
             
             let startPosition = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
             
-            let endPosition = routeController.mapListener.startPosition
-            routeController.mapListener.endPosition = endPosition
-            routeController.mapListener.startPosition = startPosition
+            let stopPosition = basicEvents.stopPosition
             
-            event.startPosition = startPosition
-            event.stopPosition = endPosition
-            event.clickPosition = endPosition
+            routeController.showRoute(start: startPosition!, stop: stopPosition!)
             
-            routeController.stopClicked(event: event)
         } else {
+            
             self.progressLabel.complete(message: "You need to set a final position")
         }
         
     }
     
     // MARK: BASIC MAP EVENTS DELEGATE
-    func startClicked(event: RouteMapEvent){
-        UIButton.animate(withDuration: 2) { 
-            self.routeButton.alpha = 1
-        }
-        routeController.startRoute(event: event)
+    
+    func stopPositionSet(event: RouteMapEvent) {
+       
+        routeController.onePointRoute(event: event)
+    }
+    
+    func stopPositionUnSet() {
+        
+        routeController.finishRoute()
     }
     
     func longTap(){
+        
         // NO RESPONDER A LOS LONG-TAPS
     }
     

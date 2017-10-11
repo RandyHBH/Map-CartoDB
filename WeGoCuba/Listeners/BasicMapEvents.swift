@@ -11,6 +11,7 @@ import Foundation
 public class BasicMapEvents : NTMapEventListener
 {
     var map: NTMapView!
+    var stopPosition : NTMapPos!
     
     var previousAngle: CGFloat?
     var previousZoom: CGFloat?
@@ -34,27 +35,36 @@ public class BasicMapEvents : NTMapEventListener
     
     override public func onMapClicked(_ mapClickInfo: NTMapClickInfo!) {
         
-        switch mapClickInfo.getClickType() {
-            
-        case .CLICK_TYPE_LONG:
+        if mapClickInfo.getClickType() != .CLICK_TYPE_SINGLE {
             delegateBasicMapEvents?.longTap()
-            
-        default:
-            let position = mapClickInfo.getClickPos()
-            
-            let event = RouteMapEvent()
-            
-            event.clickPosition = position
-            
-            delegateBasicMapEvents?.startClicked(event: event)
-            
+            return
         }
+        
+        let position = mapClickInfo.getClickPos()
+        let event = RouteMapEvent()
+        
+        if (stopPosition == nil){
+
+            stopPosition = position
+
+            event.clickPosition = position
+            event.stopPosition = stopPosition
+            
+            delegateBasicMapEvents?.stopPositionSet(event: event)
+        } else {
+            
+            stopPosition = nil
+            delegateBasicMapEvents?.stopPositionUnSet()
+        }
+        
     }
 }
 
 protocol BasicMapEventsDelgate {
     
-    func startClicked(event: RouteMapEvent)
+    func stopPositionSet(event: RouteMapEvent)
+    
+    func stopPositionUnSet()
     
     func longTap()
 }
