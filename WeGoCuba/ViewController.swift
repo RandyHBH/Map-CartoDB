@@ -105,6 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // START UPDATING LOCATION, WHEN STOP THE UPDATES????
         startLocationUpdates()
         
         basicEvents?.delegateRotate = self
@@ -125,17 +126,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         
         switch locationButton.isActive() {
         case true:
-            if (isUpdatingLocation == true) {
-                // Don't do nothing
-            } else {
-                startLocationUpdates()
-            }
+                locationMarker.focus = true
         default:
-            if (isUpdatingLocation == true) {
-                stopLocationUpdates()
-            } else {
-                // Don't do nothing
-            }
+                locationMarker.focus = false
         }
     }
     
@@ -215,9 +208,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         // Latest location saved as class variable to get bearing to adjust compass
         let location = locations[0]
         
-        if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
-            if (latestLocation.coordinate.longitude == location.coordinate.longitude) {
-                return
+        if (latestLocation != nil) {
+            if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
+                if (latestLocation.coordinate.longitude == location.coordinate.longitude) {
+                    return
+                }
             }
         }
         
