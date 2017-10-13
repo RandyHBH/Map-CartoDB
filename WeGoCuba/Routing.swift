@@ -20,7 +20,7 @@ class Routing {
     var mapView: NTMapView!
     var projection: NTProjection!
     
-    var showTurns: Bool = true
+    var showTurns: Bool = false
     
     init(mapView: NTMapView, hopper: GraphHopper) {
         

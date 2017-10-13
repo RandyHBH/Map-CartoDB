@@ -20,12 +20,12 @@ class TurnByTurnClient: NSObject, CLLocationManagerDelegate {
     
     let destinationListener = DestinationClickListener()
     
-    init(mapView : NTMapView) {
+    init(mapView : NTMapView, progressLabel: ProgressLabel) {
         super.init()
         
         self.mapView = mapView
         
-        marker = LocationMarker(mapView: self.mapView, progressLabel: progressLabel)
+        marker = LocationMarker(mapView: self.mapView)
         
         manager.pausesLocationUpdatesAutomatically = false
         manager.desiredAccuracy = 1

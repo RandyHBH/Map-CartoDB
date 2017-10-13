@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class LocationButton: UIButton {
     
      var delegate: LocationButtonDelegate?
@@ -39,27 +38,12 @@ class LocationButton: UIButton {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 0.5
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+       layer.cornerRadius = min(bounds.width,bounds.height) / 2.0
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if (!isEnabled) {
-            return
-        }
-        
-        alpha = 0.8
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if (!isEnabled) {
-            return
-        }
-        
-        alpha = 0.8
-    }
     
 }
 

@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class RouteButton : UIButton {
     
     var delegate: RouteButtonDelegate?
@@ -23,26 +22,10 @@ class RouteButton : UIButton {
         delegate?.routeButtonTapped()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        alpha = 0.5
-    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if (!isEnabled) {
-            return
-        }
-        
-        alpha = 0.8
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if (!isEnabled) {
-            return
-        }
-        
-        alpha = 0.8
+        layer.cornerRadius = min(bounds.width,bounds.height) / 2.0
     }
     
 }

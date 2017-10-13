@@ -12,8 +12,8 @@
 		8B0E8B861F78A24D00BD08D1 /* icon_compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E8B831F78A24D00BD08D1 /* icon_compass.png */; };
 		8B0E8B871F78A24D00BD08D1 /* icon_track_location_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E8B841F78A24D00BD08D1 /* icon_track_location_off.png */; };
 		8B0E8B881F78A24D00BD08D1 /* icon_track_location_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E8B851F78A24D00BD08D1 /* icon_track_location_on.png */; };
-		8B12CCAE1F8731D9000550C2 /* libjre_emul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B12CCAB1F8731D9000550C2 /* libjre_emul.a */; };
-		8B12CCAF1F8731D9000550C2 /* libgraphhopper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B12CCAC1F8731D9000550C2 /* libgraphhopper.a */; };
+		8B1FE03E1F9019F4003C3521 /* libjre_emul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1FE03B1F9019F4003C3521 /* libjre_emul.a */; };
+		8B1FE03F1F9019F4003C3521 /* libgraphhopper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1FE03C1F9019F4003C3521 /* libgraphhopper.a */; };
 		8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */; };
 		8B273CC01F61C5C1008FA023 /* BasicMapEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */; };
 		8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27B68D1F8C5748009F4722 /* RouteController.swift */; };
@@ -26,7 +26,6 @@
 		8B41E2C11F7D96CA003BC7EA /* RotationListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41E2C01F7D96CA003BC7EA /* RotationListener.swift */; };
 		8B42D52E1F7DCF71002C93F0 /* ScaleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42D52D1F7DCF71002C93F0 /* ScaleBar.swift */; };
 		8B42D5311F7DD05D002C93F0 /* LocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42D5301F7DD05D002C93F0 /* LocationExtensions.swift */; };
-		8B6416631F6196E600D5184D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416621F6196E600D5184D /* GLKit.framework */; };
 		8B6416651F61977300D5184D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416641F61977300D5184D /* libc++.tbd */; };
 		8B6416671F61978900D5184D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416661F61978900D5184D /* libz.tbd */; };
 		8B689FE01F8BD6FE0033B95E /* TurnByTurnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FDF1F8BD6FE0033B95E /* TurnByTurnViewController.swift */; };
@@ -34,7 +33,6 @@
 		8B689FE41F8BF3CF0033B95E /* LocationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */; };
 		8B689FE61F8BFB8B0033B95E /* BaseMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE51F8BFB8B0033B95E /* BaseMap.swift */; };
 		8B724FF51F715DF70075270C /* cuba.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B724FF11F715DF70075270C /* cuba.mbtiles */; };
-		8B8A28541F8E90F700B14BBE /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A28531F8E90F700B14BBE /* MyButton.swift */; };
 		8B900C2E1F83461A00FCCEB8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B900C2D1F83461A00FCCEB8 /* Security.framework */; };
 		8B900C301F83464B00FCCEB8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B900C2F1F83464B00FCCEB8 /* libicucore.tbd */; };
 		8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A000F1F55A42900330631 /* AppDelegate.swift */; };
@@ -113,8 +111,8 @@
 		8B0E8B831F78A24D00BD08D1 /* icon_compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_compass.png; sourceTree = "<group>"; };
 		8B0E8B841F78A24D00BD08D1 /* icon_track_location_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_track_location_off.png; sourceTree = "<group>"; };
 		8B0E8B851F78A24D00BD08D1 /* icon_track_location_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_track_location_on.png; sourceTree = "<group>"; };
-		8B12CCAB1F8731D9000550C2 /* libjre_emul.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjre_emul.a; path = j2objc/lib/libjre_emul.a; sourceTree = "<group>"; };
-		8B12CCAC1F8731D9000550C2 /* libgraphhopper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgraphhopper.a; path = build/libgraphhopper.a; sourceTree = "<group>"; };
+		8B1FE03B1F9019F4003C3521 /* libjre_emul.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjre_emul.a; path = j2objc/lib/libjre_emul.a; sourceTree = "<group>"; };
+		8B1FE03C1F9019F4003C3521 /* libgraphhopper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgraphhopper.a; path = build/libgraphhopper.a; sourceTree = "<group>"; };
 		8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMarkers.swift; path = Marcadores/AddMarkers.swift; sourceTree = "<group>"; };
 		8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicMapEvents.swift; path = Listeners/BasicMapEvents.swift; sourceTree = "<group>"; };
 		8B27B68D1F8C5748009F4722 /* RouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteController.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 		8B41E2C01F7D96CA003BC7EA /* RotationListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotationListener.swift; path = ../RotationListener.swift; sourceTree = "<group>"; };
 		8B42D52D1F7DCF71002C93F0 /* ScaleBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScaleBar.swift; path = ../ScaleBar.swift; sourceTree = "<group>"; };
 		8B42D5301F7DD05D002C93F0 /* LocationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationExtensions.swift; path = WeGoCuba/LocationExtensions.swift; sourceTree = SOURCE_ROOT; };
-		8B6416621F6196E600D5184D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8B6416641F61977300D5184D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8B6416661F61978900D5184D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B689FDF1F8BD6FE0033B95E /* TurnByTurnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnByTurnViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +132,6 @@
 		8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationMarker.swift; path = ../LocationMarker.swift; sourceTree = "<group>"; };
 		8B689FE51F8BFB8B0033B95E /* BaseMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMap.swift; sourceTree = "<group>"; };
 		8B724FF11F715DF70075270C /* cuba.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = cuba.mbtiles; sourceTree = "<group>"; };
-		8B8A28531F8E90F700B14BBE /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		8B900BF41F8343C100FCCEB8 /* graphhopper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = graphhopper.xcodeproj; path = "libs/graphhopper-ios/graphhopper.xcodeproj"; sourceTree = "<group>"; };
 		8B900C2D1F83461A00FCCEB8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8B900C2F1F83464B00FCCEB8 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -205,13 +201,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B12CCAE1F8731D9000550C2 /* libjre_emul.a in Frameworks */,
-				8B900C301F83464B00FCCEB8 /* libicucore.tbd in Frameworks */,
-				8B900C2E1F83461A00FCCEB8 /* Security.framework in Frameworks */,
-				8B6416671F61978900D5184D /* libz.tbd in Frameworks */,
 				8B6416651F61977300D5184D /* libc++.tbd in Frameworks */,
-				8B6416631F6196E600D5184D /* GLKit.framework in Frameworks */,
-				8B12CCAF1F8731D9000550C2 /* libgraphhopper.a in Frameworks */,
+				8B900C301F83464B00FCCEB8 /* libicucore.tbd in Frameworks */,
+				8B6416671F61978900D5184D /* libz.tbd in Frameworks */,
+				8B1FE03F1F9019F4003C3521 /* libgraphhopper.a in Frameworks */,
+				8B900C2E1F83461A00FCCEB8 /* Security.framework in Frameworks */,
+				8B1FE03E1F9019F4003C3521 /* libjre_emul.a in Frameworks */,
 				D53FED525E0A8C0206484CAB /* Pods_WeGoCuba.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,7 +222,6 @@
 				8B900BF41F8343C100FCCEB8 /* graphhopper.xcodeproj */,
 				8B6416661F61978900D5184D /* libz.tbd */,
 				8B6416641F61977300D5184D /* libc++.tbd */,
-				8B6416621F6196E600D5184D /* GLKit.framework */,
 				919D3E9F52A0F47479A16E13 /* Pods_WeGoCuba.framework */,
 			);
 			name = Frameworks;
@@ -258,11 +252,11 @@
 			path = IMG;
 			sourceTree = "<group>";
 		};
-		8B12CCAD1F8731D9000550C2 /* Libraries */ = {
+		8B1FE03D1F9019F4003C3521 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				8B12CCAB1F8731D9000550C2 /* libjre_emul.a */,
-				8B12CCAC1F8731D9000550C2 /* libgraphhopper.a */,
+				8B1FE03B1F9019F4003C3521 /* libjre_emul.a */,
+				8B1FE03C1F9019F4003C3521 /* libgraphhopper.a */,
 			);
 			name = Libraries;
 			path = "libs/graphhopper-ios";
@@ -304,8 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				8B27B68C1F8C5711009F4722 /* Turn-by-Turn-Navigation */,
-				8B9A00111F55A42900330631 /* ViewController.swift */,
 				8B27B68D1F8C5748009F4722 /* RouteController.swift */,
+				8B9A00111F55A42900330631 /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -315,7 +309,6 @@
 			children = (
 				8BFED7FD1F85177F00544FB1 /* ProgressLabel.swift */,
 				8BFED7F81F85149300544FB1 /* AlertBaseView.swift */,
-				8BFED7ED1F85143300544FB1 /* Buttons */,
 				8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */,
 				8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */,
 				8B4142761F68E5320002AD80 /* BoundingBox.swift */,
@@ -344,8 +337,8 @@
 		8B9A00031F55A42900330631 = {
 			isa = PBXGroup;
 			children = (
+				8B1FE03D1F9019F4003C3521 /* Libraries */,
 				8BC2CDD21F87A4FB00DDF77F /* Translations */,
-				8B12CCAD1F8731D9000550C2 /* Libraries */,
 				8B724FF01F715DF70075270C /* Resources */,
 				8B9A000E1F55A42900330631 /* WeGoCuba */,
 				8B9A000D1F55A42900330631 /* Products */,
@@ -372,6 +365,7 @@
 				8B42D52F1F7DD030002C93F0 /* GPS Location */,
 				8B42D53A1F7DEE33002C93F0 /* Route Search */,
 				8B0E8B761F788D9900BD08D1 /* Utils */,
+				8BFED7ED1F85143300544FB1 /* Buttons */,
 				8B58A58F1F6875EA00F15888 /* Components */,
 				8B9A00161F55A42900330631 /* Assets.xcassets */,
 				8B9A001B1F55A42900330631 /* Info.plist */,
@@ -449,7 +443,6 @@
 				8BFED7EE1F85143300544FB1 /* LocationButton.swift */,
 				8BFED7F11F85143300544FB1 /* RouteButton.swift */,
 				8BFED7EF1F85143300544FB1 /* PopupButton.swift */,
-				8B8A28531F8E90F700B14BBE /* MyButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -649,7 +642,6 @@
 				8B689FE41F8BF3CF0033B95E /* LocationMarker.swift in Sources */,
 				8BFED7F31F85143300544FB1 /* LocationButton.swift in Sources */,
 				8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */,
-				8B8A28541F8E90F700B14BBE /* MyButton.swift in Sources */,
 				8B42D5311F7DD05D002C93F0 /* LocationExtensions.swift in Sources */,
 				8B419A9B1F83E3090036FBC2 /* Routing.swift in Sources */,
 				8BFED7F51F85143300544FB1 /* RotationResetButton.swift in Sources */,
@@ -817,6 +809,8 @@
 					"$(inherited)",
 					"\"$(PROJECT_DIR)/libs/graphhopper-ios/j2objc/lib\"/**",
 					"\"$(PROJECT_DIR)/libs/graphhopper-ios/build\"/**",
+					"$(PROJECT_DIR)/libs/graphhopper-ios/j2objc/lib",
+					"$(PROJECT_DIR)/libs/graphhopper-ios/build",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -845,7 +839,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeGoCuba-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/graphhopper-ios/src\"/** \"$(SRCROOT)/libs/graphhopper-ios/j2objc/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/graphhopper-ios/src/** $(SRCROOT)/libs/graphhopper-ios/j2objc/include/**";
 			};
 			name = Debug;
 		};
@@ -870,6 +864,8 @@
 					"$(inherited)",
 					"\"$(PROJECT_DIR)/libs/graphhopper-ios/j2objc/lib\"/**",
 					"\"$(PROJECT_DIR)/libs/graphhopper-ios/build\"/**",
+					"$(PROJECT_DIR)/libs/graphhopper-ios/j2objc/lib",
+					"$(PROJECT_DIR)/libs/graphhopper-ios/build",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -898,7 +894,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeGoCuba-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/libs/graphhopper-ios/src\"/** \"$(SRCROOT)/libs/graphhopper-ios/j2objc/include\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/libs/graphhopper-ios/src/** $(SRCROOT)/libs/graphhopper-ios/j2objc/include/**";
 			};
 			name = Release;
 		};

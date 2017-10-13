@@ -27,12 +27,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     var locationMarker : LocationMarker!
     
     
-    // BASIC BRUJALA DECLARATION
+    // BASIC BRUJALA & MAP EVENTS DECLARATION
     var basicEvents: BasicMapEvents!
     
     // BASIC GPS LOCALIZATION DECLARATION
     var manager: CLLocationManager!
     var latestLocation: CLLocation!
+    var isUpdatingLocation : Bool = false
     
     // BASIC DECLARATION FOR OFFLINE ROUTE
     var progressLabel: ProgressLabel!
@@ -72,22 +73,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         manager.pausesLocationUpdatesAutomatically = false
         //        manager.desiredAccuracy = 1
         
-        
-        /*
-         * In addition to requesting background location updates, you need to add the following lines to your Info.plist:
-         *
-         * 1. Privacy - Location When In Use Usage Description
-         * 2. Privacy - Location Always Usage Description
-         * 3. Required background modes:
-         *    3.1 App registers for location updates
-         */
         if #available(iOS 9.0, *) {
             manager.requestAlwaysAuthorization()
         }
         
-        //        if #available(iOS 9.0, *) {
-        //            manager.allowsBackgroundLocationUpdates = true
-        //        }
         
         rotationResetButton.resetDuration = rotationDuration
         
@@ -97,15 +86,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         basicEvents = BasicMapEvents()
         basicEvents.map = map
         
-        locationButton.addRecognizer()
-        
         progressLabel = ProgressLabel()
         view.addSubview(progressLabel)
         layoutProgressLabel()
         
         routeController = RouteController(mapView: self.map, progressLabel: self.progressLabel)
         
-        self.routeButton.alpha = 0
     }
     
     
@@ -119,8 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        manager.startUpdatingLocation()
-        manager.startUpdatingHeading()
+        startLocationUpdates()
         
         basicEvents?.delegateRotate = self
         basicEvents?.delegateBasicMapEvents = self
@@ -128,6 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         map.setMapEventListener(basicEvents)
         
         locationButton.delegate = self
+        locationButton.addRecognizer()
         
         routeButton.addRecognizer()
         routeButton.delegate = self
@@ -135,17 +121,41 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     }
     
     // MARK: LOCATION BUTTON DELEGATE
-    func locationSwitchTapped(){
-        if (locationButton.isActive()){
-            manager.startUpdatingLocation()
-            manager.startUpdatingHeading()
-        } else {
-            manager.stopUpdatingLocation()
-            manager.stopUpdatingHeading()
+    func locationSwitchTapped() {
+        
+        switch locationButton.isActive() {
+        case true:
+            if (isUpdatingLocation == true) {
+                // Don't do nothing
+            } else {
+                startLocationUpdates()
+            }
+        default:
+            if (isUpdatingLocation == true) {
+                stopLocationUpdates()
+            } else {
+                // Don't do nothing
+            }
         }
     }
     
+    func startLocationUpdates() {
+        manager.startUpdatingLocation()
+        manager.startUpdatingHeading()
+        
+        isUpdatingLocation = true
+    }
+    
+    func stopLocationUpdates() {
+        manager.stopUpdatingLocation()
+        manager.stopUpdatingHeading()
+        
+        isUpdatingLocation = false
+    }
+    
     // MARK: ROUTE BUTTON DELEGATE
+    
+    var navigationStarted : Bool = false
     
     func routeButtonTapped() {
         if ( basicEvents.stopPosition != nil) {
@@ -159,6 +169,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
             
             routeController.showRoute(start: startPosition!, stop: stopPosition!)
             
+            navigationStarted = true
+            startLocationUpdates()
+            
         } else {
             
             self.progressLabel.complete(message: "You need to set a final position")
@@ -169,7 +182,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     // MARK: BASIC MAP EVENTS DELEGATE
     
     func stopPositionSet(event: RouteMapEvent) {
-       
+        
         routeController.onePointRoute(event: event)
     }
     
@@ -198,16 +211,47 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     //MARK: LOCATION MANAGER METHOD DELEGATE
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Latest location saved as class variable to get bearing to adjust compass
-        latestLocation = locations[0]
         
-        // Not "online", but reusing the online switch to achieve location tracking functionality
+        // Latest location saved as class variable to get bearing to adjust compass
+        let location = locations[0]
+        
+        if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
+            if (latestLocation.coordinate.longitude == location.coordinate.longitude) {
+                return
+            }
+        }
+        
+        latestLocation = location
+        
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        locationMarker.showUserAt(location: latestLocation)
+        
+        // Zoom & focus is enabled by default, disable after initial location is set
+        locationMarker.focus = false
+        
+        // Only enabled Zoom & focus if locationButton change his state
         if (locationButton.isActive()) {
             locationMarker.focus = true
-            locationMarker.showUserAt(location: latestLocation)
+        } else {
+            locationMarker.focus = false
+        }
+        
+        var destination =  basicEvents.stopPosition
+        
+        if (destination != nil) {
+            if (navigationStarted) {
+                let position = locationMarker.projection.fromLat(latitude, lng: longitude)
+                if (position != destination) {
+                    routeController.showRoute(start: position!, stop: destination!)
+                } else {
+                    destination = nil
+                    routeController.finishRoute()
+                }
+            }
         }
     }
-    
     
     
     //MARK: END LOCATION MANAGER

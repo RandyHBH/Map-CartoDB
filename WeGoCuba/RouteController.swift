@@ -78,7 +78,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
                     self.progressLabel.complete(message: "Routing failed. Please try again")
                     return
                 } else {
-                    self.progressLabel.complete(message: self.routing.getMessage(result: result!))
+//                    self.progressLabel.complete(message: self.routing.getMessage(result: result!))
                 }
                 
                 let color = NTColor(r: 14, g: 122, b: 254, a: 150)

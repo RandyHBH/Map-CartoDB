@@ -50,39 +50,6 @@ extension String {
 
 extension UIView {
     
-    @IBInspectable
-    var borderWidht : CGFloat {
-        get{
-            return layer.borderWidth
-        }
-        set{
-            layer.borderWidth = newValue
-        }
-    }
-    
-    @IBInspectable
-    var cornerRadius : CGFloat {
-        get{
-            return layer.cornerRadius
-        }
-        set{
-            layer.cornerRadius = newValue
-            layer.masksToBounds = newValue != 0
-        }
-    }
-    
-    @IBInspectable
-    var makeCircular : Bool? {
-        get{
-            return nil
-        }
-        set{
-            if let makeCircular = newValue , makeCircular {
-                cornerRadius = min(bounds.width, bounds.height) / 2.0
-            }
-        }
-    }
-    
     func addSquareShadow() {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.lightGray.cgColor
