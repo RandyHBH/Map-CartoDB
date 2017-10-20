@@ -40,8 +40,29 @@ public extension CLLocation {
         return CGFloat(radiansBearing)
     }
     
+    func bearingToLocationRadian(destinationPosition: NTMapPos) -> CGFloat {
+        
+        let lat1 = coordinate.latitude.degreesToRadians
+        let lon1 = coordinate.longitude.degreesToRadians
+        
+        let lat2 = destinationPosition.getY().degreesToRadians
+        let lon2 = destinationPosition.getX().degreesToRadians
+        
+        let dLon = lon2 - lon1
+        
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let radiansBearing = atan2(y, x)
+        
+        return CGFloat(radiansBearing)
+    }
+    
     func bearingToLocationDegrees(destinationLocation: CLLocation) -> CGFloat {
         return bearingToLocationRadian(destinationLocation).radiansToDegrees
+    }
+    
+    func bearingToLocationDegrees(destinationPosition: NTMapPos) -> CGFloat {
+        return bearingToLocationRadian(destinationPosition: destinationPosition).radiansToDegrees
     }
 }
 
