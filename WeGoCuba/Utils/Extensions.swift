@@ -6,6 +6,23 @@
 //  Copyright © 2017 CARTO. All rights reserved.
 //
 
+
+extension UIButton {
+    
+    func flash() {
+        
+        let flash = CABasicAnimation(keyPath: "opacity")
+        flash.duration = 1
+        flash.fromValue = 0.8
+        flash.toValue = 0.1
+        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        flash.autoreverses = true
+        flash.repeatCount = 3
+        
+        layer.add(flash, forKey: "opacity")
+    }
+}
+
 extension String {
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
