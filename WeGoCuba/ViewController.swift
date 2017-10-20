@@ -233,14 +233,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         if (latestLocation != nil) {
             if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
                 if (latestLocation.coordinate.longitude == location.coordinate.longitude) {
-                    if (locationMarker.focus == true) {
-                        
-                        locationMarker.showUserAt(location: location)
-                        locationMarker.focus = false
-                    } else {
-                        
-                        return
-                    }
+                    
+                    return
                 }
             }
         }
