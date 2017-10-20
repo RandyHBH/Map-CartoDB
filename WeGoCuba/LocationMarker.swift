@@ -14,10 +14,10 @@ class LocationMarker: NSObject {
     
     var map : NTMapView!
     
-    var focus = true
-    
     var source : NTLocalVectorDataSource!
     var projection : NTProjection!
+    
+    var markerImage : UIImage!
     
     init(mapView : NTMapView) {
         super.init()
@@ -32,10 +32,15 @@ class LocationMarker: NSObject {
     
     //MARK: LOCATION METHODS
     
-    var userMarker: NTPoint!
+    var focus = true
+    var navigationMode: Bool = false
+    var userMarker: NTMarker!
     var accuracyMarker: NTPolygon!
+    var builderUserMarkerStyle : NTMarkerStyleBuilder?
     
     func showUserAt(location: CLLocation) {
+        
+        let speed : Double = location.speed
         
         let latitude = Double(location.coordinate.latitude)
         let longitude = Double(location.coordinate.longitude)
@@ -43,9 +48,19 @@ class LocationMarker: NSObject {
         
         let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
         
-        if (focus){
+        if focus {
             map.setFocus(position, durationSeconds: 1)
-            map.setZoom(18, durationSeconds: 1)
+        }
+
+        if (navigationMode) {
+            
+            autoZoom(speed: speed, position: position!)
+            map.setTilt(45, durationSeconds: 3)
+            map.setFocus(position, durationSeconds: 1)
+        } else {
+            
+            map.setZoom(18, durationSeconds: 2)
+            map.setTilt(90, durationSeconds: 1)
         }
         
         let builder = NTPolygonStyleBuilder()
@@ -68,15 +83,32 @@ class LocationMarker: NSObject {
         }
         
         if (userMarker == nil) {
-            let builder = NTPointStyleBuilder()
-            builder?.setColor(Colors.appleBlue.toNTColor())
-            builder?.setSize(16.0)
+            builderUserMarkerStyle = NTMarkerStyleBuilder()
+            self.markerImage = UIImage(named: "ic_navigation_white")
+            builderUserMarkerStyle?.setBitmap(NTBitmapUtils.createBitmap(from: markerImage))
+            builderUserMarkerStyle?.setColor(Colors.appleBlue.toNTColor())
+            builderUserMarkerStyle?.setAnchorPointX(0)
+            builderUserMarkerStyle?.setAnchorPointY(0)
+            builderUserMarkerStyle?.setSize(25.0)
             
-            userMarker = NTPoint(pos: position, style: builder?.buildStyle())
+            userMarker = NTMarker(pos: position, style: builderUserMarkerStyle?.buildStyle())
             source.add(userMarker)
         }
         
+        /**
+         *Sets the new absolute rotation value. 0 means look north, 90 means west, -90 means east and 180 means south.
+         * The rotation value will be wrapped to the range of (-180 .. 180].
+         **/
+        
+        let rotation = 0 - Float(location.course)  - self.map.getRotation()
+        userMarker.setRotation(rotation)
+        
         userMarker.setPos(position)
+    }
+    
+    func NTBitmapFromString(path: String) -> NTBitmap {
+        let image = UIImage(named: path)
+        return NTBitmapUtils.createBitmap(from: image)
     }
     
     func getCirclePoints(latitude: Double, longitude: Double, accuracy: Float) -> NTMapPosVector {
@@ -104,5 +136,16 @@ class LocationMarker: NSObject {
         return points!
     }
     
-    //MARK: END LOCATION METHODS
+    func autoZoom(speed : Double, position : NTMapPos) {
+        let speedKmH = speed * 3.6
+        if (speedKmH >= 80) {
+            map.setZoom(17, targetPos: position, durationSeconds: 2)
+        } else if (speedKmH >= 70) {
+            map.setZoom(18, targetPos: position, durationSeconds: 2)
+        } else if (speedKmH >= 50) {
+            map.setZoom(19, targetPos: position, durationSeconds: 2)
+        } else {
+            map.setZoom(17, targetPos: position, durationSeconds: 2)
+        }
+    }
 }

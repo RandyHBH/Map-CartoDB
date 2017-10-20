@@ -15,7 +15,7 @@ class RouteMapEventListener : NTMapEventListener {
     
     var delegate: RouteMapEventDelegate?
     
-    var position, startPosition, endPosition: NTMapPos!
+    var position, startPosition, stopPosition: NTMapPos!
     
     override func onMapClicked(_ mapClickInfo: NTMapClickInfo!) {
         
@@ -29,20 +29,23 @@ class RouteMapEventListener : NTMapEventListener {
         
         let event = RouteMapEvent()
         
-        if (endPosition == nil) {
-            endPosition = position
+        if (startPosition == nil) {
+            startPosition = position
+            
+            event.clickPosition = position
+            
+            delegate?.startClicked(event: event)
+        } else {
+            stopPosition = position
             
             event.clickPosition = position
             event.startPosition = startPosition
-            event.stopPosition = endPosition
-
+            event.stopPosition = stopPosition
+            
             delegate?.stopClicked(event: event)
             
-        } else {
             startPosition = nil
-            endPosition = nil
-            delegate?.singleTap()
-            
+            stopPosition = nil
         }
     }
 }

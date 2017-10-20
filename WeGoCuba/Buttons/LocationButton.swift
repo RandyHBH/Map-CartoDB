@@ -19,7 +19,6 @@ class LocationButton: UIButton {
     }
     
     func switchChanged(_ sender: UITapGestureRecognizer) {
-        toggle()
         delegate?.locationSwitchTapped()
     }
     
