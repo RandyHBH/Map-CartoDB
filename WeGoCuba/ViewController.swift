@@ -1,16 +1,16 @@
  //
-//  ViewController.swift
-//  WeGoCuba
-//
-//  Created by Randy Hector Bartumeu Huergo on 8/29/17.
-//  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
-//
-
-import UIKit
-import CoreLocation
-
-
-class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate {
+ //  ViewController.swift
+ //  WeGoCuba
+ //
+ //  Created by Randy Hector Bartumeu Huergo on 8/29/17.
+ //  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
+ //
+ 
+ import UIKit
+ import CoreLocation
+ 
+ 
+ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var locationButton: LocationButton!
@@ -130,9 +130,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     // MARK: LOCATION BUTTON DELEGATE
     func locationSwitchTapped() {
         
-        locationMarker.focus = true
-        stopLocationUpdates()
-        startLocationUpdates()
+        if (latestLocation != nil) {
+            
+            let latitude = Double(latestLocation.coordinate.latitude)
+            let longitude = Double(latestLocation.coordinate.longitude)
+            
+            let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+            
+            map.setZoom(18, durationSeconds: 2)
+            map.setFocus(position, durationSeconds: 1)
+        }
     }
     
     func startLocationUpdates() {
@@ -170,7 +177,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
             self.navigationMode = true
             self.locationMarker.navigationMode = true
             self.navigationInProgress = true
-
+            
             
         } else if (navigationInProgress == true) {
             
@@ -243,12 +250,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         
         if (navigationMode == false) {
             if mFirstLocationUpdated {
+                
                 locationMarker.showUserAt(location: location)
                 mFirstLocationUpdated = false
             } else {
                 
                 locationMarker.showUserAt(location: location)
-                locationMarker.focus = false                
             }
         } else if (self.routeController.result != nil) && (navigationMode == true) {
             
@@ -304,4 +311,4 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     }
     
     
-}
+ }

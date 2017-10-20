@@ -32,7 +32,6 @@ class LocationMarker: NSObject {
     
     //MARK: LOCATION METHODS
     
-    var focus = true
     var navigationMode: Bool = false
     var userMarker: NTMarker!
     var accuracyMarker: NTPolygon!
@@ -47,20 +46,13 @@ class LocationMarker: NSObject {
         let accuracy = Float(location.horizontalAccuracy)
         
         let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
-        
-        if focus {
-            map.setFocus(position, durationSeconds: 1)
-        }
 
-        if (navigationMode) {
+        if navigationMode {
             
             autoZoom(speed: speed, position: position!)
             map.setTilt(45, durationSeconds: 3)
-            map.setFocus(position, durationSeconds: 1)
-        } else {
             
-            map.setZoom(18, durationSeconds: 2)
-            map.setTilt(90, durationSeconds: 1)
+            map.setFocus(position, durationSeconds: 1)
         }
         
         let builder = NTPolygonStyleBuilder()
