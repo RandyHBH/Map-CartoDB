@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var locationButton: LocationButton!
@@ -18,6 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     @IBOutlet var rotationResetButton: RotationResetButton!
     @IBOutlet var routeButton: RouteButton!
     
+    @IBOutlet var ptpButton: PTPButton!
     
     // BASIC MAP DECLARATION
     var projection: NTProjection!
@@ -119,6 +120,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         routeButton.addRecognizer()
         routeButton.delegate = self
         
+        ptpButton.addRecognizer()
+        ptpButton.delegate = self
+        
+        self.routeController.locationMarker = self.locationMarker
+        
     }
     
     // MARK: LOCATION BUTTON DELEGATE
@@ -126,7 +132,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         
         switch locationButton.isActive() {
         case true:
-                locationMarker.focus = true
+        locationMarker.focus = true
         default:
                 locationMarker.focus = false
         }
