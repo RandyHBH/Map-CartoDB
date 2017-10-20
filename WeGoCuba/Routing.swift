@@ -188,7 +188,10 @@ class Routing {
     func createPolyLine(result: GHResponse, color: NTColor) -> NTLine {
         let builder = NTLineStyleBuilder()
         builder?.setColor(color)
-        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
+        
+        // TODO Add another layer for the Arrow
+        //        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
+        
         builder?.setWidth(7)
         
         let points = result.getBest().getPoints()!
@@ -218,7 +221,10 @@ class Routing {
         let color = NTColor(r: 14, g: 122, b: 254, a: 150)
         let builder = NTLineStyleBuilder()
         builder?.setColor(color)
-        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
+
+        // TODO Add another layer for the Arrow
+//        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
+        
         builder?.setWidth(7)
         
         let size = points.size()
