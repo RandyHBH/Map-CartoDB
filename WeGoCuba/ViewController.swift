@@ -48,7 +48,7 @@
         map.frame = cartoTitleOff
         
         map.getOptions().setZoomGestures(true)
-        map.getOptions().setZoom(NTMapRange(min: 6, max: 22))
+        map.getOptions().setZoom(NTMapRange(min: 5, max: 22))
         map.getOptions().setPanningMode(NTPanningMode.PANNING_MODE_STICKY)
         
         //Need to add as a subview
@@ -75,7 +75,6 @@
         if #available(iOS 9.0, *) {
             manager.requestAlwaysAuthorization()
         }
-        
         
         rotationResetButton.resetDuration = rotationDuration
         
