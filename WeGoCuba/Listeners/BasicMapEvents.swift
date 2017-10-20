@@ -13,13 +13,21 @@ public class BasicMapEvents : NTMapEventListener
     var map: NTMapView!
     var stopPosition : NTMapPos!
     
+    var navigationMode = false
+    
     var previousAngle: CGFloat?
     var previousZoom: CGFloat?
     
     var delegateBasicMapEvents : BasicMapEventsDelgate?
     var delegateRotate: RotationDelegate?
+    var delegateMapIsInactive: MapIsInactiveDelegate?
     
     override public func onMapMoved() {
+        
+        if navigationMode == true {
+            delegateMapIsInactive?.resetTimer()
+            delegateMapIsInactive?.startTimer()
+        }
         
         let angle = CGFloat(map.getRotation())
         let zoom = CGFloat(map.getZoom())
@@ -74,4 +82,11 @@ protocol RotationDelegate {
     func rotated(angle: CGFloat)
     
     func zoomed(zoom: CGFloat)
+}
+
+protocol MapIsInactiveDelegate {
+    
+    func startTimer()
+    
+    func resetTimer()
 }

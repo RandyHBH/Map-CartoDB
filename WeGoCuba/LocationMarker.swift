@@ -31,29 +31,27 @@ class LocationMarker: NSObject {
     }
     
     //MARK: LOCATION METHODS
+    let timer = Timer()
+    var freeMode: Bool = true
     
-    var navigationMode: Bool = false
     var userMarker: NTMarker!
+    var position: NTMapPos!
+    var speed: Double!
+    var rotation: Float!
+    var course: Float!
+    
     var accuracyMarker: NTPolygon!
     var builderUserMarkerStyle : NTMarkerStyleBuilder?
     
     func showUserAt(location: CLLocation) {
         
-        let speed : Double = location.speed
+        speed = location.speed
         
         let latitude = Double(location.coordinate.latitude)
         let longitude = Double(location.coordinate.longitude)
         let accuracy = Float(location.horizontalAccuracy)
         
-        let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
-
-        if navigationMode {
-            
-            autoZoom(speed: speed, position: position!)
-            map.setTilt(45, durationSeconds: 3)
-            
-            map.setFocus(position, durationSeconds: 1)
-        }
+        position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
         
         let builder = NTPolygonStyleBuilder()
         builder?.setColor(Colors.lightTransparentAppleBlue.toNTColor())
@@ -92,7 +90,7 @@ class LocationMarker: NSObject {
          * The rotation value will be wrapped to the range of (-180 .. 180].
          **/
         
-        let rotation = 0 - Float(location.course)  - self.map.getRotation()
+        rotation = 0 - Float(location.course)  - self.map.getRotation()
         userMarker.setRotation(rotation)
         
         userMarker.setPos(position)
@@ -127,6 +125,20 @@ class LocationMarker: NSObject {
         
         return points!
     }
+    
+    func modeNavigation() {
+
+        autoZoom(speed: speed, position: position)
+        map.setTilt(30, durationSeconds: 1)
+        map.setFocus(position, durationSeconds: 1)
+        map.setRotation(-course, targetPos: position, durationSeconds: 1)
+    }
+    
+    func modeFree() {
+        map.setTilt(90, durationSeconds: 1)
+        map.setFocus(position, durationSeconds: 1)
+    }
+    
     
     func autoZoom(speed : Double, position : NTMapPos) {
         let speedKmH = speed * 3.6

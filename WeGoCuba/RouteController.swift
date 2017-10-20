@@ -114,7 +114,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
     var currentRoutePoint : Int = 0
     var mDestinationArrived = false
     var mTraveledDistance: Double?
-    
+    var isTimerRunning: Bool?
     func updateRoute(location: CLLocation) {
         
         
@@ -136,6 +136,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
             DispatchQueue.main.async(execute: {
                 if (finished) {
                     self.finishRoute()
+                    self.locationMarker.modeFree()
                     return;
                 }
             })
@@ -180,8 +181,6 @@ class RouteController: NSObject, RouteMapEventDelegate {
             let startPosition : NTMapPos = self.projection.fromWgs84(NTMapPos(x: longitude, y: latitude))
             print(startPosition.debugDescription)
             
-            self.progressLabel.complete(message: "New Route from \(startPosition.debugDescription)")
-            
             DispatchQueue.global().async {
                 
                 let response = self.routing.getNewResult(startPos: startPosition, stopPos: finalPos)
@@ -215,8 +214,13 @@ class RouteController: NSObject, RouteMapEventDelegate {
                 
                 let project = self.getProjection(lat: currentGeoPoint.getY(), lon: currentGeoPoint.getX(), fromLat: prevLocation!.getY(), fromLon: prevLocation!.getX(), toLat: next!.getY(), toLon: next!.getX());
                 
-                //MARK: UPDATE POSITION
+                //MARK: UPDATE MARKER POSITION
                 self.locationMarker.showUserAt(location: location)
+                
+                //MARK: UPDATE VIEW POSITION
+                if isTimerRunning == false {
+                    locationMarker.modeNavigation()
+                }
                 
                 //MARK: UPDATING LINE
                 self.routing.show(points: pointList, startPoint: project, currentPointList: self.currentRoutePoint)

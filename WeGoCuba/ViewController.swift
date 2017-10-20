@@ -10,7 +10,7 @@
  import CoreLocation
  
  
- class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate {
+ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate, MapIsInactiveDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var locationButton: LocationButton!
@@ -27,7 +27,6 @@
     // LOCATIONS MARKERS
     var locationMarker : LocationMarker!
     
-    
     // BASIC BRUJALA & MAP EVENTS DECLARATION
     var basicEvents: BasicMapEvents!
     
@@ -40,7 +39,6 @@
     var progressLabel: ProgressLabel!
     
     var routeController : RouteController!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,16 +90,14 @@
         layoutProgressLabel()
         
         routeController = RouteController(mapView: self.map, progressLabel: self.progressLabel)
-        
+
     }
-    
     
     // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         let cartoTitleOff = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 50)
         map.frame = cartoTitleOff
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,6 +107,7 @@
         
         basicEvents?.delegateRotate = self
         basicEvents?.delegateBasicMapEvents = self
+        basicEvents?.delegateMapIsInactive = self
         
         map.setMapEventListener(basicEvents)
         
@@ -158,8 +155,8 @@
     
     // MARK: ROUTE BUTTON DELEGATE
     
-    var navigationMode: Bool = false
-    var navigationInProgress: Bool = false
+    var navigationMode = false
+    var navigationInProgress = false
     
     func routeButtonTapped() {
         
@@ -175,9 +172,9 @@
             self.routeController.showRoute(start: startPosition!, stop: stopPosition!)
             
             self.navigationMode = true
-            self.locationMarker.navigationMode = true
             self.navigationInProgress = true
-            
+            basicEvents.navigationMode = true
+            self.locationMarker.modeNavigation()
             
         } else if (navigationInProgress == true) {
             
@@ -208,9 +205,13 @@
     func stopPositionUnSet() {
         
         routeController.finishRoute()
+        
         navigationMode = false
         navigationInProgress = false
-        self.locationMarker.navigationMode = false
+        basicEvents.navigationMode = false
+        
+        
+        self.locationMarker.modeFree()
     }
     
     func longTap(){
@@ -227,8 +228,7 @@
         
         progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
     }
-    
-    
+ 
     //MARK: LOCATION MANAGER METHOD DELEGATE
     
     var mFirstLocationUpdated = true
@@ -252,6 +252,7 @@
             if mFirstLocationUpdated {
                 
                 locationMarker.showUserAt(location: location)
+                locationMarker.modeFree()
                 mFirstLocationUpdated = false
             } else {
                 
@@ -264,6 +265,45 @@
         }
     }
     
+    // MARK: TIMER
+    
+    var timer = Timer()
+    var seconds = 5
+    var isTimerRunning = false
+    
+    func startTimer() {
+        if isTimerRunning == false {
+            runTimer()
+        }
+    }
+    
+    func runTimer() {
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+        
+        isTimerRunning = true
+        routeController.isTimerRunning = true
+    }
+    
+    func updateTimer() {
+        if seconds < 1 {
+            timer.invalidate()
+            if navigationInProgress {
+                locationMarker.modeNavigation()
+            }
+            routeController.isTimerRunning = false
+        } else {
+            
+            seconds -= 1
+        }
+    }
+    
+    func resetTimer() {
+        timer.invalidate()
+        seconds = 5
+        
+        isTimerRunning = false
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         
@@ -277,6 +317,7 @@
         // TODO: I DONT KNOW HOW TO ROTATE THE LOCATION MARKER
         let heading = ((newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading)
         
+        locationMarker.course = Float(heading)
         // TODO calculate heading to see whether the user should turn around or is facing the correct direction
         
     }
