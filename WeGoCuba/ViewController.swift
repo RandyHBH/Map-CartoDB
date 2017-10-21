@@ -89,7 +89,7 @@
         layoutProgressLabel()
         
         routeController = RouteController(mapView: self.map, progressLabel: self.progressLabel)
-
+        
     }
     
     // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
@@ -227,7 +227,7 @@
         
         progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
     }
- 
+    
     //MARK: LOCATION MANAGER METHOD DELEGATE
     
     var mFirstLocationUpdated = true
@@ -247,16 +247,18 @@
         
         latestLocation = location
         
+        
+        if mFirstLocationUpdated {
+            
+            locationMarker.showUserAt(location: location)
+            locationMarker.modeFree()
+            mFirstLocationUpdated = false
+            return
+        }
+        
         if (navigationMode == false) {
-            if mFirstLocationUpdated {
-                
-                locationMarker.showUserAt(location: location)
-                locationMarker.modeFree()
-                mFirstLocationUpdated = false
-            } else {
-                
-                locationMarker.showUserAt(location: location)
-            }
+            locationMarker.showUserAt(location: location)
+            
         } else if (self.routeController.result != nil) && (navigationMode == true) {
             
             self.routeController.updateRoute(location: location)
