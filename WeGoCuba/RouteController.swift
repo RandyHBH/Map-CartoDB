@@ -201,10 +201,17 @@ class RouteController: NSObject, RouteMapEventDelegate {
                     }
                     
                     let color = NTColor(r: 14, g: 122, b: 254, a: 150)
-                    self.routing.show(result: self.result!, lineColor: color!, complete: {
-                        (route: Route) in
-                        
-                    })
+                    self.routing.show(result: self.result!, lineColor: color!, complete: {_ in })
+                    
+                    //MARK: UPDATE MARKER POSITION
+                    // In navigation accurancy is not needed
+                    self.locationMarker.showAt(latitude: latitude, longitude: longitude, accuracy: 0)
+                    
+                    //MARK: UPDATE VIEW POSITION
+                    if self.isTimerRunning == false {
+                        self.locationMarker.modeNavigation()
+                    }
+
                 })
             }
             
