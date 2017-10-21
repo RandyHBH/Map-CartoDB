@@ -115,17 +115,21 @@ class RouteController: NSObject, RouteMapEventDelegate {
     var mDestinationArrived = false
     var mTraveledDistance: Double?
     var isTimerRunning: Bool?
+    
     func updateRoute(location: CLLocation) {
         
-        
         let speed: Double = location.speed
-        var posTolerance = 60.0
+        var posTolerance: Float = 60.0
         
-        if location.horizontalAccuracy > 0 {
-            posTolerance = posTolerance / 2 + location.horizontalAccuracy
+        let latitude = Double(location.coordinate.latitude)
+        let longitude = Double(location.coordinate.longitude)
+        let accuracy = Float(location.horizontalAccuracy)
+        
+        if accuracy > 0 {
+            posTolerance = posTolerance / 2 + accuracy
         }
         
-        let currentGeoPoint: NTMapPos = NTMapPos(x: location.coordinate.longitude, y: location.coordinate.latitude)
+        let currentGeoPoint: NTMapPos = NTMapPos(x: longitude, y: latitude)
         
         var calculateRoute = false
         
@@ -153,7 +157,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
             let point: NTMapPos = NTMapPos(x: pointList.getLongitudeWith(jint(currentRoute)), y: pointList.getLatitudeWith(jint(currentRoute)))
             
             let dist = self.getOrthogonalDistance(geoPoint: currentGeoPoint, geoFrom: afterPoint, geoTo: point);
-            if (dist > 1.2 * posTolerance) {
+            if (dist > Double(1.2 * posTolerance)) {
                 calculateRoute = true;
             }
         }
@@ -162,7 +166,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
         let next = self.getNextRouteGeoPoint();
         let wrongMovementDirection = self.checkWrongMovementDirection(location: location, nextRouteLocation: next);
         let point: NTMapPos = NTMapPos(x: pointList.getLongitudeWith(jint(currentRoute)), y: pointList.getLatitudeWith(jint(currentRoute)))
-        if (wrongMovementDirection && self.distanceBetween(startPoint: currentGeoPoint,endPoint: point) > 2 * posTolerance) {
+        if (wrongMovementDirection && self.distanceBetween(startPoint: currentGeoPoint, endPoint: point) > Double(2 * posTolerance)) {
             calculateRoute = true;
         }
         
@@ -204,7 +208,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
                 })
             }
             
-            
+            calculateRoute = false
         } else {
             
             // 5. update path layer and instructions
@@ -215,7 +219,8 @@ class RouteController: NSObject, RouteMapEventDelegate {
                 let project = self.getProjection(lat: currentGeoPoint.getY(), lon: currentGeoPoint.getX(), fromLat: prevLocation!.getY(), fromLon: prevLocation!.getX(), toLat: next!.getY(), toLon: next!.getX());
                 
                 //MARK: UPDATE MARKER POSITION
-                self.locationMarker.showUserAt(location: location)
+                // In navigation accurancy is not needed
+                self.locationMarker.showAt(latitude: latitude, longitude: longitude, accuracy: 0)
                 
                 //MARK: UPDATE VIEW POSITION
                 if isTimerRunning == false {
