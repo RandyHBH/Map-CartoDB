@@ -83,6 +83,7 @@
 		8BC2CDF71F87A4FB00DDF77F /* vi_VI.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDCF1F87A4FB00DDF77F /* vi_VI.txt */; };
 		8BC2CDF81F87A4FB00DDF77F /* zh_CN.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDD01F87A4FB00DDF77F /* zh_CN.txt */; };
 		8BC2CDF91F87A4FB00DDF77F /* zh_HK.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDD11F87A4FB00DDF77F /* zh_HK.txt */; };
+		8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC366311F9132C1007E0D42 /* PTPButton.swift */; };
 		8BD248391F841E0C00E6D9AA /* route.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD248381F841E0C00E6D9AA /* route.png */; };
 		8BFED7F31F85143300544FB1 /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFED7EE1F85143300544FB1 /* LocationButton.swift */; };
 		8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFED7EF1F85143300544FB1 /* PopupButton.swift */; };
@@ -185,6 +186,7 @@
 		8BC2CDCF1F87A4FB00DDF77F /* vi_VI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vi_VI.txt; path = build/translations/vi_VI.txt; sourceTree = "<group>"; };
 		8BC2CDD01F87A4FB00DDF77F /* zh_CN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = zh_CN.txt; path = build/translations/zh_CN.txt; sourceTree = "<group>"; };
 		8BC2CDD11F87A4FB00DDF77F /* zh_HK.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = zh_HK.txt; path = build/translations/zh_HK.txt; sourceTree = "<group>"; };
+		8BC366311F9132C1007E0D42 /* PTPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPButton.swift; sourceTree = "<group>"; };
 		8BD248381F841E0C00E6D9AA /* route.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route.png; sourceTree = "<group>"; };
 		8BD6B4E11F61816600C86085 /* WeGoCuba-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeGoCuba-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8BFED7EE1F85143300544FB1 /* LocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				8BFED7EE1F85143300544FB1 /* LocationButton.swift */,
 				8BFED7F11F85143300544FB1 /* RouteButton.swift */,
 				8BFED7EF1F85143300544FB1 /* PopupButton.swift */,
+				8BC366311F9132C1007E0D42 /* PTPButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				8B41E2BF1F7D78E7003BC7EA /* RouteMapEventListener.swift in Sources */,
 				8B419A9D1F83E36B0036FBC2 /* Route.swift in Sources */,
 				8BFED7F91F85149300544FB1 /* AlertBaseView.swift in Sources */,
+				8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */,
 				8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */,
 				8B27B6901F8C73C0009F4722 /* DestinationClickListener.swift in Sources */,
 				8B42D52E1F7DCF71002C93F0 /* ScaleBar.swift in Sources */,

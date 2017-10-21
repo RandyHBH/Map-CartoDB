@@ -34,29 +34,44 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mz0-Kc-b2c">
-                                <rect key="frame" x="270" y="370" width="40" height="90"/>
+                                <rect key="frame" x="260" y="290" width="50" height="170"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlU-hr-sfS" userLabel="Route Button" customClass="RouteButton" customModule="WeGoCuba" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <button opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M38-Vx-crb" userLabel="PTP Button" customClass="PTPButton" customModule="WeGoCuba" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="2Bc-Js-UQ8"/>
-                                            <constraint firstAttribute="height" constant="40" id="sWK-09-wsI"/>
+                                            <constraint firstAttribute="height" constant="50" id="DvX-jb-6C4"/>
+                                            <constraint firstAttribute="width" constant="50" id="tMi-6d-Ssb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="titleShadowOffset" width="0.0" height="2"/>
+                                        <state key="normal" image="route.png">
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892239999999" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlU-hr-sfS" userLabel="Route Button" customClass="RouteButton" customModule="WeGoCuba" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="60" width="50" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="2Bc-Js-UQ8"/>
+                                            <constraint firstAttribute="height" constant="50" id="sWK-09-wsI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="titleShadowOffset" width="0.0" height="2"/>
                                         <state key="normal" image="ic_route">
                                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892241379309" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-sL-wiY" customClass="LocationButton" customModule="WeGoCuba" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="40" height="40"/>
+                                        <rect key="frame" x="0.0" y="120" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="oyv-cc-FUJ"/>
-                                            <constraint firstAttribute="height" constant="40" id="zTQ-51-6VU"/>
+                                            <constraint firstAttribute="width" constant="50" id="oyv-cc-FUJ"/>
+                                            <constraint firstAttribute="height" constant="50" id="zTQ-51-6VU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,9 +79,6 @@
                                         <state key="normal" image="ic_my_location_white">
                                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892241379309" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -104,6 +116,7 @@
                     <connections>
                         <outlet property="locationButton" destination="LRM-sL-wiY" id="bWo-9o-RuG"/>
                         <outlet property="map" destination="Xh6-g3-XDh" id="Vim-Dd-81W"/>
+                        <outlet property="ptpButton" destination="M38-Vx-crb" id="bEg-2S-gvp"/>
                         <outlet property="rotationResetButton" destination="DcG-3s-ECL" id="Fck-Lv-vys"/>
                         <outlet property="routeButton" destination="BlU-hr-sfS" id="ALi-YC-IdE"/>
                         <outlet property="scaleBar" destination="4qE-dD-NUM" id="x8n-lI-24f"/>
@@ -123,5 +136,6 @@
         <image name="ic_my_location_white" width="24" height="24"/>
         <image name="ic_route" width="36" height="36"/>
         <image name="icon_compass.png" width="16" height="40"/>
+        <image name="route.png" width="512" height="512"/>
     </resources>
 </document>

@@ -6,7 +6,18 @@
          contextName = "SwitchButton.isOnline() -&gt; Bool:SwitchButton.swift">
       </ContextState>
       <ContextState
-         contextName = "ViewController.locationManager(CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ():ViewController.swift">
+         contextName = "ViewController.routeButtonTapped() -&gt; ():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LocationMarker.showUserAt(location : CLLocation) -&gt; ():LocationMarker.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Routing.getResult(startPos : NTMapPos, stopPos : NTMapPos) -&gt; GHResponse?:Routing.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "request.getHints().has(with: &quot;ch.disable&quot;)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
