@@ -20,13 +20,12 @@ class Routing {
     var mapView: NTMapView!
     var projection: NTProjection!
     
-    var showTurns: Bool = true
+    var showTurns: Bool = false
     
-    init(mapView: NTMapView) {
-        
-        initGraphhoper()
+    init(mapView: NTMapView, hopper: GraphHopper) {
         
         self.mapView = mapView
+        self.hopper = hopper
         projection = mapView.getOptions().getBaseProjection()
         
         let start = NTBitmapFromString(path: "icon_pin_red.png")
@@ -53,7 +52,7 @@ class Routing {
         markerBuilder?.setBitmap(start)
         markerBuilder?.setHideIfOverlapped(false)
         // Note: When setting the size on Android, you need to account for Resources.DisplayMetrics.Density
-        markerBuilder?.setSize(15)
+        markerBuilder?.setSize(20)
         
         let defaultPosition = NTMapPos(x: 0, y: 0)
         startMarker = NTMarker(pos: defaultPosition, style: markerBuilder?.buildStyle())
@@ -92,36 +91,36 @@ class Routing {
         let line = createPolyLine(result: result, color: lineColor)
         routeDataSource?.add(line)
         
-        let path : PathWrapper = result.getBest()
-        let instructions : InstructionList = path.getInstructions()
-        
         let vector = NTMapPosVector()
         
-        let count = instructions.size()
-        
-        for i in stride(from: 0, to: count, by: 1) {
-
-            let instruction : Instruction = instructions.getWith(i)
-            
-            let cantPointInstruction = instruction.getPoints().size()
-            
-            var j : jint = 0
-            while j < cantPointInstruction {
-                
-                let xLongitud = instruction.getPoints().getLongitudeWith(j)
-                let yLatitud = instruction.getPoints().getLatitudeWith(j)
-                
-                let position = projection.fromWgs84(NTMapPos(x: xLongitud, y: yLatitud))
-                
-                if (showTurns) {
-                    createRoutePoint(position: position!, instruction: instruction, source: routeDataSource!)
-                }
-                
-                vector?.add(position)
-                j += 1
-            }
-            
-        }
+        //        let path : PathWrapper = result.getBest()
+        //        let instructions : InstructionList = path.getInstructions()
+        //
+        //        let count = instructions.size()
+        //
+        //        for i in stride(from: 0, to: count, by: 1) {
+        //
+        //            let instruction : Instruction = instructions.getWith(i)
+        //
+        //            let cantPointInstruction = instruction.getPoints().size()
+        //
+        //            var j : jint = 0
+        //            while j < cantPointInstruction {
+        //
+        //                let xLongitud = instruction.getPoints().getLongitudeWith(j)
+        //                let yLatitud = instruction.getPoints().getLatitudeWith(j)
+        //
+        //                let position = projection.fromWgs84(NTMapPos(x: xLongitud, y: yLatitud))
+        //
+        //                if (showTurns) {
+        //                    createRoutePoint(position: position!, instruction: instruction, source: routeDataSource!)
+        //                }
+        //
+        //                vector?.add(position)
+        //                j += 1
+        //            }
+        //
+        //        }
         
         let polygon = NTPolygon(poses: vector, style: NTPolygonStyleBuilder().buildStyle())
         
@@ -142,33 +141,34 @@ class Routing {
         return message
     }
     
-    func getResult(startPos: NTMapPos, stopPos: NTMapPos) -> GHResponse? {
-        var result: GHResponse?
-        let request : GHRequest?
+    func getResult(startPos: NTMapPos, stopPos: NTMapPos) -> (GHResponse?,String) {
         
+        var result: GHResponse?
+        let request : GHRequest!
         let longitudStart84 = projection.toWgs84(startPos).getX()
         let latitudStart84 = projection.toWgs84(startPos).getY()
         
         let longitudStop84 = projection.toWgs84(stopPos).getX()
         let latitudStop84 = projection.toWgs84(stopPos).getY()
-
-    
+        
+        
         request = GHRequest(double: latitudStart84, with: longitudStart84, with: latitudStop84, with: longitudStop84).setVehicleWith("car").setWeightingWith("fastest").setLocaleWith("es")
+        request.getHints().put(with: "ch.disable", withId: true)
         
         result = self.hopper?.route(with: request)
         
         var routeInfo : String = ""
-
+        
         if (result?.hasErrors())! {
-            print("\(result!.getErrors())")
+            
             routeInfo = routeInfo + ("\(result?.getErrors())\n")
-            return nil
+            return (nil, routeInfo)
         }
         
-        return result
+        return (result,"")
         
     }
-
+    
     func createRoutePoint(position: NTMapPos, instruction: Instruction, source: NTLocalVectorDataSource) {
         
         let action = instruction.getSign()
@@ -188,6 +188,10 @@ class Routing {
     func createPolyLine(result: GHResponse, color: NTColor) -> NTLine {
         let builder = NTLineStyleBuilder()
         builder?.setColor(color)
+        
+        // TODO Add another layer for the Arrow
+        //        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
+        
         builder?.setWidth(7)
         
         let points = result.getBest().getPoints()!
@@ -203,6 +207,71 @@ class Routing {
         return NTLine(poses: linePoses, style: builder?.buildStyle())
     }
     
+    func show(points: PointList, startPoint: NTMapPos, currentPointList : Int) {
+        routeDataSource?.clear()
+        startMarker?.setVisible(true)
+        
+        let line = updatePolyLine(points: points, startPoint: startPoint, currentPointList: currentPointList)
+        routeDataSource?.add(line)
+        
+    }
+    
+    func updatePolyLine(points: PointList, startPoint: NTMapPos, currentPointList : Int) -> NTLine {
+        
+        let color = NTColor(r: 14, g: 122, b: 254, a: 150)
+        let builder = NTLineStyleBuilder()
+        builder?.setColor(color)
+
+        // TODO Add another layer for the Arrow
+//        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
+        
+        builder?.setWidth(7)
+        
+        let size = points.size()
+        let linePoses = NTMapPosVector()
+        
+        linePoses?.add(projection.fromWgs84(startPoint))
+        
+        var i = jint(currentPointList)
+        while i < size {
+            
+            linePoses?.add(projection.fromWgs84(NTMapPos(x: points.getLongitudeWith(i), y: points.getLatitudeWith(i))))
+            i += 1
+        }
+        
+        return NTLine(poses: linePoses, style: builder?.buildStyle())
+        
+    }
+    
+    func getNewResult(startPos: NTMapPos, stopPos: NTMapPos) -> (GHResponse?,String) {
+        
+        var result: GHResponse?
+        let request : GHRequest!
+        
+        let longitudStart84 = projection.toWgs84(startPos).getX()
+        let latitudStart84 = projection.toWgs84(startPos).getY()
+        
+        let longitudStop84 = stopPos.getX()
+        let latitudStop84 = stopPos.getY()
+        
+        
+        request = GHRequest(double: latitudStart84, with: longitudStart84, with: latitudStop84, with: longitudStop84).setVehicleWith("car").setWeightingWith("fastest").setLocaleWith("es")
+        request.getHints().put(with: "ch.disable", withId: true)
+        
+        result = self.hopper?.route(with: request)
+        
+        var routeInfo : String = ""
+        
+        if (result?.hasErrors())! {
+            
+            routeInfo = routeInfo + ("\(result?.getErrors())\n")
+            return (nil, routeInfo)
+        }
+        
+        return (result,"")
+        
+    }
+    
     func setStartMarker(position: NTMapPos) {
         routeDataSource?.clear()
         stopMarker?.setVisible(false)
@@ -215,21 +284,11 @@ class Routing {
         stopMarker?.setVisible(true)
     }
     
-    func initGraphhoper(){
-        let location: String? = Bundle.main.path(forResource: "graph-data", ofType: "osm-gh")
-        self.hopper = GraphHopper()
-        self.hopper!.setCHEnabledWithBoolean(true)
-        self.hopper!.setEnableInstructionsWithBoolean(true)
-        self.hopper!.setAllowWritesWithBoolean(true)
-        self.hopper!.setEncodingManagerWith(EncodingManager.init(nsString: "car"))
-        self.hopper!.forMobile()
-        self.hopper!.load__(with: location)
-        print(self.hopper!.getStorage().getBounds())
-        
-    }
-    
     func cleaning() {
         
+        routeDataSource?.clear()
+        stopMarker?.setVisible(false)
+        startMarker?.setVisible(false)
     }
 }
 

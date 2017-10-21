@@ -2,7 +2,7 @@
 platform :ios, '9.0'
 
 target 'WeGoCuba' do
-  pod 'CartoMobileSDK', '4.1.0-rc.2'
+  pod 'CartoMobileSDK', '4.1.0'
   
   use_frameworks!
 end

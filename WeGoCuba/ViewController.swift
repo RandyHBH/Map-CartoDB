@@ -1,40 +1,44 @@
-//
-//  ViewController.swift
-//  WeGoCuba
-//
-//  Created by Randy Hector Bartumeu Huergo on 8/29/17.
-//  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
-//
-
-import UIKit
-import CoreLocation
-
-
-class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, LocationButtonDelegate,RouteButtonDelegate, RouteMapEventDelegate {
+ //
+ //  ViewController.swift
+ //  WeGoCuba
+ //
+ //  Created by Randy Hector Bartumeu Huergo on 8/29/17.
+ //  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
+ //
+ 
+ import UIKit
+ import CoreLocation
+ 
+ 
+ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate, MapIsInactiveDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var locationButton: LocationButton!
-    @IBOutlet var routeButton: RouteButton!
     @IBOutlet var scaleBar: ScaleBar!
     @IBOutlet var rotationResetButton: RotationResetButton!
+    @IBOutlet var routeButton: RouteButton!
     
+    @IBOutlet var ptpButton: PTPButton!
     
     // BASIC MAP DECLARATION
-    
     var projection: NTProjection!
-    var source: NTLocalVectorDataSource!
+    var baseMap : BaseMap!
     
-    // BASIC BRUJALA DECLARATION
-    var rotationListener: RotationListener!
+    // LOCATIONS MARKERS
+    var locationMarker : LocationMarker!
+    
+    // BASIC BRUJALA & MAP EVENTS DECLARATION
+    var basicEvents: BasicMapEvents!
     
     // BASIC GPS LOCALIZATION DECLARATION
     var manager: CLLocationManager!
     var latestLocation: CLLocation!
+    var isUpdatingLocation : Bool = false
     
     // BASIC DECLARATION FOR OFFLINE ROUTE
     var progressLabel: ProgressLabel!
-    var mapListener: RouteMapEventListener!
-    var routing: Routing!
+    
+    var routeController : RouteController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,46 +48,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         map.frame = cartoTitleOff
         
         map.getOptions().setZoomGestures(true)
+        map.getOptions().setZoom(NTMapRange(min: 5, max: 22))
         map.getOptions().setPanningMode(NTPanningMode.PANNING_MODE_STICKY)
         
         //Need to add as a subview
         view.insertSubview(map, at: 1)
         
-        // Load MBTiles Raster Tiles o MBTiles Vector Tiles
-        loadVectorDataSource()
+        // Load MBTiles Vector Tiles
+        baseMap = BaseMap(mapView: self.map)
         
         // Get base projection from mapView
-        projection = map.getOptions().getBaseProjection();
+        projection = map.getOptions().getBaseProjection()
         
-        //Creating Layer to store the markers, i think :)
-        source =  NTLocalVectorDataSource(projection: projection)
-        let layer = NTVectorLayer(dataSource: source)
-        map.getLayers().add(layer)
-        
+        //Creating GPS Marker
+        locationMarker = LocationMarker(mapView: self.map)
         
         // FOCUS IN CUBA
-        map?.setFocus(projection?.fromWgs84(NTMapPos(x: -82.2906, y: 23.0469)), durationSeconds: 3)
+        map?.setFocus(projection?.fromWgs84(NTMapPos(x: -82.2906, y: 23.0469)), durationSeconds: 0)
         map?.setZoom(6, durationSeconds: 3)
         
         manager = CLLocationManager()
         manager.delegate = self
         manager.pausesLocationUpdatesAutomatically = false
-        manager.desiredAccuracy = 1
+        //        manager.desiredAccuracy = 1
         
-        /*
-         * In addition to requesting background location updates, you need to add the following lines to your Info.plist:
-         *
-         * 1. Privacy - Location When In Use Usage Description
-         * 2. Privacy - Location Always Usage Description
-         * 3. Required background modes:
-         *    3.1 App registers for location updates
-         */
         if #available(iOS 9.0, *) {
             manager.requestAlwaysAuthorization()
-        }
-        
-        if #available(iOS 9.0, *) {
-            manager.allowsBackgroundLocationUpdates = true
         }
         
         rotationResetButton.resetDuration = rotationDuration
@@ -91,20 +81,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         scaleBar.initialize()
         scaleBar.map = map
         
-        rotationListener = RotationListener()
-        rotationListener.map = map
-        
-        locationButton.initialize(onImageUrl: "icon_track_location_on.png", offImageUrl: "icon_track_location_off.png")
-        
-        routeButton.initialize(onImageUrl: "route.png", offImageUrl: "route.png")
+        basicEvents = BasicMapEvents()
+        basicEvents.map = map
         
         progressLabel = ProgressLabel()
         view.addSubview(progressLabel)
+        layoutProgressLabel()
         
-        mapListener = RouteMapEventListener()
+        routeController = RouteController(mapView: self.map, progressLabel: self.progressLabel)
         
     }
-    
     
     // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -112,48 +98,126 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         map.frame = cartoTitleOff
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        manager.startUpdatingLocation()
-        manager.startUpdatingHeading()
+        // START UPDATING LOCATION, WHEN STOP THE UPDATES????
+        startLocationUpdates()
         
-        rotationListener?.delegate = self
-        map.setMapEventListener(rotationListener)
+        basicEvents?.delegateRotate = self
+        basicEvents?.delegateBasicMapEvents = self
+        basicEvents?.delegateMapIsInactive = self
+        
+        map.setMapEventListener(basicEvents)
         
         locationButton.delegate = self
+        locationButton.addRecognizer()
+        
+        routeButton.addRecognizer()
         routeButton.delegate = self
+        
+        ptpButton.addRecognizer()
+        ptpButton.delegate = self
+        
+        self.routeController.locationMarker = self.locationMarker
+        
     }
     
     // MARK: LOCATION BUTTON DELEGATE
-    func locationSwitchTapped(){
-        if (locationButton.isActive()){
-            manager.startUpdatingLocation()
-            manager.startUpdatingHeading()
-        } else {
-            manager.stopUpdatingLocation()
-            manager.stopUpdatingHeading()
+    func locationSwitchTapped() {
+        
+        if (latestLocation != nil) {
+            
+            let latitude = Double(latestLocation.coordinate.latitude)
+            let longitude = Double(latestLocation.coordinate.longitude)
+            
+            let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+            
+            map.setZoom(18, durationSeconds: 2)
+            map.setFocus(position, durationSeconds: 1)
         }
+    }
+    
+    func startLocationUpdates() {
+        manager.startUpdatingLocation()
+        manager.startUpdatingHeading()
+        
+        isUpdatingLocation = true
+    }
+    
+    func stopLocationUpdates() {
+        manager.stopUpdatingLocation()
+        manager.stopUpdatingHeading()
+        
+        isUpdatingLocation = false
     }
     
     // MARK: ROUTE BUTTON DELEGATE
-    func routeSwitchTapped() {
-        let actualEventsSave = map.getMapEventListener()
+    
+    var navigationMode = false
+    var navigationInProgress = false
+    
+    func routeButtonTapped() {
         
-        if (routeButton.isActive()){
-            layoutProgressLabel()
-            mapListener.delegate = self
-            map.setMapEventListener(mapListener)
-            routing = Routing(mapView: map)
+        if ( basicEvents.stopPosition != nil) && (navigationMode == false) && (latestLocation != nil) && (navigationInProgress != true) {
+            
+            let latitude = Double(latestLocation.coordinate.latitude)
+            let longitude = Double(latestLocation.coordinate.longitude)
+            
+            let startPosition = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+            
+            let stopPosition = basicEvents.stopPosition
+            
+            self.routeController.showRoute(start: startPosition!, stop: stopPosition!)
+            
+            self.navigationMode = true
+            self.navigationInProgress = true
+            basicEvents.navigationMode = true
+            self.locationMarker.modeNavigation()
+            
+        } else if (navigationInProgress == true) {
+            
+            stopPositionUnSet()
+            basicEvents.stopPosition = nil
         } else {
             
-            mapListener.delegate = nil
-            map.setMapEventListener(nil)
-            map.setMapEventListener(actualEventsSave)
+            navigationMode = false
+            self.progressLabel.complete(message: "You need to set a final position")
         }
+        
     }
     
+    // MARK: PTP BUTTON DELEGATE
+    // TODO
+    func ptpButtonTapped() {
+        
+        routeController.startRoute()
+    }
+    
+    // MARK: BASIC MAP EVENTS DELEGATE
+    
+    func stopPositionSet(event: RouteMapEvent) {
+        
+        routeController.onePointRoute(event: event)
+    }
+    
+    func stopPositionUnSet() {
+        
+        routeController.finishRoute()
+        
+        navigationMode = false
+        navigationInProgress = false
+        basicEvents.navigationMode = false
+        
+        
+        self.locationMarker.modeFree()
+    }
+    
+    func longTap(){
+        // NO RESPONDER A LOS LONG-TAPS
+    }
+    
+    // TODO : NECESITO HACERLO EL DISEÑO EN EL STORYBOARD
     func layoutProgressLabel() {
         
         let w: CGFloat = view.frame.width
@@ -164,153 +228,103 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
         progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
     }
     
-    func singleTap() {
-        // No actions for single tap
-    }
-    
-    func startClicked(event: RouteMapEvent) {
-        DispatchQueue.main.async(execute: {
-            self.routing.setStartMarker(position: event.clickPosition)
-            self.progressLabel.hide()
-        })
-    }
-    
-    func stopClicked(event: RouteMapEvent) {
-        routing.setStopMarker(position: event.clickPosition)
-        showRoute(start: event.startPosition, stop: event.stopPosition)
-    }
-    
-    func showRoute(start: NTMapPos, stop: NTMapPos) {
-        DispatchQueue.global().async {
-            
-            let result: GHResponse? = self.routing.getResult(startPos: start, stopPos: stop)
-            
-            DispatchQueue.main.async(execute: {
-                if (result == nil) {
-                    self.progressLabel.complete(message: "Routing failed. Please try again")
-                    return
-                } else {
-                    self.progressLabel.complete(message: self.routing.getMessage(result: result!))
-                }
-                
-                let color = NTColor(r: 14, g: 122, b: 254, a: 150)
-                self.routing.show(result: result!, lineColor: color!, complete: {
-                    (route: Route) in
-                    
-                })
-            })
-        }
-    }
-    
-    //MARK: VECTOR METHODS
-    
-    func loadVectorDataSource() {
-        // Create a local vector data source
-        let source: NTTileDataSource? = createTileDataSource()
-        let newbaseLayer = NTCartoOfflineVectorTileLayer(dataSource: source, style: .CARTO_BASEMAP_STYLE_VOYAGER)
-        
-        map?.getLayers()?.add(newbaseLayer)
-    }
-    
-    func createTileDataSource() -> NTTileDataSource {
-        let name: String = "cuba"
-        let format : String = "mbtiles"
-        // file-based local offline datasource
-        let source: String? = Bundle.main.path(forResource: name, ofType: format)
-        let vectorTileDataSource: NTTileDataSource? = NTMBTilesTileDataSource(minZoom: 0, maxZoom: 14, path: source)
-        return vectorTileDataSource!
-    }
-    
-    //MARK: END VECTOR METHODS
-    
     //MARK: LOCATION MANAGER METHOD DELEGATE
     
+    var mFirstLocationUpdated = true
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Latest location saved as class variable to get bearing to adjust compass
-        latestLocation = locations[0]
         
-        // Not "online", but reusing the online switch to achieve location tracking functionality
-        if (locationButton.isActive()) {
-            showUserAt(location: latestLocation)
+        let location = locations[0]
+        
+        if (latestLocation != nil) {
+            if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
+                if (latestLocation.coordinate.longitude == location.coordinate.longitude) {
+                    
+                    return
+                }
+            }
+        }
+        
+        latestLocation = location
+        
+        
+        if mFirstLocationUpdated {
+            
+            locationMarker.showUserAt(location: location)
+            locationMarker.modeFree()
+            mFirstLocationUpdated = false
+            return
+        }
+        
+        if (navigationMode == false) {
+            locationMarker.showUserAt(location: location)
+            
+        } else if (self.routeController.result != nil) && (navigationMode == true) {
+            
+            self.routeController.updateRoute(location: location)
+            
         }
     }
     
-    //MARK: END LOCATION MANAGER
+    // MARK: TIMER
     
-    //MARK: LOCATION METHODS
+    var timer = Timer()
+    var seconds = 5
+    var isTimerRunning = false
     
-    var userMarker: NTPoint!
-    var accuracyMarker: NTPolygon!
+    func startTimer() {
+        if isTimerRunning == false {
+            runTimer()
+        }
+    }
     
-    func showUserAt(location: CLLocation) {
+    func runTimer() {
         
-        let latitude = Double(location.coordinate.latitude)
-        let longitude = Double(location.coordinate.longitude)
-        let accuracy = Float(location.horizontalAccuracy)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
         
-        let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
-        
-        map.setFocus(position, durationSeconds: 1)
-        map.setZoom(14, durationSeconds: 1)
-        
-        let builder = NTPolygonStyleBuilder()
-        builder?.setColor(Colors.lightTransparentAppleBlue.toNTColor())
-        
-        let borderBuilder = NTLineStyleBuilder()
-        borderBuilder?.setColor(Colors.darkTransparentAppleBlue.toNTColor())
-        borderBuilder?.setWidth(1)
-        
-        builder?.setLineStyle(borderBuilder?.buildStyle())
-        
-        let points = getCirclePoints(latitude: latitude, longitude: longitude, accuracy: accuracy)
-        
-        if (accuracyMarker == nil) {
-            accuracyMarker = NTPolygon(poses: points, holes: NTMapPosVectorVector(), style: builder?.buildStyle())
-            source.add(accuracyMarker)
+        isTimerRunning = true
+        routeController.isTimerRunning = true
+    }
+    
+    func updateTimer() {
+        if seconds < 1 {
+            timer.invalidate()
+            if navigationInProgress {
+                locationMarker.modeNavigation()
+            }
+            routeController.isTimerRunning = false
         } else {
-            accuracyMarker.setStyle(builder?.buildStyle())
-            accuracyMarker.setGeometry(NTPolygonGeometry(poses: points))
-        }
-        
-        if (userMarker == nil) {
-            let builder = NTPointStyleBuilder()
-            builder?.setColor(Colors.appleBlue.toNTColor())
-            builder?.setSize(16.0)
             
-            userMarker = NTPoint(pos: position, style: builder?.buildStyle())
-            source.add(userMarker)
+            seconds -= 1
         }
-        
-        userMarker.setPos(position)
     }
     
-    func getCirclePoints(latitude: Double, longitude: Double, accuracy: Float) -> NTMapPosVector {
-        // Number of points of circle
-        let N = 100
-        let EARTH_RADIUS = 6378137.0
+    func resetTimer() {
+        timer.invalidate()
+        seconds = 5
         
-        let radius = Double(accuracy)
-        
-        let points = NTMapPosVector()
-        
-        for i in stride(from: 0, to: N, by: 1) {
-            
-            let angle = Double.pi * 2 * (Double(i).truncatingRemainder(dividingBy:Double(N))) / Double(N)
-            let dx = radius * cos(angle)
-            let dy = radius * sin(angle)
-            
-            let lat = latitude + (180 / Double.pi) * (dy / EARTH_RADIUS)
-            let lon = longitude + (180 / Double.pi) * (dx / EARTH_RADIUS) / cos(Double(latitude * Double.pi / 180))
-            
-            let point = projection.fromWgs84(NTMapPos(x: lon, y: lat))
-            points?.add(point)
-        }
-        
-        return points!
+        isTimerRunning = false
     }
     
-    //MARK: END LOCATION METHODS
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        
+        if (newHeading.headingAccuracy < 0) {
+            // Ignore if there's no accuracy, no point in processing it
+            return
+        }
+        
+        // Use true heading if it is valid.
+        
+        // TODO: I DONT KNOW HOW TO ROTATE THE LOCATION MARKER
+        let heading = ((newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading)
+        
+        locationMarker.course = Float(heading)
+        // TODO calculate heading to see whether the user should turn around or is facing the correct direction
+        
+    }
     
+    // MARK: END LOCATION MANAGER
+    // ROTATE BUTTON
     
     @IBAction func rotate(_ sender: UITapGestureRecognizer) {
         isRotationInProgress = true
@@ -339,4 +353,4 @@ class ViewController: UIViewController, CLLocationManagerDelegate, RotationDeleg
     }
     
     
-}
+ }

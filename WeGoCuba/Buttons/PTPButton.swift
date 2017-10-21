@@ -1,16 +1,16 @@
 //
-//  RouteButton.swift
+//  PTPButton.swift
 //  WeGoCuba
 //
-//  Created by Randy Hector Bartumeu Huergo on 10/3/17.
+//  Created by Randy Hector Bartumeu Huergo on 10/13/17.
 //  Copyright © 2017 Randy Hector Bartumeu Huergo. All rights reserved.
 //
 
 import UIKit
 
-class RouteButton : UIButton {
+class PTPButton : UIButton {
     
-    var delegate: RouteButtonDelegate?
+    var delegate: PTPButtonDelegate?
     
     func addRecognizer() {
         
@@ -19,18 +19,18 @@ class RouteButton : UIButton {
     }
     
     func switchChanged(_ sender: UITapGestureRecognizer) {
-        delegate?.routeButtonTapped()
+        delegate?.ptpButtonTapped()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    
+        
         layer.cornerRadius = min(bounds.width,bounds.height) / 2.0
     }
     
 }
 
 
-protocol RouteButtonDelegate {
-    func routeButtonTapped()
+protocol PTPButtonDelegate {
+    func ptpButtonTapped()
 }
