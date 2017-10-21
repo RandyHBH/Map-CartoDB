@@ -30,23 +30,9 @@ class TurnByTurnClient: NSObject, CLLocationManagerDelegate {
         manager.pausesLocationUpdatesAutomatically = false
         manager.desiredAccuracy = 1
         
-        /*
-         * In addition to requesting background location updates, you need to add the following lines to your Info.plist:
-         *
-         * 1. Privacy - Location When In Use Usage Description
-         * 2. Required background modes:
-         *    2.1 App registers for location updates
-         *
-         * In most realistic scenarios, you'd also require:
-         * Privacy - Location Always Usage Description
-         * and need to call call manager.requestAlwaysAuthorization(),
-         * but we're not doing this here, as it's a sample applocation
-         */
-        
         if #available(iOS 9.0, *) {
             manager.requestWhenInUseAuthorization()
         }
-        
     }
     
     func onResume() {

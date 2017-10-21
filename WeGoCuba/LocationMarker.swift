@@ -31,27 +31,32 @@ class LocationMarker: NSObject {
     }
     
     //MARK: LOCATION METHODS
-    let timer = Timer()
-    var freeMode: Bool = true
     
-    var userMarker: NTMarker!
-    var position: NTMapPos!
+    var freeMode: Bool = true
     var speed: Double!
     var rotation: Float!
     var course: Float!
     
+    var userMarker: NTMarker!
+    var position: NTMapPos!
     var accuracyMarker: NTPolygon!
     var builderUserMarkerStyle : NTMarkerStyleBuilder?
     
     func showUserAt(location: CLLocation) {
         
         speed = location.speed
+        rotation = 0 - Float(location.course)  - self.map.getRotation()
         
         let latitude = Double(location.coordinate.latitude)
         let longitude = Double(location.coordinate.longitude)
         let accuracy = Float(location.horizontalAccuracy)
         
         position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+        
+        showAt(latitude: latitude, longitude: longitude, accuracy: accuracy)
+    }
+    
+    func showAt(latitude: Double, longitude: Double, accuracy: Float) {
         
         let builder = NTPolygonStyleBuilder()
         builder?.setColor(Colors.lightTransparentAppleBlue.toNTColor())
@@ -85,14 +90,8 @@ class LocationMarker: NSObject {
             source.add(userMarker)
         }
         
-        /**
-         *Sets the new absolute rotation value. 0 means look north, 90 means west, -90 means east and 180 means south.
-         * The rotation value will be wrapped to the range of (-180 .. 180].
-         **/
         
-        rotation = 0 - Float(location.course)  - self.map.getRotation()
         userMarker.setRotation(rotation)
-        
         userMarker.setPos(position)
     }
     
@@ -127,7 +126,7 @@ class LocationMarker: NSObject {
     }
     
     func modeNavigation() {
-
+        
         autoZoom(speed: speed, position: position)
         map.setTilt(30, durationSeconds: 1)
         map.setFocus(position, durationSeconds: 1)
@@ -149,7 +148,7 @@ class LocationMarker: NSObject {
         } else if (speedKmH >= 50) {
             map.setZoom(19, targetPos: position, durationSeconds: 2)
         } else {
-            map.setZoom(17, targetPos: position, durationSeconds: 2)
+            map.setZoom(19, targetPos: position, durationSeconds: 2)
         }
     }
 }
