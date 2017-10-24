@@ -192,7 +192,7 @@ class Routing {
         let builder = NTLineStyleBuilder()
         builder?.setColor(color)
         
-        // TODO Add another layer for the Arrow
+        // TODO: Add another layer for the Arrow
         //        builder?.setBitmap(NTBitmapFromString(path: "ic_arrow_upward_white"))
         
         builder?.setWidth(7)
