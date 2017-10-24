@@ -152,8 +152,11 @@ class Routing {
         let latitudStop84 = projection.toWgs84(stopPos).getY()
         
         
-        request = GHRequest(double: latitudStart84, with: longitudStart84, with: latitudStop84, with: longitudStop84).setVehicleWith("car").setWeightingWith("fastest").setLocaleWith("es")
-        request.getHints().put(with: "ch.disable", withId: true)
+        request = GHRequest(double: latitudStart84, with: longitudStart84, with: latitudStop84, with: longitudStop84)
+        request.getHints().put(with: "ch.disable", withId: "true")
+        request.setVehicleWith("car")
+        request.setWeightingWith("fastest")
+        request.setLocaleWith("es")
         
         result = self.hopper?.route(with: request)
         
