@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NTMapView.registerLicense(License);
         
-        
-        
         return true
     }
 

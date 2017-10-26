@@ -18,6 +18,7 @@
 		8B273CC01F61C5C1008FA023 /* BasicMapEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */; };
 		8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27B68D1F8C5748009F4722 /* RouteController.swift */; };
 		8B27B6901F8C73C0009F4722 /* DestinationClickListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27B68F1F8C73C0009F4722 /* DestinationClickListener.swift */; };
+		8B3E39F41FA26A0D006C0CD9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */; };
 		8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4142761F68E5320002AD80 /* BoundingBox.swift */; };
 		8B419A911F83C1430036FBC2 /* graph-data.osm-gh in Resources */ = {isa = PBXBuildFile; fileRef = 8B419A901F83C1430036FBC2 /* graph-data.osm-gh */; };
 		8B419A9B1F83E3090036FBC2 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B419A9A1F83E3090036FBC2 /* Routing.swift */; };
@@ -40,6 +41,7 @@
 		8B9A00151F55A42900330631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00131F55A42900330631 /* Main.storyboard */; };
 		8B9A00171F55A42900330631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00161F55A42900330631 /* Assets.xcassets */; };
 		8B9A001A1F55A42900330631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00181F55A42900330631 /* LaunchScreen.storyboard */; };
+		8BB5C0761FA02747006386CE /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 8BB5C0751FA02724006386CE /* Fonts */; };
 		8BBB4D711F87BA2000B702B0 /* icon_pin_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBB4D701F87BA2000B702B0 /* icon_pin_red.png */; };
 		8BBB4D751F87BABB00B702B0 /* direction_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBB4D721F87BABB00B702B0 /* direction_up.png */; };
 		8BBB4D761F87BABB00B702B0 /* direction_upthenleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBB4D731F87BABB00B702B0 /* direction_upthenleft.png */; };
@@ -118,6 +120,7 @@
 		8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicMapEvents.swift; path = Listeners/BasicMapEvents.swift; sourceTree = "<group>"; };
 		8B27B68D1F8C5748009F4722 /* RouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteController.swift; sourceTree = "<group>"; };
 		8B27B68F1F8C73C0009F4722 /* DestinationClickListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationClickListener.swift; sourceTree = "<group>"; };
+		8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8B4142761F68E5320002AD80 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		8B419A901F83C1430036FBC2 /* graph-data.osm-gh */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "graph-data.osm-gh"; path = "libs/graphhopper-ios/graphhopper/graph-data.osm-gh"; sourceTree = SOURCE_ROOT; };
 		8B419A9A1F83E3090036FBC2 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 		8B9A00161F55A42900330631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B9A00191F55A42900330631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B9A001B1F55A42900330631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BB5C0751FA02724006386CE /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		8BBB4D701F87BA2000B702B0 /* icon_pin_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pin_red.png; sourceTree = "<group>"; };
 		8BBB4D721F87BABB00B702B0 /* direction_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = direction_up.png; sourceTree = "<group>"; };
 		8BBB4D731F87BABB00B702B0 /* direction_upthenleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = direction_upthenleft.png; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 				8B27B68C1F8C5711009F4722 /* Turn-by-Turn-Navigation */,
 				8B27B68D1F8C5748009F4722 /* RouteController.swift */,
 				8B9A00111F55A42900330631 /* ViewController.swift */,
+				8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 		8B724FF01F715DF70075270C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8BB5C0751FA02724006386CE /* Fonts */,
 				8B419A901F83C1430036FBC2 /* graph-data.osm-gh */,
 				8B0E8B821F78A24D00BD08D1 /* IMG */,
 				8BA3B9961F71B69E0020EB51 /* Vectorial */,
@@ -529,6 +535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB5C0761FA02747006386CE /* Fonts in Resources */,
 				8BC2CDF21F87A4FB00DDF77F /* si.txt in Resources */,
 				8BC2CDF01F87A4FB00DDF77F /* ro.txt in Resources */,
 				8BC2CDD61F87A4FB00DDF77F /* ca.txt in Resources */,
@@ -593,9 +600,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -666,6 +680,7 @@
 				8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */,
 				8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */,
 				8B41E2C11F7D96CA003BC7EA /* RotationListener.swift in Sources */,
+				8B3E39F41FA26A0D006C0CD9 /* MainViewController.swift in Sources */,
 				8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */,
 				8BFED7F61F85143300544FB1 /* RouteButton.swift in Sources */,
 			);
