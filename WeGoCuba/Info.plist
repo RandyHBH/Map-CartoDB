@@ -61,6 +61,11 @@
 		<string>msyh.ttc</string>
 		<string>msyhbd.ttc</string>
 		<string>msyhl.ttc</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Thin.ttf</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
