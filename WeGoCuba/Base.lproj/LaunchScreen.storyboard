@@ -53,7 +53,7 @@
                                                         <color key="textColor" red="0.83529411764705885" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El mapa de Cuba en tus manos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XHJ-t2-u2X">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="El mapa de Cuba en tus manos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="XHJ-t2-u2X">
                                                         <rect key="frame" x="0.0" y="27" width="231" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="MicrosoftYaHeiUI-Bold" family="Microsoft YaHei UI" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.31764705882352939" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>

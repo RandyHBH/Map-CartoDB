@@ -30,6 +30,7 @@ class MainViewController: UIViewController {
         SideMenuManager.menuAnimationBackgroundColor = #colorLiteral(red: 0.07435884327, green: 0.2261409163, blue: 0.5749377012, alpha: 1)
         
         SideMenuManager.menuPresentMode = .menuSlideIn
+        SideMenuManager.menuWidth = max(round(min((self.view.frame.width), (self.view.frame.height)) * 0.85), 240)
     }
 
 }
