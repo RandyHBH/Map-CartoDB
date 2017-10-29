@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DRHTableViewDataModelItem {
+class LMTableViewDataModelItem {
     
     var avatarImageURL: String?
     var title: String?
@@ -25,13 +25,13 @@ class DRHTableViewDataModelItem {
     }
 }
 
-class DRHTableViewDataModel {
+class LMTableViewDataModel {
     
-    weak var delegate: DRHTableViewDataModelDelegate?
+    weak var delegate: LMTableViewDataModelDelegate?
     
     func requestData() {
         
-        var data = [DRHTableViewDataModelItem]()
+        var data = [LMTableViewDataModelItem]()
         
         let images = ["ic_explore_white","ic_list_white","ic_language_white","ic_settings_white","ic_info_white","ic_help_white"]
         let titles = ["Navegación","Unidades de medida","Idioma","Ajustes","Información","Ayuda"]
@@ -40,7 +40,7 @@ class DRHTableViewDataModel {
         for i in 0..<images.count {
             
             if let drhTableViewDataModelItem =
-                DRHTableViewDataModelItem(avatar:images[i], title: titles[i]) {
+                LMTableViewDataModelItem(avatar:images[i], title: titles[i]) {
                 
                 data.append(drhTableViewDataModelItem)
             }
@@ -50,8 +50,8 @@ class DRHTableViewDataModel {
     }
 }
 
-protocol DRHTableViewDataModelDelegate: class {
+protocol LMTableViewDataModelDelegate: class {
     
-    func didRecieveDataUpdate(data: [DRHTableViewDataModelItem])
+    func didRecieveDataUpdate(data: [LMTableViewDataModelItem])
     
 }

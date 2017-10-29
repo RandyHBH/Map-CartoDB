@@ -21,13 +21,12 @@ class DRHTableViewCell: UITableViewCell {
         return UINib(nibName: identifier, bundle: nil)
     }
     
-    func configureWithItem(item: DRHTableViewDataModelItem) {
+    func configureWithItem(item: LMTableViewDataModelItem) {
         
         avatarImageView?.image = UIImage(named: item.avatarImageURL!)
         titleLabel?.text = item.title
-        
-        
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

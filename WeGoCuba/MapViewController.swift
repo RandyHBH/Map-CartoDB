@@ -10,7 +10,7 @@
  import CoreLocation
  
  
- class ViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate, MapIsInactiveDelegate {
+ class MapViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate, MapIsInactiveDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var locationButton: LocationButton!
@@ -121,6 +121,11 @@
         
         self.routeController.locationMarker = self.locationMarker
         
+    }
+    
+    class func newInstance() -> MapViewController {
+        let mapVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        return mapVC
     }
     
     // MARK: LOCATION BUTTON DELEGATE

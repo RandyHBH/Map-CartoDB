@@ -12,8 +12,8 @@ class LeftViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private let dataSource = DRHTableViewDataModel()
-    fileprivate var dataArray = [DRHTableViewDataModelItem]() {
+    private let dataSource = LMTableViewDataModel()
+    fileprivate var dataArray = [LMTableViewDataModelItem]() {
         didSet {
             tableView.reloadData()
         }
@@ -36,17 +36,31 @@ class LeftViewController: UIViewController {
     }
 }
 
-extension LeftViewController : DRHTableViewDataModelDelegate {
+extension LeftViewController : LMTableViewDataModelDelegate {
     
-    func didRecieveDataUpdate(data: [DRHTableViewDataModelItem]) {
+    func didRecieveDataUpdate(data: [LMTableViewDataModelItem]) {
         dataArray = data
     }
 }
 
 extension LeftViewController: UITableViewDelegate {
-    
+   
+    // TODO: Finish Navigation
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        switch dataArray[indexPath.row].title! {
+            
+        case "Navegación":
+            let mapVC = MapViewController.newInstance()
+            self.navigationController?.present(mapVC, animated: true, completion: nil)
+//            self.navigationController?.pushViewController(mapVC, animated: true)
+        case "Unidades de medida": break
+        case "Idioma": break
+        case "Ajustes": break
+        case "Información": break
+        default:
+            return
+        }
     }
     
 }
