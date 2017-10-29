@@ -5,19 +5,22 @@ PODS:
   - Material/Core (2.10.2)
   - SideMenu (2.3.4)
   - SlideMenuControllerSwift (3.0.2)
+  - SnapKit (3.2.0)
 
 DEPENDENCIES:
   - CartoMobileSDK (= 4.1.0)
   - Material (= 2.10.2)
   - SideMenu (~> 2.3.4)
   - SlideMenuControllerSwift
+  - SnapKit (~> 3)
 
 SPEC CHECKSUMS:
   CartoMobileSDK: 8203b31d289e85b93cf82f3bd1da7e162f184db2
   Material: 8265a77332acfb7872a7fd0f4f2023f080d25d1f
   SideMenu: 2ea1a015d14ffb96110af43fe3232d995943e726
   SlideMenuControllerSwift: 16001e1fd9963fd089fa6c91dbe18d4c148f0ce9
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
 
-PODFILE CHECKSUM: c67b757a2fe0e064f049ba8af42051e4ce5da099
+PODFILE CHECKSUM: 37f8a230cf669f212012aa7df75dd11da416fe35
 
 COCOAPODS: 1.3.1

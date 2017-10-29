@@ -9,5 +9,6 @@ target 'WeGoCuba' do
   pod 'Material','2.10.2'
   pod 'SlideMenuControllerSwift'
   pod 'SideMenu', '~> 2.3.4'
+  pod 'SnapKit', '~> 3'
 
 end
