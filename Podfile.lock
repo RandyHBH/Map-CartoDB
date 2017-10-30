@@ -4,23 +4,23 @@ PODS:
     - Material/Core (= 2.10.2)
   - Material/Core (2.10.2)
   - SideMenu (2.3.4)
-  - SlideMenuControllerSwift (3.0.2)
   - SnapKit (3.2.0)
+  - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
   - CartoMobileSDK (= 4.1.0)
   - Material (= 2.10.2)
   - SideMenu (~> 2.3.4)
-  - SlideMenuControllerSwift
   - SnapKit (~> 3)
+  - XLPagerTabStrip (~> 7.0)
 
 SPEC CHECKSUMS:
   CartoMobileSDK: 8203b31d289e85b93cf82f3bd1da7e162f184db2
   Material: 8265a77332acfb7872a7fd0f4f2023f080d25d1f
   SideMenu: 2ea1a015d14ffb96110af43fe3232d995943e726
-  SlideMenuControllerSwift: 16001e1fd9963fd089fa6c91dbe18d4c148f0ce9
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 37f8a230cf669f212012aa7df75dd11da416fe35
+PODFILE CHECKSUM: 74253eb646e70dcb9cc6ea4ac26877e0809eb28a
 
 COCOAPODS: 1.3.1
