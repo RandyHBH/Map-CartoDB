@@ -14,7 +14,7 @@ class ProgressLabel : AlertBaseView {
     var label: UILabel!
     var progressBar: UIView!
     
-    var height: CGFloat!
+//    var height: CGFloat!
 
     convenience init() {
         self.init(frame: CGRect.zero)

@@ -703,6 +703,9 @@
                             </barButtonItem>
                             <barButtonItem image="ic_search_white" id="VXb-Pw-JXr">
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="qXY-4m-Rs7" kind="show" id="CmE-0l-dnH"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -745,6 +748,139 @@
             </objects>
             <point key="canvasLocation" x="-943" y="-780"/>
         </scene>
+        <!--Search Address View Controller-->
+        <scene sceneID="Z6H-mj-ayE">
+            <objects>
+                <viewController storyboardIdentifier="SearchAddressViewController" id="qXY-4m-Rs7" customClass="SearchAddressViewController" customModule="WeGoCuba" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lfj-6s-c7v"/>
+                        <viewControllerLayoutGuide type="bottom" id="YoY-uY-eAb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ixM-xF-cP6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="IHB-fM-gxF">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TF9-Rl-rom">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="oGy-kq-IcV">
+                                                <rect key="frame" x="20" y="20" width="285" height="127"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ciudad" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m1n-9F-PNf" customClass="TextField" customModule="Material">
+                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="25"/>
+                                                        <color key="textColor" red="0.0" green="0.31764705882352939" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Ciudad"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Calle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LNl-6k-kwD" customClass="TextField" customModule="Material">
+                                                        <rect key="frame" x="0.0" y="51" width="285" height="25"/>
+                                                        <color key="textColor" red="0.0" green="0.31764705882352939" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Calle"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Calle" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gGV-AB-aH1" customClass="TextField" customModule="Material">
+                                                        <rect key="frame" x="0.0" y="102" width="285" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="KkG-Hv-FAD"/>
+                                                        </constraints>
+                                                        <color key="textColor" red="0.0" green="0.31764705882352939" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Calle"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="LNl-6k-kwD" firstAttribute="height" secondItem="gGV-AB-aH1" secondAttribute="height" id="EWj-fq-v2O"/>
+                                                    <constraint firstItem="m1n-9F-PNf" firstAttribute="height" secondItem="gGV-AB-aH1" secondAttribute="height" id="L6b-dB-yG8"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="oGy-kq-IcV" firstAttribute="leading" secondItem="TF9-Rl-rom" secondAttribute="leading" constant="20" id="KH3-Wk-pGy"/>
+                                            <constraint firstAttribute="bottom" secondItem="oGy-kq-IcV" secondAttribute="bottom" constant="15" id="OHl-14-1Cs"/>
+                                            <constraint firstAttribute="trailing" secondItem="oGy-kq-IcV" secondAttribute="trailing" constant="15" id="TAu-Rq-31a"/>
+                                            <constraint firstItem="oGy-kq-IcV" firstAttribute="top" secondItem="TF9-Rl-rom" secondAttribute="top" constant="20" id="rrQ-H0-oFk"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.40000000000000002"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PW0-U0-dfa">
+                                        <rect key="frame" x="0.0" y="164" width="320" height="252"/>
+                                        <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="separatorColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="PW0-U0-dfa" secondAttribute="trailing" id="610-2L-uir"/>
+                                    <constraint firstItem="PW0-U0-dfa" firstAttribute="leading" secondItem="IHB-fM-gxF" secondAttribute="leading" id="Ey4-o1-9DC"/>
+                                    <constraint firstItem="TF9-Rl-rom" firstAttribute="top" secondItem="IHB-fM-gxF" secondAttribute="top" id="IA1-EO-jmC"/>
+                                    <constraint firstAttribute="trailing" secondItem="TF9-Rl-rom" secondAttribute="trailing" id="KDI-lL-2Eb"/>
+                                    <constraint firstItem="TF9-Rl-rom" firstAttribute="leading" secondItem="IHB-fM-gxF" secondAttribute="leading" id="j74-is-D44"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eK4-Wr-aTR">
+                                <rect key="frame" x="254" y="415" width="50" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VIp-Ra-WmE">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="5X3-E1-XOa"/>
+                                            <constraint firstAttribute="height" constant="50" id="Rvp-87-Bbu"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="address_search"/>
+                                        <connections>
+                                            <action selector="searchForAddress:" destination="qXY-4m-Rs7" eventType="touchUpInside" id="jC7-zV-k84"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="IHB-fM-gxF" secondAttribute="trailing" id="1cA-e4-l5o"/>
+                            <constraint firstItem="IHB-fM-gxF" firstAttribute="top" secondItem="Lfj-6s-c7v" secondAttribute="bottom" id="32S-Cg-048"/>
+                            <constraint firstItem="IHB-fM-gxF" firstAttribute="centerX" secondItem="ixM-xF-cP6" secondAttribute="centerX" id="6kW-e9-ePL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eK4-Wr-aTR" secondAttribute="trailing" id="Owt-63-Y1S"/>
+                            <constraint firstItem="IHB-fM-gxF" firstAttribute="leading" secondItem="ixM-xF-cP6" secondAttribute="leading" id="WbI-za-Ibr"/>
+                            <constraint firstItem="YoY-uY-eAb" firstAttribute="top" secondItem="eK4-Wr-aTR" secondAttribute="bottom" constant="15" id="Z1I-ox-tfU"/>
+                            <constraint firstItem="YoY-uY-eAb" firstAttribute="top" secondItem="IHB-fM-gxF" secondAttribute="bottom" id="do2-8d-hqT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="calleFirstTextField" destination="LNl-6k-kwD" id="OFL-Yx-W96"/>
+                        <outlet property="calleSecondTextField" destination="gGV-AB-aH1" id="waj-Gg-XXE"/>
+                        <outlet property="ciudadTextField" destination="m1n-9F-PNf" id="Xy1-l1-V9V"/>
+                        <outlet property="tableView" destination="PW0-U0-dfa" id="EuS-Q5-ZVp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3zR-o9-289" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-778.125" y="128.75"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Cover_App" width="912" height="515"/>
@@ -756,6 +892,7 @@
         <image name="Ico_navegacion" width="60" height="60"/>
         <image name="Ico_unidades" width="56" height="45"/>
         <image name="Logo" width="339" height="322"/>
+        <image name="address_search" width="183" height="183"/>
         <image name="avatar_predeterminado" width="192" height="192"/>
         <image name="background" width="1082" height="1922"/>
         <image name="ic_help_white" width="24" height="24"/>
@@ -769,6 +906,6 @@
         <image name="route.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Deo-9l-Msj"/>
+        <segue reference="t3w-NE-e3c"/>
     </inferredMetricsTieBreakers>
 </document>

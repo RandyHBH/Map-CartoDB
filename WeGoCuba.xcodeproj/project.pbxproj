@@ -91,6 +91,10 @@
 		8BC2CDF91F87A4FB00DDF77F /* zh_HK.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDD11F87A4FB00DDF77F /* zh_HK.txt */; };
 		8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC366311F9132C1007E0D42 /* PTPButton.swift */; };
 		8BD248391F841E0C00E6D9AA /* route.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD248381F841E0C00E6D9AA /* route.png */; };
+		8BDCBAB31FA83001003D9241 /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */; };
+		8BDCBAB71FA83B09003D9241 /* SearchAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCBAB51FA83B09003D9241 /* SearchAddressTableViewCell.swift */; };
+		8BDCBAB81FA83B09003D9241 /* SearchAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BDCBAB61FA83B09003D9241 /* SearchAddressTableViewCell.xib */; };
+		8BDCBABA1FA83E03003D9241 /* SearchAddressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCBAB91FA83E03003D9241 /* SearchAddressDataModel.swift */; };
 		8BFED7F31F85143300544FB1 /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFED7EE1F85143300544FB1 /* LocationButton.swift */; };
 		8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFED7EF1F85143300544FB1 /* PopupButton.swift */; };
 		8BFED7F51F85143300544FB1 /* RotationResetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFED7F01F85143300544FB1 /* RotationResetButton.swift */; };
@@ -201,6 +205,10 @@
 		8BC366311F9132C1007E0D42 /* PTPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPButton.swift; sourceTree = "<group>"; };
 		8BD248381F841E0C00E6D9AA /* route.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route.png; sourceTree = "<group>"; };
 		8BD6B4E11F61816600C86085 /* WeGoCuba-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeGoCuba-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
+		8BDCBAB51FA83B09003D9241 /* SearchAddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressTableViewCell.swift; sourceTree = "<group>"; };
+		8BDCBAB61FA83B09003D9241 /* SearchAddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAddressTableViewCell.xib; sourceTree = "<group>"; };
+		8BDCBAB91FA83E03003D9241 /* SearchAddressDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressDataModel.swift; sourceTree = "<group>"; };
 		8BFED7EE1F85143300544FB1 /* LocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
 		8BFED7EF1F85143300544FB1 /* PopupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupButton.swift; sourceTree = "<group>"; };
 		8BFED7F01F85143300544FB1 /* RotationResetButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationResetButton.swift; sourceTree = "<group>"; };
@@ -400,6 +408,7 @@
 		8B9A000E1F55A42900330631 /* WeGoCuba */ = {
 			isa = PBXGroup;
 			children = (
+				8BDCBAB11FA82FA2003D9241 /* PageMenu */,
 				8B9A000F1F55A42900330631 /* AppDelegate.swift */,
 				8B9A00131F55A42900330631 /* Main.storyboard */,
 				8B9A00181F55A42900330631 /* LaunchScreen.storyboard */,
@@ -478,6 +487,17 @@
 			);
 			name = Translations;
 			path = "libs/graphhopper-ios";
+			sourceTree = "<group>";
+		};
+		8BDCBAB11FA82FA2003D9241 /* PageMenu */ = {
+			isa = PBXGroup;
+			children = (
+				8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */,
+				8BDCBAB51FA83B09003D9241 /* SearchAddressTableViewCell.swift */,
+				8BDCBAB61FA83B09003D9241 /* SearchAddressTableViewCell.xib */,
+				8BDCBAB91FA83E03003D9241 /* SearchAddressDataModel.swift */,
+			);
+			name = PageMenu;
 			sourceTree = "<group>";
 		};
 		8BFED7ED1F85143300544FB1 /* Buttons */ = {
@@ -590,6 +610,7 @@
 				8B419A911F83C1430036FBC2 /* graph-data.osm-gh in Resources */,
 				8BC2CDF31F87A4FB00DDF77F /* sk.txt in Resources */,
 				8BC2CDD91F87A4FB00DDF77F /* de_DE.txt in Resources */,
+				8BDCBAB81FA83B09003D9241 /* SearchAddressTableViewCell.xib in Resources */,
 				8BC2CDEE1F87A4FB00DDF77F /* pt_BR.txt in Resources */,
 				8BC2CDDA1F87A4FB00DDF77F /* el.txt in Resources */,
 				8BC2CDED1F87A4FB00DDF77F /* pl_PL.txt in Resources */,
@@ -707,6 +728,7 @@
 				8B0E8B781F788D9900BD08D1 /* Colors.swift in Sources */,
 				8B689FE01F8BD6FE0033B95E /* TurnByTurnViewController.swift in Sources */,
 				8B689FE61F8BFB8B0033B95E /* BaseMap.swift in Sources */,
+				8BDCBAB31FA83001003D9241 /* SearchAddressViewController.swift in Sources */,
 				8B273CC01F61C5C1008FA023 /* BasicMapEvents.swift in Sources */,
 				8B0E8B7A1F788E1400BD08D1 /* Extensions.swift in Sources */,
 				8B689FE21F8BECB70033B95E /* TurnByTurnClient.swift in Sources */,
@@ -714,9 +736,11 @@
 				8B419A9D1F83E36B0036FBC2 /* Route.swift in Sources */,
 				8BFED7F91F85149300544FB1 /* AlertBaseView.swift in Sources */,
 				8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */,
+				8BDCBAB71FA83B09003D9241 /* SearchAddressTableViewCell.swift in Sources */,
 				8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */,
 				8B27B6901F8C73C0009F4722 /* DestinationClickListener.swift in Sources */,
 				8B26B0FA1FA3732400DE7DAC /* LMDataModel.swift in Sources */,
+				8BDCBABA1FA83E03003D9241 /* SearchAddressDataModel.swift in Sources */,
 				8B42D52E1F7DCF71002C93F0 /* ScaleBar.swift in Sources */,
 				8B9A00121F55A42900330631 /* MapViewController.swift in Sources */,
 				8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */,
