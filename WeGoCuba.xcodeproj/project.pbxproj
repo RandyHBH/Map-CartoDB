@@ -38,6 +38,9 @@
 		8B689FE41F8BF3CF0033B95E /* LocationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */; };
 		8B689FE61F8BFB8B0033B95E /* BaseMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B689FE51F8BFB8B0033B95E /* BaseMap.swift */; };
 		8B724FF51F715DF70075270C /* cuba.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = 8B724FF11F715DF70075270C /* cuba.mbtiles */; };
+		8B7D1C9B1FA8F438007F2E8A /* PageMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D1C9A1FA8F438007F2E8A /* PageMenuViewController.swift */; };
+		8B7D1C9D1FA8FA7B007F2E8A /* SearchCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D1C9C1FA8FA7B007F2E8A /* SearchCategoriesViewController.swift */; };
+		8B7D1C9F1FA8FADF007F2E8A /* SearchRecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D1C9E1FA8FADF007F2E8A /* SearchRecentsViewController.swift */; };
 		8B900C2E1F83461A00FCCEB8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B900C2D1F83461A00FCCEB8 /* Security.framework */; };
 		8B900C301F83464B00FCCEB8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B900C2F1F83464B00FCCEB8 /* libicucore.tbd */; };
 		8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A000F1F55A42900330631 /* AppDelegate.swift */; };
@@ -148,6 +151,9 @@
 		8B689FE31F8BF3CF0033B95E /* LocationMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationMarker.swift; path = ../LocationMarker.swift; sourceTree = "<group>"; };
 		8B689FE51F8BFB8B0033B95E /* BaseMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMap.swift; sourceTree = "<group>"; };
 		8B724FF11F715DF70075270C /* cuba.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = cuba.mbtiles; sourceTree = "<group>"; };
+		8B7D1C9A1FA8F438007F2E8A /* PageMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuViewController.swift; sourceTree = "<group>"; };
+		8B7D1C9C1FA8FA7B007F2E8A /* SearchCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCategoriesViewController.swift; sourceTree = "<group>"; };
+		8B7D1C9E1FA8FADF007F2E8A /* SearchRecentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRecentsViewController.swift; sourceTree = "<group>"; };
 		8B900BF41F8343C100FCCEB8 /* graphhopper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = graphhopper.xcodeproj; path = "libs/graphhopper-ios/graphhopper.xcodeproj"; sourceTree = "<group>"; };
 		8B900C2D1F83461A00FCCEB8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8B900C2F1F83464B00FCCEB8 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -359,6 +365,7 @@
 		8B5973A11FA4ED2B00AE5FB2 /* Left Menu */ = {
 			isa = PBXGroup;
 			children = (
+				8B3E39F71FA2D017006C0CD9 /* TableView */,
 				8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */,
 				8B26B0F91FA3732400DE7DAC /* LMDataModel.swift */,
 			);
@@ -375,6 +382,17 @@
 				8BA3B9951F71B6850020EB51 /* Raster */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8B7D1C971FA8EFDE007F2E8A /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */,
+				8BDCBAB51FA83B09003D9241 /* SearchAddressTableViewCell.swift */,
+				8BDCBAB61FA83B09003D9241 /* SearchAddressTableViewCell.xib */,
+				8BDCBAB91FA83E03003D9241 /* SearchAddressDataModel.swift */,
+			);
+			name = Address;
 			sourceTree = "<group>";
 		};
 		8B900BF51F8343C100FCCEB8 /* Products */ = {
@@ -408,13 +426,12 @@
 		8B9A000E1F55A42900330631 /* WeGoCuba */ = {
 			isa = PBXGroup;
 			children = (
-				8BDCBAB11FA82FA2003D9241 /* PageMenu */,
 				8B9A000F1F55A42900330631 /* AppDelegate.swift */,
 				8B9A00131F55A42900330631 /* Main.storyboard */,
 				8B9A00181F55A42900330631 /* LaunchScreen.storyboard */,
+				8BDCBAB11FA82FA2003D9241 /* PageMenu */,
 				8B58A58E1F68754500F15888 /* Controller */,
 				8B5973A11FA4ED2B00AE5FB2 /* Left Menu */,
-				8B3E39F71FA2D017006C0CD9 /* TableView */,
 				8B42D52F1F7DD030002C93F0 /* GPS Location */,
 				8B42D53A1F7DEE33002C93F0 /* Route Search */,
 				8B0E8B761F788D9900BD08D1 /* Utils */,
@@ -492,10 +509,10 @@
 		8BDCBAB11FA82FA2003D9241 /* PageMenu */ = {
 			isa = PBXGroup;
 			children = (
-				8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */,
-				8BDCBAB51FA83B09003D9241 /* SearchAddressTableViewCell.swift */,
-				8BDCBAB61FA83B09003D9241 /* SearchAddressTableViewCell.xib */,
-				8BDCBAB91FA83E03003D9241 /* SearchAddressDataModel.swift */,
+				8B7D1C971FA8EFDE007F2E8A /* Address */,
+				8B7D1C9A1FA8F438007F2E8A /* PageMenuViewController.swift */,
+				8B7D1C9C1FA8FA7B007F2E8A /* SearchCategoriesViewController.swift */,
+				8B7D1C9E1FA8FADF007F2E8A /* SearchRecentsViewController.swift */,
 			);
 			name = PageMenu;
 			sourceTree = "<group>";
@@ -726,6 +743,7 @@
 				8BFED7F51F85143300544FB1 /* RotationResetButton.swift in Sources */,
 				8BFED7FE1F85177F00544FB1 /* ProgressLabel.swift in Sources */,
 				8B0E8B781F788D9900BD08D1 /* Colors.swift in Sources */,
+				8B7D1C9B1FA8F438007F2E8A /* PageMenuViewController.swift in Sources */,
 				8B689FE01F8BD6FE0033B95E /* TurnByTurnViewController.swift in Sources */,
 				8B689FE61F8BFB8B0033B95E /* BaseMap.swift in Sources */,
 				8BDCBAB31FA83001003D9241 /* SearchAddressViewController.swift in Sources */,
@@ -734,6 +752,7 @@
 				8B689FE21F8BECB70033B95E /* TurnByTurnClient.swift in Sources */,
 				8B41E2BF1F7D78E7003BC7EA /* RouteMapEventListener.swift in Sources */,
 				8B419A9D1F83E36B0036FBC2 /* Route.swift in Sources */,
+				8B7D1C9F1FA8FADF007F2E8A /* SearchRecentsViewController.swift in Sources */,
 				8BFED7F91F85149300544FB1 /* AlertBaseView.swift in Sources */,
 				8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */,
 				8BDCBAB71FA83B09003D9241 /* SearchAddressTableViewCell.swift in Sources */,
@@ -745,6 +764,7 @@
 				8B9A00121F55A42900330631 /* MapViewController.swift in Sources */,
 				8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */,
 				8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */,
+				8B7D1C9D1FA8FA7B007F2E8A /* SearchCategoriesViewController.swift in Sources */,
 				8B41E2C11F7D96CA003BC7EA /* RotationListener.swift in Sources */,
 				8B3E39F41FA26A0D006C0CD9 /* MainViewController.swift in Sources */,
 				8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */,
@@ -889,6 +909,7 @@
 					"\"${PODS_ROOT}/Headers/Public/CartoMobileSDK\"",
 				);
 				INFOPLIST_FILE = WeGoCuba/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -944,6 +965,7 @@
 					"\"${PODS_ROOT}/Headers/Public/CartoMobileSDK\"",
 				);
 				INFOPLIST_FILE = WeGoCuba/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import XLPagerTabStrip
 
 class SearchAddressViewController: UIViewController {
     
@@ -50,6 +51,11 @@ class SearchAddressViewController: UIViewController {
     @IBAction func searchForAddress(_ sender: Any) {
         searchDataSource.requestData()
     }
+    
+    class func newInstance() -> SearchAddressViewController {
+        let searchAddressVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchAddressViewController") as! SearchAddressViewController
+        return searchAddressVC
+    }
 }
 
 extension SearchAddressViewController: UITableViewDelegate {
@@ -84,5 +90,12 @@ extension SearchAddressViewController: SearchAddressDataModelDelegate {
     
     func didRecieveDataUpdate(data: [SearchAddressDataModelItem]) {
         dataArray = data
+    }
+}
+
+extension SearchAddressViewController: IndicatorInfoProvider {
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Address")
     }
 }
