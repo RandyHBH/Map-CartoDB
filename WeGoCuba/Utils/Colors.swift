@@ -11,6 +11,10 @@ import UIKit
 
 class Colors {
     
+    public static var appBlue: UIColor = fromRgba(red: 0, green: 0, blue: 128, alpha: 255)
+    
+    public static var appWhiteInactive: UIColor = fromRgba(red: 255, green: 255, blue: 255, alpha: 76)
+    
     public static var appleBlue: UIColor = fromRgba(red: 14, green: 122, blue: 254, alpha: 255)
     
     public static var lightTransparentAppleBlue: UIColor = fromRgba(red: 14, green: 122, blue: 254, alpha: 70)
