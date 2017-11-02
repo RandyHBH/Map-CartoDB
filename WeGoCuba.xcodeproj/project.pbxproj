@@ -48,7 +48,11 @@
 		8B9A00151F55A42900330631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00131F55A42900330631 /* Main.storyboard */; };
 		8B9A00171F55A42900330631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00161F55A42900330631 /* Assets.xcassets */; };
 		8B9A001A1F55A42900330631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9A00181F55A42900330631 /* LaunchScreen.storyboard */; };
-		8BB5C0761FA02747006386CE /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 8BB5C0751FA02724006386CE /* Fonts */; };
+		8BB98FD81FA9719500E6B69D /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BB98FD71FA9719500E6B69D /* Roboto-Regular.ttf */; };
+		8BB98FDA1FA971A900E6B69D /* Gotham-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BB98FD91FA971A900E6B69D /* Gotham-Bold.ttf */; };
+		8BB98FDE1FA9725700E6B69D /* msyh.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 8BB98FDB1FA9725700E6B69D /* msyh.ttc */; };
+		8BB98FDF1FA9725700E6B69D /* msyhbd.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 8BB98FDC1FA9725700E6B69D /* msyhbd.ttc */; };
+		8BB98FE01FA9725700E6B69D /* msyhl.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 8BB98FDD1FA9725700E6B69D /* msyhl.ttc */; };
 		8BBB4D711F87BA2000B702B0 /* icon_pin_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBB4D701F87BA2000B702B0 /* icon_pin_red.png */; };
 		8BBB4D751F87BABB00B702B0 /* direction_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBB4D721F87BABB00B702B0 /* direction_up.png */; };
 		8BBB4D761F87BABB00B702B0 /* direction_upthenleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBB4D731F87BABB00B702B0 /* direction_upthenleft.png */; };
@@ -164,7 +168,11 @@
 		8B9A00161F55A42900330631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B9A00191F55A42900330631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B9A001B1F55A42900330631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BB5C0751FA02724006386CE /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		8BB98FD71FA9719500E6B69D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Fonts/Roboto/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		8BB98FD91FA971A900E6B69D /* Gotham-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Bold.ttf"; path = "Fonts/Gotham/Gotham-Bold.ttf"; sourceTree = "<group>"; };
+		8BB98FDB1FA9725700E6B69D /* msyh.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = msyh.ttc; path = "Fonts/Microsoft Yahei UI/msyh.ttc"; sourceTree = "<group>"; };
+		8BB98FDC1FA9725700E6B69D /* msyhbd.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = msyhbd.ttc; path = "Fonts/Microsoft Yahei UI/msyhbd.ttc"; sourceTree = "<group>"; };
+		8BB98FDD1FA9725700E6B69D /* msyhl.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = msyhl.ttc; path = "Fonts/Microsoft Yahei UI/msyhl.ttc"; sourceTree = "<group>"; };
 		8BBB4D701F87BA2000B702B0 /* icon_pin_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pin_red.png; sourceTree = "<group>"; };
 		8BBB4D721F87BABB00B702B0 /* direction_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = direction_up.png; sourceTree = "<group>"; };
 		8BBB4D731F87BABB00B702B0 /* direction_upthenleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = direction_upthenleft.png; sourceTree = "<group>"; };
@@ -375,7 +383,11 @@
 		8B724FF01F715DF70075270C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8BB5C0751FA02724006386CE /* Fonts */,
+				8BB98FD91FA971A900E6B69D /* Gotham-Bold.ttf */,
+				8BB98FDB1FA9725700E6B69D /* msyh.ttc */,
+				8BB98FDC1FA9725700E6B69D /* msyhbd.ttc */,
+				8BB98FDD1FA9725700E6B69D /* msyhl.ttc */,
+				8BB98FD71FA9719500E6B69D /* Roboto-Regular.ttf */,
 				8B419A901F83C1430036FBC2 /* graph-data.osm-gh */,
 				8B0E8B821F78A24D00BD08D1 /* IMG */,
 				8BA3B9961F71B69E0020EB51 /* Vectorial */,
@@ -608,7 +620,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB5C0761FA02747006386CE /* Fonts in Resources */,
 				8BC2CDF21F87A4FB00DDF77F /* si.txt in Resources */,
 				8BC2CDF01F87A4FB00DDF77F /* ro.txt in Resources */,
 				8BC2CDD61F87A4FB00DDF77F /* ca.txt in Resources */,
@@ -663,6 +674,11 @@
 				8BBB4D711F87BA2000B702B0 /* icon_pin_red.png in Resources */,
 				8B0E8B871F78A24D00BD08D1 /* icon_track_location_off.png in Resources */,
 				8BC2CDE81F87A4FB00DDF77F /* ja.txt in Resources */,
+				8BB98FD81FA9719500E6B69D /* Roboto-Regular.ttf in Resources */,
+				8BB98FDA1FA971A900E6B69D /* Gotham-Bold.ttf in Resources */,
+				8BB98FDE1FA9725700E6B69D /* msyh.ttc in Resources */,
+				8BB98FDF1FA9725700E6B69D /* msyhbd.ttc in Resources */,
+				8BB98FE01FA9725700E6B69D /* msyhl.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

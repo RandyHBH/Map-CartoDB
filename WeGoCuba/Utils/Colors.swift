@@ -11,7 +11,7 @@ import UIKit
 
 class Colors {
     
-    public static var appBlue: UIColor = fromRgba(red: 0, green: 0, blue: 128, alpha: 255)
+    public static var appBlue: UIColor = fromRgba(red: 0, green: 81, blue: 190, alpha: 255)
     
     public static var appWhiteInactive: UIColor = fromRgba(red: 255, green: 255, blue: 255, alpha: 76)
     
