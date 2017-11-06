@@ -10,27 +10,7 @@ import UIKit
 
 class RouteButton : UIButton {
     
-    var delegate: RouteButtonDelegate?
-    
-    func addRecognizer() {
-        
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.switchChanged(_:)))
-        addGestureRecognizer(recognizer)
-    }
-    
-    func switchChanged(_ sender: UITapGestureRecognizer) {
-        delegate?.routeButtonTapped()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    
-        layer.cornerRadius = min(bounds.width,bounds.height) / 2.0
-    }
-    
 }
 
 
-protocol RouteButtonDelegate {
-    func routeButtonTapped()
-}
+

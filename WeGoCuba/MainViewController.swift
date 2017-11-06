@@ -10,10 +10,10 @@ import UIKit
 import SideMenu
 
 class MainViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupSideMenu()
     }
     
@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
         
         setupStatusBarColor()
     }
-
+    
     fileprivate func setupSideMenu() {
         // Define the menus
         SideMenuManager.menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "LeftMenuNavigationController") as? UISideMenuNavigationController
@@ -43,7 +43,15 @@ class MainViewController: UIViewController {
         
         let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
         statusBarView.backgroundColor = Colors.appBlue
+        statusBarView.tag = 100
         self.navigationController?.view.addSubview(statusBarView)
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        let statusBarView = self.navigationController?.view.viewWithTag(100)
+        statusBarView?.removeFromSuperview()
+    }
+    
 }

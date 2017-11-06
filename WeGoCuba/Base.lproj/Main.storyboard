@@ -124,62 +124,137 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qE-dD-NUM" customClass="ScaleBar" customModule="WeGoCuba" customModuleProvider="target">
-                                <rect key="frame" x="10" y="440" width="54" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="54" id="0JJ-3Z-v0x"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="6Ps-6G-ShW"/>
-                                    <constraint firstAttribute="height" constant="20" id="Ee7-Tj-33J"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="SlW-2q-6wX"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mz0-Kc-b2c">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mz0-Kc-b2c">
                                 <rect key="frame" x="260" y="290" width="50" height="170"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M38-Vx-crb" userLabel="PTP Button" customClass="PTPButton" customModule="WeGoCuba" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <gestureRecognizers/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVa-av-6CU" customClass="RouteButtonsView" customModule="WeGoCuba" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="170"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pl1-Eu-WMd">
+                                                <rect key="frame" x="0.0" y="60" width="50" height="110"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgv-rY-OsF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <subviews>
+                                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M38-Vx-crb" userLabel="PTP Button">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="tMi-6d-Ssb"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <size key="titleShadowOffset" width="0.0" height="2"/>
+                                                                <state key="normal" image="route.png">
+                                                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892239999999" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="25"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="ptpButtonTapped:" destination="LVa-av-6CU" eventType="touchUpInside" id="cLL-7s-xj7"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="Ru6-uH-5EO"/>
+                                                            <constraint firstItem="M38-Vx-crb" firstAttribute="centerY" secondItem="kgv-rY-OsF" secondAttribute="centerY" id="ZGU-fQ-aJl"/>
+                                                            <constraint firstItem="M38-Vx-crb" firstAttribute="centerX" secondItem="kgv-rY-OsF" secondAttribute="centerX" id="dTW-Aj-NX3"/>
+                                                            <constraint firstItem="M38-Vx-crb" firstAttribute="height" secondItem="kgv-rY-OsF" secondAttribute="height" id="oBP-lY-xg9"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-F3-Nph">
+                                                        <rect key="frame" x="0.0" y="55" width="50" height="0.0"/>
+                                                        <subviews>
+                                                            <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlU-hr-sfS" userLabel="Route Button">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="0.0"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="2Bc-Js-UQ8"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <size key="titleShadowOffset" width="0.0" height="2"/>
+                                                                <state key="normal" image="ic_route">
+                                                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892241379309" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="25"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="routeButtonTapped:" destination="LVa-av-6CU" eventType="touchUpInside" id="Q0i-Fo-hIa"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstItem="BlU-hr-sfS" firstAttribute="height" secondItem="JGk-F3-Nph" secondAttribute="height" id="358-i6-Mo6"/>
+                                                            <constraint firstAttribute="height" id="5iS-48-XrX"/>
+                                                            <constraint firstItem="BlU-hr-sfS" firstAttribute="centerY" secondItem="JGk-F3-Nph" secondAttribute="centerY" id="CTp-uP-mZm"/>
+                                                            <constraint firstItem="BlU-hr-sfS" firstAttribute="centerX" secondItem="JGk-F3-Nph" secondAttribute="centerX" id="VBg-az-7AH"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIB-fL-HnC">
+                                                        <rect key="frame" x="0.0" y="60" width="50" height="50"/>
+                                                        <subviews>
+                                                            <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-sL-wiY">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="oyv-cc-FUJ"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <size key="titleShadowOffset" width="0.0" height="2"/>
+                                                                <state key="normal" image="ic_my_location_white">
+                                                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892241379309" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="25"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="locationButtonTapped:" destination="LVa-av-6CU" eventType="touchUpInside" id="2cb-OO-lbU"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstItem="LRM-sL-wiY" firstAttribute="centerY" secondItem="oIB-fL-HnC" secondAttribute="centerY" id="C23-5F-42D"/>
+                                                            <constraint firstAttribute="height" constant="50" id="QIG-1m-l90"/>
+                                                            <constraint firstItem="LRM-sL-wiY" firstAttribute="centerX" secondItem="oIB-fL-HnC" secondAttribute="centerX" id="WGy-7P-TsE"/>
+                                                            <constraint firstItem="LRM-sL-wiY" firstAttribute="height" secondItem="oIB-fL-HnC" secondAttribute="height" id="zWY-d9-hgr"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="DvX-jb-6C4"/>
-                                            <constraint firstAttribute="width" constant="50" id="tMi-6d-Ssb"/>
+                                            <constraint firstAttribute="height" constant="170" id="LRD-gI-JDy"/>
+                                            <constraint firstAttribute="width" constant="50" id="W5q-io-9v0"/>
+                                            <constraint firstAttribute="bottom" secondItem="Pl1-Eu-WMd" secondAttribute="bottom" id="bfN-fB-mzX"/>
+                                            <constraint firstAttribute="trailing" secondItem="Pl1-Eu-WMd" secondAttribute="trailing" id="mZD-Pa-fmw"/>
+                                            <constraint firstItem="Pl1-Eu-WMd" firstAttribute="leading" secondItem="LVa-av-6CU" secondAttribute="leading" id="ujC-DV-XXK"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="titleShadowOffset" width="0.0" height="2"/>
-                                        <state key="normal" image="route.png">
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892239999999" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlU-hr-sfS" userLabel="Route Button" customClass="RouteButton" customModule="WeGoCuba" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="60" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="2Bc-Js-UQ8"/>
-                                            <constraint firstAttribute="height" constant="50" id="sWK-09-wsI"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="titleShadowOffset" width="0.0" height="2"/>
-                                        <state key="normal" image="ic_route">
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892241379309" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-sL-wiY" customClass="LocationButton" customModule="WeGoCuba" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="oyv-cc-FUJ"/>
-                                            <constraint firstAttribute="height" constant="50" id="zTQ-51-6VU"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="titleShadowOffset" width="0.0" height="2"/>
-                                        <state key="normal" image="ic_my_location_white">
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.24824892241379309" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
+                                        <connections>
+                                            <outlet property="heightConstraint" destination="5iS-48-XrX" id="9ga-Mm-F6b"/>
+                                            <outlet property="locationButton" destination="LRM-sL-wiY" id="dIv-3l-DJn"/>
+                                            <outlet property="locationContainer" destination="oIB-fL-HnC" id="Gwb-JG-rMQ"/>
+                                            <outlet property="ptpButton" destination="M38-Vx-crb" id="m1x-le-fq8"/>
+                                            <outlet property="ptpContainer" destination="kgv-rY-OsF" id="ZvD-0X-Lm1"/>
+                                            <outlet property="routeButton" destination="BlU-hr-sfS" id="FxW-5t-5PH"/>
+                                            <outlet property="routeContainer" destination="JGk-F3-Nph" id="z0e-ku-yw1"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcG-3s-ECL" customClass="RotationResetButton" customModule="WeGoCuba" customModuleProvider="target">
@@ -198,11 +273,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4qE-dD-NUM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="2Ly-V5-DLB"/>
                             <constraint firstAttribute="trailing" secondItem="Xh6-g3-XDh" secondAttribute="trailing" id="2oK-uh-IEE"/>
                             <constraint firstItem="DcG-3s-ECL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="BN4-3H-FYM"/>
                             <constraint firstAttribute="trailing" secondItem="DcG-3s-ECL" secondAttribute="trailing" constant="10" id="LWX-QH-jWG"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4qE-dD-NUM" secondAttribute="bottom" constant="20" id="OwA-Dy-exf"/>
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="d41-Gc-W56"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mz0-Kc-b2c" secondAttribute="bottom" constant="20" id="eAs-Hs-j8z"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xh6-g3-XDh" secondAttribute="bottom" id="j4S-xY-Qf2"/>
@@ -211,15 +284,176 @@
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wdh-On-WHb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="yHm-Mi-7Ny"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" id="yHm-Mi-7Ny">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="ic_arrow_back_white" id="Jfl-Vh-KpM">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="lOs-2z-s6i" customClass="RoutingChoices" customModule="WeGoCuba" customModuleProvider="target">
+                            <rect key="frame" x="60" y="6" width="200" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5Q1-45-yjB">
+                                    <rect key="frame" x="0.0" y="0.0" width="119" height="33"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1p-bv-nOV" customClass="CircleProgressView" customModule="CircleProgressView">
+                                            <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wP-WB-WXX">
+                                                    <rect key="frame" x="7.5" y="8.5" width="18" height="16"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="Ico_car"/>
+                                                    <connections>
+                                                        <action selector="selectChoise:" destination="lOs-2z-s6i" eventType="touchUpInside" id="Wdb-Le-wlG"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="0wP-WB-WXX" firstAttribute="width" secondItem="r1p-bv-nOV" secondAttribute="width" constant="-15" id="Bto-LK-Emo"/>
+                                                <constraint firstItem="0wP-WB-WXX" firstAttribute="centerX" secondItem="r1p-bv-nOV" secondAttribute="centerX" id="ed1-Oy-fMi"/>
+                                                <constraint firstItem="0wP-WB-WXX" firstAttribute="height" secondItem="r1p-bv-nOV" secondAttribute="height" constant="-17" id="lRG-Lj-5f2"/>
+                                                <constraint firstAttribute="width" constant="33" id="mLO-I0-Dzc"/>
+                                                <constraint firstItem="0wP-WB-WXX" firstAttribute="centerY" secondItem="r1p-bv-nOV" secondAttribute="centerY" id="ofa-ci-Fbg"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                                    <real key="value" value="0.25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                    <real key="value" value="2.2999999999999998"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="centerFillColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.15307112070000001" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJZ-cu-ngU" customClass="CircleProgressView" customModule="CircleProgressView">
+                                            <rect key="frame" x="43" y="0.0" width="33" height="33"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmB-na-Raq">
+                                                    <rect key="frame" x="7.5" y="8.5" width="18" height="16"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="Ico_bici"/>
+                                                    <connections>
+                                                        <action selector="selectChoise:" destination="lOs-2z-s6i" eventType="touchUpInside" id="4jt-Mb-mJe"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="zmB-na-Raq" firstAttribute="width" secondItem="vJZ-cu-ngU" secondAttribute="width" constant="-15" id="KnN-xT-SIs"/>
+                                                <constraint firstItem="zmB-na-Raq" firstAttribute="centerX" secondItem="vJZ-cu-ngU" secondAttribute="centerX" id="Zrn-wE-12r"/>
+                                                <constraint firstAttribute="width" constant="33" id="heL-Ra-7lo"/>
+                                                <constraint firstItem="zmB-na-Raq" firstAttribute="centerY" secondItem="vJZ-cu-ngU" secondAttribute="centerY" id="nH2-HD-Dah"/>
+                                                <constraint firstItem="zmB-na-Raq" firstAttribute="height" secondItem="vJZ-cu-ngU" secondAttribute="height" constant="-17" id="rlE-9A-UiK"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                                    <real key="value" value="0.25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                    <real key="value" value="2.2999999999999998"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="centerFillColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.15307112070000001" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCI-t2-1Ja" customClass="CircleProgressView" customModule="CircleProgressView">
+                                            <rect key="frame" x="86" y="0.0" width="33" height="33"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIN-QG-FhQ">
+                                                    <rect key="frame" x="9" y="7.5" width="15" height="18"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="Ico_hombre"/>
+                                                    <connections>
+                                                        <action selector="selectChoise:" destination="lOs-2z-s6i" eventType="touchUpInside" id="Qky-ct-Plm"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="yIN-QG-FhQ" firstAttribute="width" secondItem="lCI-t2-1Ja" secondAttribute="width" constant="-18" id="2aL-l6-Qfl"/>
+                                                <constraint firstItem="yIN-QG-FhQ" firstAttribute="centerY" secondItem="lCI-t2-1Ja" secondAttribute="centerY" id="7v8-M9-wWD"/>
+                                                <constraint firstItem="yIN-QG-FhQ" firstAttribute="centerX" secondItem="lCI-t2-1Ja" secondAttribute="centerX" id="Hgz-hK-mdt"/>
+                                                <constraint firstItem="yIN-QG-FhQ" firstAttribute="height" secondItem="lCI-t2-1Ja" secondAttribute="height" constant="-15" id="ImE-1I-jlP"/>
+                                                <constraint firstAttribute="width" constant="33" id="Udv-ZV-CBU"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                                    <real key="value" value="0.25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                    <real key="value" value="2.2999999999999998"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="centerFillColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.15307112070000001" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackBorderColor">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="5Q1-45-yjB" firstAttribute="top" secondItem="lOs-2z-s6i" secondAttribute="top" id="9tA-eV-5aQ"/>
+                                <constraint firstAttribute="bottom" secondItem="5Q1-45-yjB" secondAttribute="bottom" id="UDA-Fn-bfT"/>
+                                <constraint firstItem="5Q1-45-yjB" firstAttribute="leading" secondItem="lOs-2z-s6i" secondAttribute="leading" id="sOz-gO-pBG"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="circlesProgressViews" destination="r1p-bv-nOV" collectionClass="NSMutableArray" id="o0P-lN-V2P"/>
+                                <outletCollection property="circlesProgressViews" destination="vJZ-cu-ngU" collectionClass="NSMutableArray" id="x4h-fC-skQ"/>
+                                <outletCollection property="circlesProgressViews" destination="lCI-t2-1Ja" collectionClass="NSMutableArray" id="ODf-Fr-M0N"/>
+                                <outletCollection property="choicesButtons" destination="0wP-WB-WXX" collectionClass="NSMutableArray" id="qk0-YP-tlE"/>
+                                <outletCollection property="choicesButtons" destination="zmB-na-Raq" collectionClass="NSMutableArray" id="hfw-RW-Vus"/>
+                                <outletCollection property="choicesButtons" destination="yIN-QG-FhQ" collectionClass="NSMutableArray" id="E6T-nZ-RbO"/>
+                            </connections>
+                        </view>
+                    </navigationItem>
                     <connections>
-                        <outlet property="locationButton" destination="LRM-sL-wiY" id="bWo-9o-RuG"/>
                         <outlet property="map" destination="Xh6-g3-XDh" id="Vim-Dd-81W"/>
-                        <outlet property="ptpButton" destination="M38-Vx-crb" id="bEg-2S-gvp"/>
                         <outlet property="rotationResetButton" destination="DcG-3s-ECL" id="Fck-Lv-vys"/>
-                        <outlet property="routeButton" destination="BlU-hr-sfS" id="ALi-YC-IdE"/>
-                        <outlet property="scaleBar" destination="4qE-dD-NUM" id="x8n-lI-24f"/>
+                        <outlet property="routeButtonsView" destination="LVa-av-6CU" id="h9V-zW-AUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -229,7 +463,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="737" y="-443"/>
+            <point key="canvasLocation" x="736.875" y="-443.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hpB-ep-Xgh">
@@ -710,7 +944,7 @@
                                                         <rect key="frame" x="76" y="0.0" width="56" height="48"/>
                                                         <state key="normal" image="mapa boton"/>
                                                         <connections>
-                                                            <segue destination="BYZ-38-t0r" kind="presentation" id="t3w-NE-e3c"/>
+                                                            <segue destination="BYZ-38-t0r" kind="show" id="t3w-NE-e3c"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dn6-3f-fBl">
@@ -961,7 +1195,10 @@
         <image name="Cover_App" width="912" height="515"/>
         <image name="Ico_ajustes" width="59" height="60"/>
         <image name="Ico_ayuda" width="60" height="60"/>
+        <image name="Ico_bici" width="72" height="62"/>
+        <image name="Ico_car" width="54" height="48"/>
         <image name="Ico_favorito" width="183" height="183"/>
+        <image name="Ico_hombre" width="39" height="65"/>
         <image name="Ico_informacion" width="60" height="60"/>
         <image name="Ico_unidades" width="56" height="45"/>
         <image name="Logo" width="339" height="322"/>

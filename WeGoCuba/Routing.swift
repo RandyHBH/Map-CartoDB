@@ -91,7 +91,7 @@ class Routing {
         let line = createPolyLine(result: result, color: lineColor)
         routeDataSource?.add(line)
         
-        let vector = NTMapPosVector()
+//        let vector = NTMapPosVector()
         
         //        let path : PathWrapper = result.getBest()
         //        let instructions : InstructionList = path.getInstructions()
@@ -122,12 +122,12 @@ class Routing {
         //
         //        }
         
-        let polygon = NTPolygon(poses: vector, style: NTPolygonStyleBuilder().buildStyle())
+//        let polygon = NTPolygon(poses: vector, style: NTPolygonStyleBuilder().buildStyle())
         
         let route = Route()
         
-        route.bounds = polygon?.getBounds()
-        route.length = result.getBest().getDistance()
+//        route.bounds = polygon?.getBounds()
+//        route.length = result.getBest().getDistance()
         
         complete(route)
     }
@@ -259,7 +259,7 @@ class Routing {
         
         
         request = GHRequest(double: latitudStart84, with: longitudStart84, with: latitudStop84, with: longitudStop84).setVehicleWith("car").setWeightingWith("fastest").setLocaleWith("es")
-        request.getHints().put(with: "ch.disable", withId: true)
+        request.getHints().put(with: "ch.disable", withId: "true")
         
         result = self.hopper?.route(with: request)
         

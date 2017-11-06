@@ -23,6 +23,9 @@
 		8B3E39F61FA2C750006C0CD9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */; };
 		8B3E39FB1FA2D347006C0CD9 /* DRHTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E39F91FA2D347006C0CD9 /* DRHTableViewCell.swift */; };
 		8B3E39FC1FA2D347006C0CD9 /* DRHTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3E39FA1FA2D347006C0CD9 /* DRHTableViewCell.xib */; };
+		8B3FBDB91FACC372002EA3DB /* MapVC+ViewDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FBDB81FACC372002EA3DB /* MapVC+ViewDidLoad.swift */; };
+		8B3FBDBB1FACC681002EA3DB /* MapVC+ViewDidAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FBDBA1FACC681002EA3DB /* MapVC+ViewDidAppear.swift */; };
+		8B3FBDBD1FACCCB3002EA3DB /* RouteButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */; };
 		8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4142761F68E5320002AD80 /* BoundingBox.swift */; };
 		8B419A911F83C1430036FBC2 /* graph-data.osm-gh in Resources */ = {isa = PBXBuildFile; fileRef = 8B419A901F83C1430036FBC2 /* graph-data.osm-gh */; };
 		8B419A9B1F83E3090036FBC2 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B419A9A1F83E3090036FBC2 /* Routing.swift */; };
@@ -96,7 +99,7 @@
 		8BC2CDF71F87A4FB00DDF77F /* vi_VI.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDCF1F87A4FB00DDF77F /* vi_VI.txt */; };
 		8BC2CDF81F87A4FB00DDF77F /* zh_CN.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDD01F87A4FB00DDF77F /* zh_CN.txt */; };
 		8BC2CDF91F87A4FB00DDF77F /* zh_HK.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BC2CDD11F87A4FB00DDF77F /* zh_HK.txt */; };
-		8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC366311F9132C1007E0D42 /* PTPButton.swift */; };
+		8BD08F9C1FAEC8870073BE72 /* RoutingChoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD08F9B1FAEC8870073BE72 /* RoutingChoices.swift */; };
 		8BD248391F841E0C00E6D9AA /* route.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD248381F841E0C00E6D9AA /* route.png */; };
 		8BDCBAB31FA83001003D9241 /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */; };
 		8BDCBAB71FA83B09003D9241 /* SearchAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDCBAB51FA83B09003D9241 /* SearchAddressTableViewCell.swift */; };
@@ -140,6 +143,9 @@
 		8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		8B3E39F91FA2D347006C0CD9 /* DRHTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DRHTableViewCell.swift; sourceTree = "<group>"; };
 		8B3E39FA1FA2D347006C0CD9 /* DRHTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DRHTableViewCell.xib; sourceTree = "<group>"; };
+		8B3FBDB81FACC372002EA3DB /* MapVC+ViewDidLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapVC+ViewDidLoad.swift"; sourceTree = "<group>"; };
+		8B3FBDBA1FACC681002EA3DB /* MapVC+ViewDidAppear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapVC+ViewDidAppear.swift"; sourceTree = "<group>"; };
+		8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteButtonsView.swift; sourceTree = "<group>"; };
 		8B4142761F68E5320002AD80 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		8B419A901F83C1430036FBC2 /* graph-data.osm-gh */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "graph-data.osm-gh"; path = "libs/graphhopper-ios/graphhopper/graph-data.osm-gh"; sourceTree = SOURCE_ROOT; };
 		8B419A9A1F83E3090036FBC2 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
@@ -216,7 +222,7 @@
 		8BC2CDCF1F87A4FB00DDF77F /* vi_VI.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vi_VI.txt; path = build/translations/vi_VI.txt; sourceTree = "<group>"; };
 		8BC2CDD01F87A4FB00DDF77F /* zh_CN.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = zh_CN.txt; path = build/translations/zh_CN.txt; sourceTree = "<group>"; };
 		8BC2CDD11F87A4FB00DDF77F /* zh_HK.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = zh_HK.txt; path = build/translations/zh_HK.txt; sourceTree = "<group>"; };
-		8BC366311F9132C1007E0D42 /* PTPButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPButton.swift; sourceTree = "<group>"; };
+		8BD08F9B1FAEC8870073BE72 /* RoutingChoices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingChoices.swift; sourceTree = "<group>"; };
 		8BD248381F841E0C00E6D9AA /* route.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route.png; sourceTree = "<group>"; };
 		8BD6B4E11F61816600C86085 /* WeGoCuba-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeGoCuba-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8BDCBAB21FA83001003D9241 /* SearchAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +349,7 @@
 				8B419A9A1F83E3090036FBC2 /* Routing.swift */,
 				8B41E2BE1F7D78E7003BC7EA /* RouteMapEventListener.swift */,
 				8B27B68F1F8C73C0009F4722 /* DestinationClickListener.swift */,
+				8BD08F9B1FAEC8870073BE72 /* RoutingChoices.swift */,
 			);
 			name = "Route Search";
 			sourceTree = "<group>";
@@ -353,7 +360,8 @@
 				8B27B68C1F8C5711009F4722 /* Turn-by-Turn-Navigation */,
 				8B27B68D1F8C5748009F4722 /* RouteController.swift */,
 				8B9A00111F55A42900330631 /* MapViewController.swift */,
-				8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */,
+				8B3FBDB81FACC372002EA3DB /* MapVC+ViewDidLoad.swift */,
+				8B3FBDBA1FACC681002EA3DB /* MapVC+ViewDidAppear.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -373,6 +381,7 @@
 		8B5973A11FA4ED2B00AE5FB2 /* Left Menu */ = {
 			isa = PBXGroup;
 			children = (
+				8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */,
 				8B3E39F71FA2D017006C0CD9 /* TableView */,
 				8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */,
 				8B26B0F91FA3732400DE7DAC /* LMDataModel.swift */,
@@ -536,7 +545,7 @@
 				8BFED7EE1F85143300544FB1 /* LocationButton.swift */,
 				8BFED7F11F85143300544FB1 /* RouteButton.swift */,
 				8BFED7EF1F85143300544FB1 /* PopupButton.swift */,
-				8BC366311F9132C1007E0D42 /* PTPButton.swift */,
+				8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -692,17 +701,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeGoCuba/Pods-WeGoCuba-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -752,6 +763,7 @@
 				8B689FE41F8BF3CF0033B95E /* LocationMarker.swift in Sources */,
 				8B3E39FB1FA2D347006C0CD9 /* DRHTableViewCell.swift in Sources */,
 				8BFED7F31F85143300544FB1 /* LocationButton.swift in Sources */,
+				8B3FBDBD1FACCCB3002EA3DB /* RouteButtonsView.swift in Sources */,
 				8B4142771F68E5320002AD80 /* BoundingBox.swift in Sources */,
 				8B42D5311F7DD05D002C93F0 /* LocationExtensions.swift in Sources */,
 				8B419A9B1F83E3090036FBC2 /* Routing.swift in Sources */,
@@ -766,11 +778,12 @@
 				8B273CC01F61C5C1008FA023 /* BasicMapEvents.swift in Sources */,
 				8B0E8B7A1F788E1400BD08D1 /* Extensions.swift in Sources */,
 				8B689FE21F8BECB70033B95E /* TurnByTurnClient.swift in Sources */,
+				8B3FBDB91FACC372002EA3DB /* MapVC+ViewDidLoad.swift in Sources */,
 				8B41E2BF1F7D78E7003BC7EA /* RouteMapEventListener.swift in Sources */,
 				8B419A9D1F83E36B0036FBC2 /* Route.swift in Sources */,
+				8B3FBDBB1FACC681002EA3DB /* MapVC+ViewDidAppear.swift in Sources */,
 				8B7D1C9F1FA8FADF007F2E8A /* SearchRecentsViewController.swift in Sources */,
 				8BFED7F91F85149300544FB1 /* AlertBaseView.swift in Sources */,
-				8BC366321F9132C1007E0D42 /* PTPButton.swift in Sources */,
 				8BDCBAB71FA83B09003D9241 /* SearchAddressTableViewCell.swift in Sources */,
 				8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */,
 				8B27B6901F8C73C0009F4722 /* DestinationClickListener.swift in Sources */,
@@ -780,6 +793,7 @@
 				8B9A00121F55A42900330631 /* MapViewController.swift in Sources */,
 				8BFED7F41F85143300544FB1 /* PopupButton.swift in Sources */,
 				8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */,
+				8BD08F9C1FAEC8870073BE72 /* RoutingChoices.swift in Sources */,
 				8B7D1C9D1FA8FA7B007F2E8A /* SearchCategoriesViewController.swift in Sources */,
 				8B41E2C11F7D96CA003BC7EA /* RotationListener.swift in Sources */,
 				8B3E39F41FA26A0D006C0CD9 /* MainViewController.swift in Sources */,

@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class BasicMapEvents : NTMapEventListener
-{
+public class BasicMapEvents : NTMapEventListener {
+    
     var map: NTMapView!
     var stopPosition : NTMapPos!
     
@@ -49,9 +49,10 @@ public class BasicMapEvents : NTMapEventListener
         }
         
         let position = mapClickInfo.getClickPos()
+        
         let event = RouteMapEvent()
         
-        if (stopPosition == nil){
+        if (stopPosition == nil) {
 
             stopPosition = position
 

@@ -10,15 +10,11 @@
  import CoreLocation
  
  
- class MapViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, LocationButtonDelegate, RouteButtonDelegate, PTPButtonDelegate, MapIsInactiveDelegate {
+ class MapViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, MapIsInactiveDelegate {
     
     @IBOutlet var map: NTMapView!
-    @IBOutlet var locationButton: LocationButton!
-    @IBOutlet var scaleBar: ScaleBar!
     @IBOutlet var rotationResetButton: RotationResetButton!
-    @IBOutlet var routeButton: RouteButton!
-    
-    @IBOutlet var ptpButton: PTPButton!
+    @IBOutlet var routeButtonsView: RouteButtonsView!
     
     // BASIC MAP DECLARATION
     var projection: NTProjection!
@@ -40,107 +36,15 @@
     
     var routeController : RouteController!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        map = NTMapView()
-        let cartoTitleOff = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height + 50)
-        map.frame = cartoTitleOff
-        
-        map.getOptions().setZoomGestures(true)
-        map.getOptions().setZoom(NTMapRange(min: 5, max: 22))
-        map.getOptions().setPanningMode(NTPanningMode.PANNING_MODE_STICKY)
-        
-        //Need to add as a subview
-        view.insertSubview(map, at: 1)
-        
-        // Load MBTiles Vector Tiles
-        baseMap = BaseMap(mapView: self.map)
-        
-        // Get base projection from mapView
-        projection = map.getOptions().getBaseProjection()
-        
-        //Creating GPS Marker
-        locationMarker = LocationMarker(mapView: self.map)
-        
-        // FOCUS IN CUBA
-        map?.setFocus(projection?.fromWgs84(NTMapPos(x: -82.2906, y: 23.0469)), durationSeconds: 0)
-        map?.setZoom(6, durationSeconds: 3)
-        
-        manager = CLLocationManager()
-        manager.delegate = self
-        manager.pausesLocationUpdatesAutomatically = false
-        //        manager.desiredAccuracy = 1
-        
-        if #available(iOS 9.0, *) {
-            manager.requestAlwaysAuthorization()
-        }
-        
-        rotationResetButton.resetDuration = rotationDuration
-        
-        scaleBar.initialize()
-        scaleBar.map = map
-        
-        basicEvents = BasicMapEvents()
-        basicEvents.map = map
-        
-        progressLabel = ProgressLabel()
-        view.addSubview(progressLabel)
-        layoutProgressLabel()
-        
-        routeController = RouteController(mapView: self.map, progressLabel: self.progressLabel)
-        
-    }
-    
     // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         let cartoTitleOff = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 50)
         map.frame = cartoTitleOff
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // START UPDATING LOCATION, WHEN STOP THE UPDATES????
-        startLocationUpdates()
-        
-        basicEvents?.delegateRotate = self
-        basicEvents?.delegateBasicMapEvents = self
-        basicEvents?.delegateMapIsInactive = self
-        
-        map.setMapEventListener(basicEvents)
-        
-        locationButton.delegate = self
-        locationButton.addRecognizer()
-        
-        routeButton.addRecognizer()
-        routeButton.delegate = self
-        
-        ptpButton.addRecognizer()
-        ptpButton.delegate = self
-        
-        self.routeController.locationMarker = self.locationMarker
-        
-    }
-    
     class func newInstance() -> MapViewController {
         let mapVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         return mapVC
-    }
-    
-    // MARK: LOCATION BUTTON DELEGATE
-    func locationSwitchTapped() {
-        
-        if (latestLocation != nil) {
-            
-            let latitude = Double(latestLocation.coordinate.latitude)
-            let longitude = Double(latestLocation.coordinate.longitude)
-            
-            let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
-            
-            map.setZoom(18, durationSeconds: 2)
-            map.setFocus(position, durationSeconds: 1)
-        }
     }
     
     func startLocationUpdates() {
@@ -163,63 +67,33 @@
     var navigationInProgress = false
     
     func routeButtonTapped() {
+//        
+//        if ( basicEvents.stopPosition != nil) && (navigationMode == false) && (latestLocation != nil) && (navigationInProgress != true) {
+//            
+//            let latitude = Double(latestLocation.coordinate.latitude)
+//            let longitude = Double(latestLocation.coordinate.longitude)
+//            
+//            let startPosition = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+//            
+//            let stopPosition = basicEvents.stopPosition
+//            
+//            self.routeController.showRoute(start: startPosition!, stop: stopPosition!)
+//            
+//            self.navigationMode = true
+//            self.navigationInProgress = true
+//            basicEvents.navigationMode = true
+//            self.locationMarker.modeNavigation()
+//            
+//        } else if (navigationInProgress == true) {
+//            
+//            stopPositionUnSet()
+//            basicEvents.stopPosition = nil
+//        } else {
+//            
+//            navigationMode = false
+//            self.progressLabel.complete(message: "You need to set a final position")
+//        }
         
-        if ( basicEvents.stopPosition != nil) && (navigationMode == false) && (latestLocation != nil) && (navigationInProgress != true) {
-            
-            let latitude = Double(latestLocation.coordinate.latitude)
-            let longitude = Double(latestLocation.coordinate.longitude)
-            
-            let startPosition = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
-            
-            let stopPosition = basicEvents.stopPosition
-            
-            self.routeController.showRoute(start: startPosition!, stop: stopPosition!)
-            
-            self.navigationMode = true
-            self.navigationInProgress = true
-            basicEvents.navigationMode = true
-            self.locationMarker.modeNavigation()
-            
-        } else if (navigationInProgress == true) {
-            
-            stopPositionUnSet()
-            basicEvents.stopPosition = nil
-        } else {
-            
-            navigationMode = false
-            self.progressLabel.complete(message: "You need to set a final position")
-        }
-        
-    }
-    
-    // MARK: PTP BUTTON DELEGATE
-    // TODO
-    func ptpButtonTapped() {
-        
-        routeController.startRoute()
-    }
-    
-    // MARK: BASIC MAP EVENTS DELEGATE
-    
-    func stopPositionSet(event: RouteMapEvent) {
-        
-        routeController.onePointRoute(event: event)
-    }
-    
-    func stopPositionUnSet() {
-        
-        routeController.finishRoute()
-        
-        navigationMode = false
-        navigationInProgress = false
-        basicEvents.navigationMode = false
-        
-        
-        self.locationMarker.modeFree()
-    }
-    
-    func longTap(){
-        // NO RESPONDER A LOS LONG-TAPS
     }
     
     // TODO : NECESITO HACERLO EL DISEÑO EN EL STORYBOARD
@@ -252,6 +126,7 @@
         
         latestLocation = location
         
+        self.routeButtonsView.latestLocation = location
         
         if mFirstLocationUpdated {
             
@@ -354,7 +229,7 @@
     }
     
     func zoomed(zoom: CGFloat) {
-        self.scaleBar.update()
+        
     }
     
     
