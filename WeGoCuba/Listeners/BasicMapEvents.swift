@@ -13,6 +13,8 @@ public class BasicMapEvents : NTMapEventListener {
     var map: NTMapView!
     var stopPosition : NTMapPos!
     
+    // TODO: REVISAR ESTA LOGICA EL MODO DE NAVEGACION DEBERIA ESATR EN UN
+    //       LUGAR CENTRALIZADO
     var navigationMode = false
     
     var previousAngle: CGFloat?
@@ -24,6 +26,8 @@ public class BasicMapEvents : NTMapEventListener {
     
     override public func onMapMoved() {
         
+        // TODO: ESTE TIMER ES NECESARIO MOVERLO O OPTIMIZARLO,
+        //       CREO QUE LA MEJOR OPCION SERIA MOVERLO.
         if navigationMode == true {
             delegateMapIsInactive?.resetTimer()
             delegateMapIsInactive?.startTimer()
