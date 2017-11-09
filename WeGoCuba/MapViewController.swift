@@ -16,25 +16,28 @@
     @IBOutlet var rotationResetButton: RotationResetButton!
     @IBOutlet var routeButtonsView: RouteButtonsView!
     
-    // BASIC MAP DECLARATION
+    // TODO: Verify where need to be. Now is in RouteButtonsView and here
+    @IBOutlet weak var routingChoices: RoutingChoices!
+    
+    // MARK: BASIC MAP DECLARATION
     var projection: NTProjection!
-    var baseMap : BaseMap!
+    var baseMap: BaseMap!
     
-    // LOCATIONS MARKERS
-    var locationMarker : LocationMarker!
+    // MARK: LOCATIONS MARKERS
+    var locationMarker: LocationMarker!
     
-    // BASIC BRUJALA & MAP EVENTS DECLARATION
+    // MARK: BASIC BRUJALA & MAP EVENTS DECLARATION
     var basicEvents: BasicMapEvents!
     
-    // BASIC GPS LOCALIZATION DECLARATION
+    // MARK: BASIC GPS LOCALIZATION DECLARATION
     var manager: CLLocationManager!
     var latestLocation: CLLocation!
-    var isUpdatingLocation : Bool = false
+    var isUpdatingLocation: Bool = false
     
-    // BASIC DECLARATION FOR OFFLINE ROUTE
+    // MARK: BASIC DECLARATION FOR OFFLINE ROUTE
     var progressLabel: ProgressLabel!
     
-    var routeController : RouteController!
+    var routeController: RouteController!
     
     // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -42,11 +45,13 @@
         map.frame = cartoTitleOff
     }
     
+    // MARK: CLASS INSTANCE
     class func newInstance() -> MapViewController {
         let mapVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         return mapVC
     }
     
+    // MARK: CORE LOCATION METHODS
     func startLocationUpdates() {
         manager.startUpdatingLocation()
         manager.startUpdatingHeading()
