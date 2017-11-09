@@ -9,7 +9,7 @@
 import UIKit
 import CircleProgressView
 
-enum ChoiseType {
+enum ChoiseType: String {
     case car
     case bike
     case foot
@@ -17,12 +17,12 @@ enum ChoiseType {
 
 class RoutingChoices: UIView {
     
-    @IBOutlet var circlesProgressViews: [CircleProgressView]!
-    @IBOutlet var choicesButtons: [UIButton]!
+    @IBOutlet fileprivate var circlesProgressViews: [CircleProgressView]!
+    @IBOutlet fileprivate var choicesButtons: [UIButton]!
     
     fileprivate var selectedIndex = 0
     
-    var selectedChoise: ChoiseType? {
+    fileprivate var selectedChoise: ChoiseType? {
         switch selectedIndex {
         case 0: return .car
         case 1: return .bike
@@ -31,10 +31,29 @@ class RoutingChoices: UIView {
         }
     }
     
+    fileprivate var selectedButton: UIButton? {
+        switch selectedIndex {
+        case 0: return choicesButtons[0]
+        case 1: return choicesButtons[1]
+        case 2: return choicesButtons[2]
+        default: return nil
+        }
+    }
+    
+    fileprivate var selectedCirclePV: CircleProgressView? {
+        switch selectedIndex {
+        case 0: return circlesProgressViews[0]
+        case 1: return circlesProgressViews[1]
+        case 2: return circlesProgressViews[2]
+        default: return nil
+        }
+    }
+    
     override func awakeFromNib() {
         resetCirclePV()
         
         highLightChoise(sender: choicesButtons[selectedIndex], circlePV: circlesProgressViews[selectedIndex])
+        DataContainer.sharedInstance.selectedVehicle = selectedChoise
     }
     
     @IBAction func selectChoise(_ sender: UIButton) {
@@ -54,6 +73,8 @@ class RoutingChoices: UIView {
         highLightChoise(sender: sender, circlePV: selectedcirclePV)
         
         selectedIndex = tempIndex
+        
+        DataContainer.sharedInstance.selectedVehicle = selectedChoise
     }
 }
 
@@ -78,3 +99,20 @@ fileprivate extension RoutingChoices {
     }
 }
 
+extension RoutingChoices {
+    
+    func startProgress() {
+        
+        turnOffChoise(sender: selectedButton!, circlePV: selectedCirclePV!)
+    }
+    
+    func finishProgress() {
+        
+        highLightChoise(sender: selectedButton!, circlePV: selectedCirclePV!)
+    }
+    
+    func updateCirclePV(percent: Double) {
+        
+        circlesProgressViews[selectedIndex].setProgress(percent, animated: true)
+    }
+}
