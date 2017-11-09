@@ -21,6 +21,8 @@ class RouteController: NSObject, RouteMapEventDelegate {
     
     var locationMarker: LocationMarker!
     
+    weak var routingStatusDelegate: RoutingStatusDelegate!
+    
     var result: GHResponse?
     
     init(mapView : NTMapView, progressLabel : ProgressLabel) {
@@ -49,7 +51,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
         
     }
     
-    func singleTap() {
+    func finishPTPRoute() {
         finishRoute()
         mapListener.delegate = nil
         map.setMapEventListener(nil)
@@ -60,7 +62,8 @@ class RouteController: NSObject, RouteMapEventDelegate {
         // No action for long tap
     }
     
-    func startRoute() {
+    func startPTPRoute() {
+        actualEventsSave = map.getMapEventListener()
         map.setMapEventListener(mapListener)
         mapListener.delegate = self
         routing = Routing(mapView: self.map, hopper: self.hopper)
@@ -75,7 +78,8 @@ class RouteController: NSObject, RouteMapEventDelegate {
     
     func stopClicked(event: RouteMapEvent) {
         routing.setStopMarker(position: event.clickPosition)
-        showRoute(start: event.startPosition, stop: event.stopPosition)
+        let selectedVehicle = DataContainer.sharedInstance.selectedVehicle
+        showRoute(start: event.startPosition, stop: event.stopPosition, vehicle: selectedVehicle!.rawValue)
     }
     
     func onePointRoute(event: RouteMapEvent) {
@@ -87,25 +91,41 @@ class RouteController: NSObject, RouteMapEventDelegate {
         routing.cleaning()
     }
     
-    func showRoute(start: NTMapPos, stop: NTMapPos) {
+    func showRoute(start: NTMapPos, stop: NTMapPos, vehicle: String) {
         DispatchQueue.global().async {
             
-            let response = self.routing.getResult(startPos: start, stopPos: stop)
+            DispatchQueue.main.async {
+                self.routingStatusDelegate?.updateStatusCV(percent: 0.1)
+            }
+            
+            
+            let response = self.routing.getResult(startPos: start, stopPos: stop, vehicle: vehicle)
+            
             self.result = response.0
             let info: String! = response.1
+            
+            DispatchQueue.main.async {
+                self.routingStatusDelegate?.updateStatusCV(percent: 0.6)
+            }
             
             DispatchQueue.main.async(execute: {
                 if (self.result == nil) {
                     self.progressLabel.complete(message: info)
+                    
+                    self.routingStatusDelegate?.updateStatusCV(percent: 1)
+                    
                     return
                 } else {
                     self.progressLabel.complete(message: self.routing.getMessage(result: self.result!))
+                    
+                    self.routingStatusDelegate?.updateStatusCV(percent: 0.8)
                 }
+                
+                self.routingStatusDelegate?.updateStatusCV(percent: 0.9)
                 
                 let color = NTColor(r: 14, g: 122, b: 254, a: 150)
                 self.routing.show(result: self.result!, lineColor: color!, complete: {
-                    (route: Route) in
-                    
+                    self.routingStatusDelegate?.updateStatusCV(percent: 1)
                 })
             })
         }
@@ -187,7 +207,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
             
             DispatchQueue.global().async {
                 
-                let response = self.routing.getNewResult(startPos: startPosition, stopPos: finalPos)
+                let response = self.routing.getNewResult(startPos: startPosition, stopPos: finalPos, vehicle: DataContainer.sharedInstance.selectedVehicle.rawValue)
                 self.result = response.0
                 let info: String = response.1
                 
@@ -203,15 +223,16 @@ class RouteController: NSObject, RouteMapEventDelegate {
                     let color = NTColor(r: 14, g: 122, b: 254, a: 150)
                     self.routing.show(result: self.result!, lineColor: color!, complete: {_ in })
                     
-                    //MARK: UPDATE MARKER POSITION
+                    // MARK: UPDATE MARKER POSITION
                     // In navigation accurancy is not needed
                     self.locationMarker.showAt(latitude: latitude, longitude: longitude, accuracy: 0)
                     
-                    //MARK: UPDATE VIEW POSITION
+                    // MARK: UPDATE VIEW POSITION
+                    // TODO: REVIEW THIS LOGIC!!!!!
                     if self.isTimerRunning == false {
-                        self.locationMarker.modeNavigation()
+                        self.locationMarker.focus()
                     }
-
+                    
                 })
             }
             
@@ -225,16 +246,17 @@ class RouteController: NSObject, RouteMapEventDelegate {
                 
                 let project = self.getProjection(lat: currentGeoPoint.getY(), lon: currentGeoPoint.getX(), fromLat: prevLocation!.getY(), fromLon: prevLocation!.getX(), toLat: next!.getY(), toLon: next!.getX());
                 
-                //MARK: UPDATE MARKER POSITION
+                // MARK: UPDATE MARKER POSITION
                 // In navigation accurancy is not needed
                 self.locationMarker.showAt(latitude: latitude, longitude: longitude, accuracy: 0)
                 
-                //MARK: UPDATE VIEW POSITION
+                // MARK: UPDATE VIEW POSITION
+                // TODO: REVIEW THIS LOGIC!!!!!
                 if isTimerRunning == false {
-                    locationMarker.modeNavigation()
+                    locationMarker.focus()
                 }
                 
-                //MARK: UPDATING LINE
+                // MARK: UPDATING LINE
                 self.routing.show(points: pointList, startPoint: project, currentPointList: self.currentRoutePoint)
             }
         }
@@ -566,5 +588,8 @@ class RouteController: NSObject, RouteMapEventDelegate {
         }
         return index;
     }
-    
+}
+
+protocol RoutingStatusDelegate: class {
+    func updateStatusCV(percent: Double) -> Void
 }
