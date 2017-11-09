@@ -117,13 +117,18 @@
         progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
     }
     
-    //MARK: LOCATION MANAGER METHOD DELEGATE
-    
+    //MARK: CORE LOCATION MANAGER METHOD DELEGATE
     var mFirstLocationUpdated = true
+    var course: Float = -1
+    var hasCourse: Bool {
+        get { return course != -1 }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let location = locations[0]
+        
+        latestLocation = DataContainer.sharedInstance.latestLocation
         
         if (latestLocation != nil) {
             if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
@@ -135,10 +140,9 @@
         }
         
         latestLocation = location
+        DataContainer.sharedInstance.latestLocation = latestLocation
         
-        self.routeButtonsView.latestLocation = location
-        
-        if mFirstLocationUpdated {
+        guard !mFirstLocationUpdated else {
             
             locationMarker.showUserAt(location: location)
             locationMarker.modeFree()
@@ -146,28 +150,25 @@
             return
         }
         
-        if (navigationMode == false) {
-            locationMarker.showUserAt(location: location)
-            
-        } else if (self.routeController.result != nil) && (navigationMode == true) {
-            
-            self.routeController.updateRoute(location: location)
-            
+        
+        locationMarker.showUserAt(location: location)
+        
+        // rotate marker, depending on marker graphics
+        // "180-course" is ok if it is "arrow down"
+        // additional adjustment is for mapView rotation, image keeps
+        // here correct course even if map is rotated
+        
+        let course = location.course;
+        let float = Float(exactly: course)!
+        
+        self.course = float
+        
+        // Only use course if it's available,
+        // else update heading from didUpdateHeading function
+        if (hasCourse) {
+            let angle = 180 - float - map.getRotation();
+            locationMarker.rotate(rotation: angle)
         }
-    }
-    
-    // MARK: TIMER
-    
-    var timer = Timer()
-    var seconds = 5
-    var isTimerRunning = false
-    
-    func startTimer() {
-        if isTimerRunning == false {
-            runTimer()
-        }
-    }
-    
         
         
         if (self.routeController.result != nil) && (navigationMode == true) {
@@ -184,19 +185,16 @@
             return
         }
         
-        // Use true heading if it is valid.
-        
-        // TODO: I DONT KNOW HOW TO ROTATE THE LOCATION MARKER
-        let heading = ((newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading)
-        
-        locationMarker.course = Float(heading)
-        // TODO calculate heading to see whether the user should turn around or is facing the correct direction
-        
+        // Only use heading if course isn't available.
+        if (!hasCourse) {
+            // Use true heading if it is valid.
+            let heading = ((newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading)
+            let angle = -Float(exactly: heading)!
+            locationMarker.rotate(rotation: angle)
+        }
     }
     
-    // MARK: END LOCATION MANAGER
-    // ROTATE BUTTON
-    
+    // MARK: ROTATE BUTTON
     @IBAction func rotate(_ sender: UITapGestureRecognizer) {
         isRotationInProgress = true
         map.setRotation(0, durationSeconds: rotationDuration)
