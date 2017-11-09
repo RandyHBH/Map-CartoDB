@@ -10,7 +10,7 @@
  import CoreLocation
  
  
- class MapViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, MapIsInactiveDelegate {
+ class MapViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, PTPButtonDelegate {
     
     @IBOutlet var map: NTMapView!
     @IBOutlet var rotationResetButton: RotationResetButton!
@@ -39,7 +39,15 @@
     
     var routeController: RouteController!
     
-    // ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
+    // MARK: TIMER
+    var timer = Timer()
+    var seconds = 5
+    var isTimerRunning = false
+    
+    // MARK:
+    var active = true
+    
+    // MARK: ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         let cartoTitleOff = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 50)
         map.frame = cartoTitleOff
@@ -66,42 +74,39 @@
         isUpdatingLocation = false
     }
     
-    // MARK: ROUTE BUTTON DELEGATE
+    // MARK: BASIC MAP EVENTS DELEGATE
+    func stopPositionSet(event: RouteMapEvent) {
+        
+        self.routeController?.onePointRoute(event: event)
+        
+        routeButtonsView.showHideRouteButton()
+        showHideNavigationBar()
+    }
     
+    func stopPositionUnSet() {
+        
+        self.basicEvents?.stopPosition = nil
+        self.routeController?.finishRoute()
+        self.locationMarker?.modeFree()
+        
+        routeButtonsView.showHideRouteButton()
+        showHideNavigationBar()
+    }
+    
+    func longTap(){
+        // NO RESPONDER A LOS LONG-TAPS
+    }
+    
+    // MARK: PTPBUTTON DELEGATE
+    func ptpButtonTapped() {
+        showHideNavigationBar()
+    }
+    
+    // MARK: ROUTE BUTTON DELEGATE
     var navigationMode = false
     var navigationInProgress = false
     
-    func routeButtonTapped() {
-//        
-//        if ( basicEvents.stopPosition != nil) && (navigationMode == false) && (latestLocation != nil) && (navigationInProgress != true) {
-//            
-//            let latitude = Double(latestLocation.coordinate.latitude)
-//            let longitude = Double(latestLocation.coordinate.longitude)
-//            
-//            let startPosition = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
-//            
-//            let stopPosition = basicEvents.stopPosition
-//            
-//            self.routeController.showRoute(start: startPosition!, stop: stopPosition!)
-//            
-//            self.navigationMode = true
-//            self.navigationInProgress = true
-//            basicEvents.navigationMode = true
-//            self.locationMarker.modeNavigation()
-//            
-//        } else if (navigationInProgress == true) {
-//            
-//            stopPositionUnSet()
-//            basicEvents.stopPosition = nil
-//        } else {
-//            
-//            navigationMode = false
-//            self.progressLabel.complete(message: "You need to set a final position")
-//        }
-        
-    }
-    
-    // TODO : NECESITO HACERLO EL DISEÑO EN EL STORYBOARD
+    // TODO: NECESITO HACERLO EL DISEÑO EN EL STORYBOARD
     func layoutProgressLabel() {
         
         let w: CGFloat = view.frame.width
@@ -163,32 +168,13 @@
         }
     }
     
-    func runTimer() {
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
         
-        isTimerRunning = true
-        routeController.isTimerRunning = true
-    }
-    
-    func updateTimer() {
-        if seconds < 1 {
-            timer.invalidate()
-            if navigationInProgress {
-                locationMarker.modeNavigation()
-            }
-            routeController.isTimerRunning = false
-        } else {
+        if (self.routeController.result != nil) && (navigationMode == true) {
             
-            seconds -= 1
+            self.routeController.updateRoute(location: location)
+            
         }
-    }
-    
-    func resetTimer() {
-        timer.invalidate()
-        seconds = 5
-        
-        isTimerRunning = false
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
