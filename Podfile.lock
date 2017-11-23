@@ -1,29 +1,34 @@
 PODS:
   - CartoMobileSDK (4.1.0)
-  - CircleProgressView (1.1.3)
+  - DropDown (2)
   - Material (2.10.2):
     - Material/Core (= 2.10.2)
   - Material/Core (2.10.2)
+  - NVActivityIndicatorView (3.7.0):
+    - NVActivityIndicatorView/Presenter (= 3.7.0)
+  - NVActivityIndicatorView/Presenter (3.7.0)
   - SideMenu (2.3.4)
   - SnapKit (3.2.0)
   - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
   - CartoMobileSDK (= 4.1.0)
-  - CircleProgressView (~> 1.0)
+  - DropDown
   - Material (= 2.10.2)
+  - NVActivityIndicatorView (~> 3.7.0)
   - SideMenu (~> 2.3.4)
   - SnapKit (~> 3)
   - XLPagerTabStrip (~> 7.0)
 
 SPEC CHECKSUMS:
   CartoMobileSDK: 8203b31d289e85b93cf82f3bd1da7e162f184db2
-  CircleProgressView: 66e4d663a2bc7a9086e37b518868be923cd0a23a
+  DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
   Material: 8265a77332acfb7872a7fd0f4f2023f080d25d1f
+  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   SideMenu: 2ea1a015d14ffb96110af43fe3232d995943e726
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 52c6ca370e92f9d076d962b4499c3e4441f06cc9
+PODFILE CHECKSUM: a6fba95233a7d9c33aa45d585ad79091ce9f1169
 
 COCOAPODS: 1.3.1
