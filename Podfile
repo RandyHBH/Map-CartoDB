@@ -10,6 +10,7 @@ target 'WeGoCuba' do
   pod 'SideMenu', '~> 2.3.4'
   pod 'SnapKit', '~> 3'
   pod 'XLPagerTabStrip', '~> 7.0'
+  pod 'DropDown'
   pod 'NVActivityIndicatorView', '~> 3.7.0'
 
 end
