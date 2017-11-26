@@ -174,7 +174,6 @@ class RouteButtonsView: UIView {
         case .ROUTE_CALCULATED:
             start = map.getOptions().getBaseProjection().fromWgs84(start)
             end = endLocation
-            print(end.description())
 
         default:
             break
@@ -198,8 +197,7 @@ class RouteButtonsView: UIView {
                 
                 route.startPos = self.map.getOptions().getBaseProjection().toWgs84(start)
                 route.endPos = self.map.getOptions().getBaseProjection().toWgs84(stop)
-                print(route.startPos!.description())
-                print(route.endPos!.description())
+
                 self.routeInfo = route
                 
                 self.infoBar.setUpInfo(routeInfo: self.routeInfo!, map: self.map)
@@ -213,8 +211,6 @@ class RouteButtonsView: UIView {
                     self.hideGoNavigationButton(state: false)
                     self.hidePTPContainer(state: true)
                     self.ptpDelegate?.ptpButtonTapped(first: false, second: true)
-//                    self.routeDelegate?.routeButtonTapped(state: false)
-//                    self.hideRoutePointsSelectionView(true)
                     
                 default:
                     self.hideGoNavigationButton()
@@ -264,7 +260,6 @@ class RouteButtonsView: UIView {
         self.map = map
         self.routeController = routeController
         self.basicEvents = basicEvents
-        //        self.basicEvents?.delegateRoutePositionMapEvents = self
         self.basicEvents?.delegate = self
         self.routingChoices.delegate = self
         self.infoBar.delegate = self
@@ -274,7 +269,6 @@ class RouteButtonsView: UIView {
 extension RouteButtonsView {
     
     func hideRouteButton(state: Bool = true) {
-        
         DispatchQueue.main.async {
             self.routeContainer.isHidden = state
             self.layoutIfNeeded()
@@ -282,7 +276,6 @@ extension RouteButtonsView {
     }
     
     func hideGoNavigationButton(state: Bool = true) {
-        
         DispatchQueue.main.async {
             self.goNavigationContainer.isHidden = state
             self.layoutIfNeeded()
@@ -290,21 +283,18 @@ extension RouteButtonsView {
     }
     
     func hidePTPContainer(state: Bool = false) {
-        
         DispatchQueue.main.async {
             self.ptpContainer.isHidden = state
         }
     }
     
     func hideInfoBar(state: Bool = true) {
-        
         DispatchQueue.main.async {
             self.infoBar.isHidden = state
         }
     }
     
     func switchWaterMarkState(active: Bool = false) {
-        
         self.logoWaterMark.image = active ? UIImage(named: "water_mark_active") : UIImage(named: "water_mark")
     }
     
@@ -315,7 +305,6 @@ extension RouteButtonsView {
     }
     
     func hideRoutePointsSelectionView(_ state: Bool) {
-        
         DispatchQueue.main.async {
             self.routingPositionSelect.isHidden = state
         }
@@ -426,8 +415,6 @@ extension RouteButtonsView: RoutingChoicesDelegate {
     }
     
     func cleaning() {
-        
-        
         DispatchQueue.main.async {
             
             self.setImageToPTPButton()

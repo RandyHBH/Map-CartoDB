@@ -157,8 +157,7 @@ class Routing {
             return (nil, routeInfo)
         }
         
-        return (result,"")
-        
+        return (result,"") 
     }
     
     func createPolyLine(result: GHResponse, color: NTColor) -> [NTLine] {
@@ -187,13 +186,11 @@ class Routing {
     
     func show(points: PointList, startPoint: NTMapPos, currentPointList : Int) {
         routeDataSource?.clear()
-//        startMarker?.setVisible(true)
         
         let lines = updatePolyLine(points: points, startPoint: startPoint, currentPointList: currentPointList)
         
         routeDataSource?.add(lines[0])
         routeDataSource?.add(lines[1])
-        
     }
     
     func updatePolyLine(points: PointList, startPoint: NTMapPos, currentPointList : Int) -> [NTLine] {
@@ -221,12 +218,10 @@ class Routing {
         }
         
         return [NTLine(poses: linePoses, style: builder?.buildStyle()), NTLine(poses: linePoses, style: builderArrow?.buildStyle())]
-        
     }
 
     func setStartMarker(position: NTMapPos) {
-//        routeDataSource?.clear()
-//        stopMarker?.setVisible(false)
+
         startMarker?.setPos(position)
         startMarker?.setVisible(true)
     }

@@ -42,7 +42,7 @@ class DataContainer {
     
     private init() { }
     
-    var mapModel: MapModelController = MapModelController()
+    var mapModel: MapModel = MapModel()
     
     var latestLocation: CLLocation?
 

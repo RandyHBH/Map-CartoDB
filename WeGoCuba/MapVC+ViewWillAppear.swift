@@ -30,7 +30,6 @@ extension MapViewController {
         setupStatusBarColor()
         
         routeButtonsView.setUpView(routeController: routeController, basicEvents: basicEvents, map: map)
-        
     }
     
     private func initMap() {

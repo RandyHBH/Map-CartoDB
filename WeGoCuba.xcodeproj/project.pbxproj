@@ -28,7 +28,6 @@
 		8B3FBDBD1FACCCB3002EA3DB /* RouteButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */; };
 		8B419A911F83C1430036FBC2 /* graph-data.osm-gh in Resources */ = {isa = PBXBuildFile; fileRef = 8B419A901F83C1430036FBC2 /* graph-data.osm-gh */; };
 		8B419A9B1F83E3090036FBC2 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B419A9A1F83E3090036FBC2 /* Routing.swift */; };
-		8B41E2BF1F7D78E7003BC7EA /* RouteMapEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41E2BE1F7D78E7003BC7EA /* RouteMapEventListener.swift */; };
 		8B42D52E1F7DCF71002C93F0 /* ScaleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42D52D1F7DCF71002C93F0 /* ScaleBar.swift */; };
 		8B42D5311F7DD05D002C93F0 /* LocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42D5301F7DD05D002C93F0 /* LocationExtensions.swift */; };
 		8B6416651F61977300D5184D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6416641F61977300D5184D /* libc++.tbd */; };
@@ -143,7 +142,6 @@
 		8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteButtonsView.swift; path = Buttons/RouteButtonsView.swift; sourceTree = "<group>"; };
 		8B419A901F83C1430036FBC2 /* graph-data.osm-gh */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "graph-data.osm-gh"; path = "libs/graphhopper-ios/graphhopper/graph-data.osm-gh"; sourceTree = SOURCE_ROOT; };
 		8B419A9A1F83E3090036FBC2 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
-		8B41E2BE1F7D78E7003BC7EA /* RouteMapEventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteMapEventListener.swift; path = Listeners/RouteMapEventListener.swift; sourceTree = "<group>"; };
 		8B42D52D1F7DCF71002C93F0 /* ScaleBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleBar.swift; sourceTree = "<group>"; };
 		8B42D5301F7DD05D002C93F0 /* LocationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationExtensions.swift; path = WeGoCuba/LocationExtensions.swift; sourceTree = SOURCE_ROOT; };
 		8B6416641F61977300D5184D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -346,12 +344,11 @@
 			isa = PBXGroup;
 			children = (
 				8B419A9A1F83E3090036FBC2 /* Routing.swift */,
-				8B41E2BE1F7D78E7003BC7EA /* RouteMapEventListener.swift */,
 			);
 			name = Route;
 			sourceTree = "<group>";
 		};
-		8B58A58E1F68754500F15888 /* Controller */ = {
+		8B58A58E1F68754500F15888 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
 				8B9EC4E31FBA855F00FC1280 /* Navigation */,
@@ -359,7 +356,7 @@
 				8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */,
 				8B27B68D1F8C5748009F4722 /* RouteController.swift */,
 			);
-			name = Controller;
+			name = Sections;
 			sourceTree = "<group>";
 		};
 		8B58A58F1F6875EA00F15888 /* Components */ = {
@@ -459,7 +456,7 @@
 				8B9A00181F55A42900330631 /* LaunchScreen.storyboard */,
 				8BEC4E951FC272B90078601D /* Model */,
 				8BB9CB571FB110620016E3AD /* Singleton */,
-				8B58A58E1F68754500F15888 /* Controller */,
+				8B58A58E1F68754500F15888 /* Sections */,
 				8BDCBAB11FA82FA2003D9241 /* PageMenu */,
 				8B5973A11FA4ED2B00AE5FB2 /* Left Menu */,
 				8B42D52F1F7DD030002C93F0 /* GPS Location */,
@@ -819,7 +816,6 @@
 				8B273CC01F61C5C1008FA023 /* BasicMapEvents.swift in Sources */,
 				8B0E8B7A1F788E1400BD08D1 /* Extensions.swift in Sources */,
 				8B3FBDB91FACC372002EA3DB /* MapVC+ViewDidLoad.swift in Sources */,
-				8B41E2BF1F7D78E7003BC7EA /* RouteMapEventListener.swift in Sources */,
 				8B3FBDBB1FACC681002EA3DB /* MapVC+ViewWillAppear.swift in Sources */,
 				8B7D1C9F1FA8FADF007F2E8A /* SearchRecentsViewController.swift in Sources */,
 				8BE3211B1FB4C31500D65839 /* RoutingPositionsSelect.swift in Sources */,

@@ -41,7 +41,6 @@ class LocationMarker: NSObject {
     var course: Float!
     
     var userMarker: NTMarker!
-//    var position: NTMapPos!
     var navigationPointer: NTMarker!
     var accuracyMarker: NTPolygon!
     

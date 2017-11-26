@@ -15,7 +15,6 @@
     var map: NTMapView!
     @IBOutlet var mapContainer: UIView!
     
-    
     @IBOutlet var rotationResetButton: RotationResetButton!
     @IBOutlet weak var leftMenuButton: UIButton!
     
@@ -27,7 +26,7 @@
     
     @IBOutlet weak var infoBar: InfoBar!
     
-    var mapModel: MapModelController = DataContainer.instance.mapModel
+    var mapModel: MapModel = DataContainer.instance.mapModel
     
     var showPtpContainer = false
     
@@ -164,7 +163,6 @@
             let heading = ((newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading)
             
             let angle = -Float(heading) - map.getRotation();
-            //        print("Angle: " + angle.description)
             locationMarker.rotate(rotation: angle)
         }
     }

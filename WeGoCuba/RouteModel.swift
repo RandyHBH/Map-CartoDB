@@ -128,6 +128,7 @@ enum UnitMesure: String {
     case km = "km/m"
     case milla = "mi/ft"
 }
+
 enum DistanceType: String {
     case km = "km"
     case m = "m"

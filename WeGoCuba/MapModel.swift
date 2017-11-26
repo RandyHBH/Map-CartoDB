@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MapModelController {
+class MapModel {
     
     var map: NTMapView!
     var projection: NTProjection!

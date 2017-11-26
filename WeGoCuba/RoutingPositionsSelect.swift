@@ -122,11 +122,6 @@ class RoutingPositionsSelect: UIView {
     }
 }
 
-extension RoutingPositionsSelect {
-    
-    
-}
-
 protocol RoutingPositionsSelectDelegate: class {
     
     func startPointTypeChange(selected: String)

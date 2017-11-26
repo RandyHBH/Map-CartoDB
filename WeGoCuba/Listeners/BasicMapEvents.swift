@@ -17,8 +17,8 @@ public class BasicMapEvents : NTMapEventListener {
     var previousZoom: CGFloat?
     
     var delegate: RouteMapEventDelegate?
-//    var delegateRoutePositionMapEvents : RoutePositionEventsDelgate?
     var delegateRotate: RotationDelegate?
+    
     var delegateMapIsInactive: MapIsInactiveDelegate?
     
     override public func onMapMoved() {

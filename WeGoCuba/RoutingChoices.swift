@@ -96,7 +96,6 @@ class RoutingChoices: UIView {
     @IBAction func downButtonTapped(_ sender: UIButton) {
         
         rotateDownButton()
-        print("Down Button is: " + isDownButtonActive.description)
         delegate?.dowButtonPressed(state: isDownButtonActive)
     }
     
@@ -131,12 +130,10 @@ fileprivate extension RoutingChoices {
     }
     
     func highLightChoise(sender: UIButton, containerView: UIView) -> Void {
-//        sender.imageView?.tintColor = Colors.appBlue
         containerView.backgroundColor = UIColor.lightGray
     }
     
     func turnOffChoise(sender: UIButton, containerView: UIView) -> Void {
-//        sender.imageView?.tintColor = .white
         containerView.backgroundColor = UIColor.clear
     }
 }
