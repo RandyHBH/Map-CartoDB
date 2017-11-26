@@ -789,11 +789,52 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubG-pW-tkt" customClass="ShowStopMarker" customModule="WeGoCuba" customModuleProvider="target">
+                                <rect key="frame" x="214" y="150" width="90" height="40"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUx-hx-j3Q">
+                                        <rect key="frame" x="0.0" y="0.0" width="85" height="40"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="ic_destination" translatesAutoresizingMaskIntoConstraints="NO" id="JHh-BL-hdG">
+                                                <rect key="frame" x="0.0" y="0.0" width="37" height="40"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <rect key="contentStretch" x="0.10000000000000001" y="0.14999999999999999" width="1" height="1"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999 m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEG-i2-E0K">
+                                                <rect key="frame" x="37" y="0.0" width="48" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lUx-hx-j3Q" firstAttribute="height" secondItem="ubG-pW-tkt" secondAttribute="height" id="LVP-nn-KKU"/>
+                                    <constraint firstAttribute="width" constant="90" id="PIA-20-qkj"/>
+                                    <constraint firstAttribute="trailing" secondItem="lUx-hx-j3Q" secondAttribute="trailing" constant="5" id="RoI-wh-Wgr"/>
+                                    <constraint firstAttribute="height" priority="999" constant="40" id="ezf-uK-fje"/>
+                                    <constraint firstItem="lUx-hx-j3Q" firstAttribute="leading" secondItem="ubG-pW-tkt" secondAttribute="leading" id="hND-cm-qPL"/>
+                                    <constraint firstItem="lUx-hx-j3Q" firstAttribute="centerY" secondItem="ubG-pW-tkt" secondAttribute="centerY" id="rZ4-ae-Idf"/>
+                                    <constraint firstAttribute="bottom" secondItem="lUx-hx-j3Q" secondAttribute="bottom" id="ttV-wn-1Nj"/>
+                                    <constraint firstItem="lUx-hx-j3Q" firstAttribute="top" secondItem="ubG-pW-tkt" secondAttribute="top" id="yi6-fc-jGg"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="distanceToMarker" destination="uEG-i2-E0K" id="hgl-l0-ETq"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Xh6-g3-XDh" secondAttribute="trailing" id="2oK-uh-IEE"/>
+                            <constraint firstItem="ubG-pW-tkt" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5PI-qE-IYo"/>
                             <constraint firstItem="HQz-7A-rJ4" firstAttribute="top" secondItem="mz0-Kc-b2c" secondAttribute="bottom" priority="999" constant="5" id="8Rr-VU-DSF"/>
                             <constraint firstItem="KzM-4q-s8i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="92W-d9-Vpu"/>
                             <constraint firstItem="KzM-4q-s8i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A5d-XL-38c"/>
@@ -818,6 +859,7 @@
                             <constraint firstItem="Ezu-AQ-9bI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rpA-FW-Yzb"/>
                             <constraint firstAttribute="bottomMargin" secondItem="HQz-7A-rJ4" secondAttribute="bottom" constant="10" id="tta-R4-3FL"/>
                             <constraint firstItem="9w1-UE-bqK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ugW-cC-q7B"/>
+                            <constraint firstItem="ubG-pW-tkt" firstAttribute="top" secondItem="Ezu-AQ-9bI" secondAttribute="bottom" constant="10" id="v2s-gp-9Jk"/>
                             <constraint firstItem="Xh6-g3-XDh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wdh-On-WHb"/>
                             <constraint firstAttribute="trailing" secondItem="Ezu-AQ-9bI" secondAttribute="trailing" id="ziJ-5t-T7p"/>
                         </constraints>
@@ -2043,6 +2085,7 @@
         <image name="ic_car_white" width="48" height="48"/>
         <image name="ic_clear_route" width="72" height="72"/>
         <image name="ic_complete_route" width="72" height="72"/>
+        <image name="ic_destination" width="72" height="72"/>
         <image name="ic_down" width="48" height="48"/>
         <image name="ic_end_point" width="48" height="48"/>
         <image name="ic_go_navigation" width="12" height="12"/>
