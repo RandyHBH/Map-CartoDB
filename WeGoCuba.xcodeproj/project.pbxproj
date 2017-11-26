@@ -19,6 +19,7 @@
 		8B273CBE1F61C1A6008FA023 /* AddMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */; };
 		8B273CC01F61C5C1008FA023 /* BasicMapEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */; };
 		8B27B68E1F8C5748009F4722 /* RouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B27B68D1F8C5748009F4722 /* RouteController.swift */; };
+		8B2E3F411FCB309900D056AC /* ShowStopMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */; };
 		8B3E39F41FA26A0D006C0CD9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */; };
 		8B3E39F61FA2C750006C0CD9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */; };
 		8B3E39FB1FA2D347006C0CD9 /* DRHTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E39F91FA2D347006C0CD9 /* DRHTableViewCell.swift */; };
@@ -133,6 +134,7 @@
 		8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMarkers.swift; path = Marcadores/AddMarkers.swift; sourceTree = "<group>"; };
 		8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicMapEvents.swift; path = Listeners/BasicMapEvents.swift; sourceTree = "<group>"; };
 		8B27B68D1F8C5748009F4722 /* RouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteController.swift; sourceTree = "<group>"; };
+		8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowStopMarker.swift; sourceTree = "<group>"; };
 		8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		8B3E39F91FA2D347006C0CD9 /* DRHTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DRHTableViewCell.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 		8B7F79D01FC33C1600E168B5 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
+				8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */,
 				8BD08F9B1FAEC8870073BE72 /* RoutingChoices.swift */,
 				8BE3211A1FB4C31500D65839 /* RoutingPositionsSelect.swift */,
 				8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */,
@@ -826,6 +829,7 @@
 				8BDCBABA1FA83E03003D9241 /* SearchAddressDataModel.swift in Sources */,
 				8B42D52E1F7DCF71002C93F0 /* ScaleBar.swift in Sources */,
 				8B9A00121F55A42900330631 /* MapViewController.swift in Sources */,
+				8B2E3F411FCB309900D056AC /* ShowStopMarker.swift in Sources */,
 				8BAC69B41FB8C4D20088D335 /* NotificationExtension.swift in Sources */,
 				8BD95EFD1FBD535200F3C07F /* RouteModel.swift in Sources */,
 				8B9A00101F55A42900330631 /* AppDelegate.swift in Sources */,

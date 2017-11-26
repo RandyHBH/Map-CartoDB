@@ -9,13 +9,21 @@
 import UIKit
 
 class ShowStopMarker: UIView {
+    
+    var delegate: ShowStopMarkerDelegate?
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet weak var distanceToMarker: UILabel!
+    
+    override func awakeFromNib() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(showStopMarkerTapped(_:)))
+        addGestureRecognizer(recognizer)
     }
-    */
+    
+    func updateDistance(distance: String) -> Void {
+        distanceToMarker.text = distance
+    }
+    
+    func showStopMarkerTapped(_ sender: UITapGestureRecognizer) {
+    }
 
 }
