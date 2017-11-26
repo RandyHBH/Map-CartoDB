@@ -37,6 +37,10 @@ public class BasicMapEvents : NTMapEventListener {
         if DataContainer.instance.latestLocation != nil {
             delegate?.hideLocationButton()
         }
+        
+        if stopPosition != nil {
+            delegate?.showStopMarkerPisition()
+        }
     }
     
     override public func onMapClicked(_ mapClickInfo: NTMapClickInfo!) {
@@ -164,6 +168,8 @@ protocol RouteMapEventDelegate {
     func longTap()
     
     func hideLocationButton()
+    
+    func showStopMarkerPisition()
 }
 
 class RouteMapEvent : NSObject {
