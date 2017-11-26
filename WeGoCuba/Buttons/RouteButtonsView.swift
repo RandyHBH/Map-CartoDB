@@ -412,6 +412,24 @@ extension RouteButtonsView: RouteMapEventDelegate {
     }
     
     func showStopMarkerPosition() {
+        let stopMarker = routeController?.getStopMarker()
+        print(stopMarker!.getBounds().getCenter().description)
+        
+        let screenWidth: Float = Float(map.frame.width) * 2
+        let screenHeight: Float = Float(map.frame.height - 50) * 2
+        
+        let minScreenPos: NTScreenPos = NTScreenPos(x: 0, y: 0)
+        let maxScreenPos: NTScreenPos = NTScreenPos(x: screenWidth, y: screenHeight)
+        let screenBounds = NTScreenBounds(min: minScreenPos, max: maxScreenPos)
+        
+        let contain = screenBounds!.contains(map.map(toScreen: stopMarker!.getBounds().getCenter()))
+        
+        if stopMarkerView.isHidden != contain {
+            DispatchQueue.main.async {
+                self.stopMarkerView.isHidden = contain
+            }
+        }
+    }
 }
 }
 
