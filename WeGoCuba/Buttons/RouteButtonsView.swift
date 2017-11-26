@@ -40,6 +40,8 @@ class RouteButtonsView: UIView {
     @IBOutlet weak var routingChoices: RoutingChoices!
     @IBOutlet weak var routingPositionSelect: RoutingPositionsSelect!
     
+    @IBOutlet weak var stopMarkerView: ShowStopMarker!
+    
     var map: NTMapView!
     
     var routeController: RouteController?

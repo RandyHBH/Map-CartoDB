@@ -767,6 +767,7 @@
                                             <outlet property="routingChoices" destination="lOs-2z-s6i" id="TeV-4V-UrN"/>
                                             <outlet property="routingPositionSelect" destination="fQ9-Ob-Dpc" id="hgv-2D-M3N"/>
                                             <outlet property="searchButton" destination="7HZ-rY-Vse" id="vcI-Cv-cWE"/>
+                                            <outlet property="stopMarkerView" destination="ubG-pW-tkt" id="iVI-az-OqZ"/>
                                         </connections>
                                     </view>
                                 </subviews>
