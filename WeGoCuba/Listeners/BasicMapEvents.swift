@@ -39,7 +39,7 @@ public class BasicMapEvents : NTMapEventListener {
         }
         
         if stopPosition != nil {
-            delegate?.showStopMarkerPisition()
+            delegate?.showStopMarkerPosition()
         }
     }
     
@@ -169,7 +169,7 @@ protocol RouteMapEventDelegate {
     
     func hideLocationButton()
     
-    func showStopMarkerPisition()
+    func showStopMarkerPosition()
 }
 
 class RouteMapEvent : NSObject {

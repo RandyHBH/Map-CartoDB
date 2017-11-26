@@ -404,6 +404,9 @@ extension RouteButtonsView: RouteMapEventDelegate {
             }
         }
     }
+    
+    func showStopMarkerPosition() {
+}
 }
 
 extension RouteButtonsView: RoutingChoicesDelegate {
