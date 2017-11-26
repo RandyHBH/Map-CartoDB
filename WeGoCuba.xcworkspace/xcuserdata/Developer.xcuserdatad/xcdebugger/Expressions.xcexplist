@@ -6,7 +6,30 @@
          contextName = "SwitchButton.isOnline() -&gt; Bool:SwitchButton.swift">
       </ContextState>
       <ContextState
+         contextName = "NavigationViewController.viewDidLoad() -&gt; ():NavigationViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NavigationClient.routeController.setter:NavigationClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BasicMapEvents.startPosition.getter:BasicMapEvents.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Route.bounds.setter:RouteModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "InfoBar.routeModeTapped(AnyObject) -&gt; ():InfoBar.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "routeInfo!.bearing">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.routeButtonTapped() -&gt; ():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NavigationViewController.showRouteButtonTapped() -&gt; ():NavigationViewController.swift">
       </ContextState>
       <ContextState
          contextName = "LocationMarker.showUserAt(location : CLLocation) -&gt; ():LocationMarker.swift">
@@ -16,6 +39,45 @@
          <PersistentStrings>
             <PersistentString
                value = "request.getHints().has(with: &quot;ch.disable&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NavigationClient.locationManager(CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ():NavigationClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Route.bounds.getter:RouteModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds.getCenter()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NavigationClient.init(map : NTMapView, marker : LocationMarker) -&gt; NavigationClient:NavigationClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NavigationClient.locationManager(CLLocationManager, didUpdateHeading : CLHeading) -&gt; ():NavigationClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "RoutingChoices.rotateDownButton() -&gt; ():RoutingChoices.swift">
+      </ContextState>
+      <ContextState
+         contextName = "RouteButtonsView.(cleaning() -&gt; ()).(closure #1):RouteButtonsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "AppState.instance.routeState">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NavigationClient.routeController.getter:NavigationClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BasicMapEvents.onMapClicked(NTMapClickInfo!) -&gt; ():BasicMapEvents.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "AppState.instance.mapState">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

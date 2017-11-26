@@ -11,6 +11,7 @@ target 'WeGoCuba' do
   pod 'SnapKit', '~> 3'
   pod 'XLPagerTabStrip', '~> 7.0'
   pod 'DropDown'
+  #pod "PromiseKit", "~> 4.4"
   pod 'NVActivityIndicatorView', '~> 3.7.0'
 
 end

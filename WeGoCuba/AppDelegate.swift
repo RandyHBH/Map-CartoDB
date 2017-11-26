@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DropDown
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,11 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NTMapView.registerLicense(License);
         
+        DropDown.startListeningToKeyboard()
+        
         // StatusBar BackgroundColor in all App
 //        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
 //        let statusBar = statWindow.subviews[0] as UIView
 //        let statusBarColor = #colorLiteral(red: 0.07435884327, green: 0.2261409163, blue: 0.5749377012, alpha: 1).withAlphaComponent(0.85)
 //        statusBar.backgroundColor = Colors.appBlue
+        
         
         return true
     }

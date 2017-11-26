@@ -32,20 +32,22 @@ class LocationMarker: NSObject {
     
     //MARK: LOCATION METHODS
     
+    var isNavigationMode = false
+    var navigationModeFirstTime = true
+    
     var freeMode: Bool = true
     var speed: Double!
     var rotation: Float!
     var course: Float!
     
     var userMarker: NTMarker!
-    var position: NTMapPos!
+//    var position: NTMapPos!
+    var navigationPointer: NTMarker!
     var accuracyMarker: NTPolygon!
-    var builderUserMarkerStyle : NTMarkerStyleBuilder?
     
     func showUserAt(location: CLLocation) {
         
         speed = location.speed
-        rotation = 0 - Float(location.course)  - self.map.getRotation()
         
         let latitude = Double(location.coordinate.latitude)
         let longitude = Double(location.coordinate.longitude)
@@ -56,7 +58,23 @@ class LocationMarker: NSObject {
     
     func showAt(latitude: Double, longitude: Double, accuracy: Float) {
         
-        position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+        let position = projection?.fromWgs84(NTMapPos(x: longitude, y: latitude))
+        
+        if (isNavigationMode == true) {
+            if (navigationModeFirstTime) {
+                
+                source.remove(userMarker)
+                source.remove(accuracyMarker)
+                
+                source.add(navigationPointer)
+                
+                navigationModeFirstTime = false
+            }
+            
+            navigationPointer.setPos(position)
+            
+            return
+        }
         
         let builder = NTPolygonStyleBuilder()
         builder?.setColor(Colors.lightTransparentAppleBlue.toNTColor())
@@ -78,21 +96,55 @@ class LocationMarker: NSObject {
         }
         
         if (userMarker == nil) {
-            builderUserMarkerStyle = NTMarkerStyleBuilder()
+            let builder = NTMarkerStyleBuilder()
             self.markerImage = UIImage(named: "ic_navigation_white")
-            builderUserMarkerStyle?.setBitmap(NTBitmapUtils.createBitmap(from: markerImage))
-            builderUserMarkerStyle?.setColor(Colors.appleBlue.toNTColor())
-            builderUserMarkerStyle?.setAnchorPointX(0)
-            builderUserMarkerStyle?.setAnchorPointY(0)
-            builderUserMarkerStyle?.setSize(25.0)
+            builder?.setBitmap(NTBitmapUtils.createBitmap(from: markerImage))
+            builder?.setColor(Colors.appleBlue.toNTColor())
+            builder?.setAnchorPointX(0, anchorPointY: 0)
+            builder?.setSize(25.0)
             
-            userMarker = NTMarker(pos: position, style: builderUserMarkerStyle?.buildStyle())
+            userMarker = NTMarker(pos: position, style: builder?.buildStyle())
             source.add(userMarker)
         }
+        if (navigationPointer == nil) {
+            let builder = NTMarkerStyleBuilder()
+            self.markerImage = UIImage(named: "ic_navigation_white")
+            builder?.setBitmap(NTBitmapUtils.createBitmap(from: markerImage))
+            builder?.setColor(Colors.appleBlue.toNTColor())
+            builder?.setSize(25.0)
+            builder?.setAnchorPointX(0, anchorPointY: 0)
+            builder?.setOrientationMode(.BILLBOARD_ORIENTATION_FACE_CAMERA_GROUND)
+            navigationPointer = NTMarker(pos: position, style: builder?.buildStyle())
+        }
         
-        
-        userMarker.setRotation(rotation)
         userMarker.setPos(position)
+        navigationPointer.setPos(position)
+    }
+    
+    func rotate(rotation: Float) {
+        if (isNavigationMode == true) {
+            navigationPointer.setRotation(rotation)
+            return
+        }
+        userMarker.setRotation(rotation)
+    }
+    
+    func focus() {
+        map.setTilt(30, durationSeconds: 0)
+        map.setFocus(navigationPointer.getBounds().getCenter(), durationSeconds: 0)
+    }
+    
+    func autoZoom(speed : Double, position : NTMapPos) {
+        let speedKmH = speed * 3.6
+        if (speedKmH >= 80) {
+            map.setZoom(17, targetPos: position, durationSeconds: 2)
+        } else if (speedKmH >= 70) {
+            map.setZoom(18, targetPos: position, durationSeconds: 2)
+        } else if (speedKmH >= 50) {
+            map.setZoom(19, targetPos: position, durationSeconds: 2)
+        } else {
+            map.setZoom(19, targetPos: position, durationSeconds: 2)
+        }
     }
     
     func NTBitmapFromString(path: String) -> NTBitmap {
@@ -123,32 +175,5 @@ class LocationMarker: NSObject {
         }
         
         return points!
-    }
-    
-    func modeNavigation() {
-        
-        autoZoom(speed: speed, position: position)
-        map.setTilt(30, durationSeconds: 1)
-        map.setFocus(position, durationSeconds: 1)
-        map.setRotation(-course, targetPos: position, durationSeconds: 1)
-    }
-    
-    func modeFree() {
-        map.setTilt(90, durationSeconds: 1)
-        map.setFocus(position, durationSeconds: 1)
-    }
-    
-    
-    func autoZoom(speed : Double, position : NTMapPos) {
-        let speedKmH = speed * 3.6
-        if (speedKmH >= 80) {
-            map.setZoom(17, targetPos: position, durationSeconds: 2)
-        } else if (speedKmH >= 70) {
-            map.setZoom(18, targetPos: position, durationSeconds: 2)
-        } else if (speedKmH >= 50) {
-            map.setZoom(19, targetPos: position, durationSeconds: 2)
-        } else {
-            map.setZoom(19, targetPos: position, durationSeconds: 2)
-        }
     }
 }

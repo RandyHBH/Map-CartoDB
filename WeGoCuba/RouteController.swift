@@ -9,32 +9,26 @@
 import Foundation
 import CoreLocation
 
-class RouteController: NSObject, RouteMapEventDelegate {
+class RouteController: NSObject {
     
     var map : NTMapView!
     var projection : NTProjection!
     var hopper: GraphHopper!
     var routing: Routing!
-    var mapListener: RouteMapEventListener!
-    var actualEventsSave : NTMapEventListener!
-    var progressLabel : ProgressLabel!
     
     var locationMarker: LocationMarker!
     
-    weak var routingStatusDelegate: RoutingStatusDelegate!
+    var delegate: NextTurnDelegate!
     
     var result: GHResponse?
     
-    init(mapView : NTMapView, progressLabel : ProgressLabel) {
+    init(mapView : NTMapView) {
         super.init()
         
         self.map = mapView
         self.projection = map.getOptions().getBaseProjection()
-        self.progressLabel = progressLabel
         
         initGraphhoper()
-        
-        mapListener = RouteMapEventListener()
         
         routing = Routing(mapView: self.map, hopper: self.hopper)
     }
@@ -51,82 +45,57 @@ class RouteController: NSObject, RouteMapEventDelegate {
         
     }
     
-    func finishPTPRoute() {
-        finishRoute()
-        mapListener.delegate = nil
-        map.setMapEventListener(nil)
-        map.setMapEventListener(actualEventsSave)
-    }
-    
     func longTap() {
         // No action for long tap
     }
     
-    func startPTPRoute() {
-        actualEventsSave = map.getMapEventListener()
-        map.setMapEventListener(mapListener)
-        mapListener.delegate = self
-        routing = Routing(mapView: self.map, hopper: self.hopper)
-    }
-    
-    func startClicked(event: RouteMapEvent) {
+    func setStartMarker(event: RouteMapEvent) {
         DispatchQueue.main.async(execute: {
-            self.routing.setStartMarker(position: event.clickPosition)
-            self.progressLabel.hide()
+            self.routing.setStartMarker(position: event.startPosition)
         })
     }
     
-    func stopClicked(event: RouteMapEvent) {
-        routing.setStopMarker(position: event.clickPosition)
-        let selectedVehicle = DataContainer.sharedInstance.selectedVehicle
-        showRoute(start: event.startPosition, stop: event.stopPosition, vehicle: selectedVehicle!.rawValue)
+    func setStopMarker(event: RouteMapEvent) {
+        routing.setStopMarker(position: event.stopPosition)
     }
     
-    func onePointRoute(event: RouteMapEvent) {
-        
-        routing.setStopMarker(position: event.clickPosition)
+    func calculateRoute(event: RouteMapEvent) {
+        let selectedVehicle = DataContainer.instance.selectedVehicle
+        showRoute(start: event.startPosition, stop: event.stopPosition, vehicle: selectedVehicle!.rawValue, complete: {_ in })
     }
     
     func finishRoute(){
         routing.cleaning()
     }
     
-    func showRoute(start: NTMapPos, stop: NTMapPos, vehicle: String) {
+    enum GHResponseParsingError: Error {
+        case invalidInput(String)
+    }
+    
+    func showRoute(start: NTMapPos, stop: NTMapPos, vehicle: String = "car", complete: @escaping (_ result: GHResponse?, _ info: String? ) -> Void) {
+        
         DispatchQueue.global().async {
-            
-            DispatchQueue.main.async {
-                self.routingStatusDelegate?.updateStatusCV(percent: 0.1)
-            }
-            
             
             let response = self.routing.getResult(startPos: start, stopPos: stop, vehicle: vehicle)
             
             self.result = response.0
             let info: String! = response.1
             
-            DispatchQueue.main.async {
-                self.routingStatusDelegate?.updateStatusCV(percent: 0.6)
+            if (self.result == nil) {
+                complete(nil, info)
             }
             
-            DispatchQueue.main.async(execute: {
-                if (self.result == nil) {
-                    self.progressLabel.complete(message: info)
-                    
-                    self.routingStatusDelegate?.updateStatusCV(percent: 1)
-                    
-                    return
-                } else {
-                    self.progressLabel.complete(message: self.routing.getMessage(result: self.result!))
-                    
-                    self.routingStatusDelegate?.updateStatusCV(percent: 0.8)
-                }
+            complete(self.result, info)
+        }
+    }
+    
+    func sendDrawroute(result: GHResponse, complete: @escaping (_ route: Route) -> Void) {
+        
+        DispatchQueue.main.async {
+            let color = NTColor(r: 14, g: 122, b: 254, a: 150)
+            self.routing.show(result: result, lineColor: color!, complete: { route in
                 
-                self.routingStatusDelegate?.updateStatusCV(percent: 0.9)
-                
-                let color = NTColor(r: 14, g: 122, b: 254, a: 150)
-                self.routing.show(result: self.result!, lineColor: color!, complete: {
-                    self.routingStatusDelegate?.updateStatusCV(percent: 1)
-                })
+                complete(route)
             })
         }
     }
@@ -160,7 +129,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
             DispatchQueue.main.async(execute: {
                 if (finished) {
                     self.finishRoute()
-                    self.locationMarker.modeFree()
+//                    self.locationMarker.modeFree()
                     return;
                 }
             })
@@ -197,42 +166,35 @@ class RouteController: NSObject, RouteMapEventDelegate {
         if (calculateRoute) {
             
             let finalPos: NTMapPos = NTMapPos(x: pointList.getLongitudeWith(pointList.getSize() - 1), y: pointList.getLatitudeWith(pointList.getSize() - 1))
-            print(finalPos.debugDescription)
             
             let latitude = Double(location.coordinate.latitude)
             let longitude = Double(location.coordinate.longitude)
             
             let startPosition : NTMapPos = self.projection.fromWgs84(NTMapPos(x: longitude, y: latitude))
-            print(startPosition.debugDescription)
             
             DispatchQueue.global().async {
                 
-                let response = self.routing.getNewResult(startPos: startPosition, stopPos: finalPos, vehicle: DataContainer.sharedInstance.selectedVehicle.rawValue)
+                let response = self.routing.getResult(startPos: startPosition, stopPos: finalPos, vehicle: DataContainer.instance.selectedVehicle.rawValue)
                 self.result = response.0
                 let info: String = response.1
                 
                 DispatchQueue.main.async(execute: {
                     
                     if (self.result == nil) {
-                        self.progressLabel.complete(message: info)
+                        self.delegate.routingFailed(info: info)
                         return
                     } else {
-                        self.progressLabel.complete(message: self.routing.getMessage(result: self.result!))
+//                        self.progressLabel.complete(message: self.routing.getMessage(result: self.result!))
                     }
                     
                     let color = NTColor(r: 14, g: 122, b: 254, a: 150)
-                    self.routing.show(result: self.result!, lineColor: color!, complete: {_ in })
+                    self.routing.show(result: self.result!, lineColor: color!, complete: { _ in })
                     
                     // MARK: UPDATE MARKER POSITION
                     // In navigation accurancy is not needed
                     self.locationMarker.showAt(latitude: latitude, longitude: longitude, accuracy: 0)
                     
-                    // MARK: UPDATE VIEW POSITION
-                    // TODO: REVIEW THIS LOGIC!!!!!
-                    if self.isTimerRunning == false {
                         self.locationMarker.focus()
-                    }
-                    
                 })
             }
             
@@ -250,19 +212,15 @@ class RouteController: NSObject, RouteMapEventDelegate {
                 // In navigation accurancy is not needed
                 self.locationMarker.showAt(latitude: latitude, longitude: longitude, accuracy: 0)
                 
-                // MARK: UPDATE VIEW POSITION
-                // TODO: REVIEW THIS LOGIC!!!!!
-                if isTimerRunning == false {
-                    locationMarker.focus()
-                }
-                
+                locationMarker.focus()
                 // MARK: UPDATING LINE
                 self.routing.show(points: pointList, startPoint: project, currentPointList: self.currentRoutePoint)
+                
+                // UPDATING NAVBAR INFORMATION velocity and direction
             }
         }
         
     }
-    
     
     func updateCurrentRouteStatus(location: CLLocation, posTolerance: Float, speed: Float) -> Bool {
         
@@ -340,7 +298,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
         
         // 3. check if destination found
         let next : NTMapPos? = getNextRouteGeoPoint();
-        let project: NTMapPos?
+        var project: NTMapPos?
         if (currentRoutePoint > 0 && next != nil) {
             let prevLocation = NTMapPos(x: pointList.getLongitudeWith(jint(currentRoute) - 1), y: pointList.getLatitudeWith(jint(currentRoute) - 1))
             project = getProjection(lat: (currentGeoPoint?.getY())!, lon: (currentGeoPoint?.getX())!,
@@ -352,12 +310,14 @@ class RouteController: NSObject, RouteMapEventDelegate {
         
         let lastPoint = NTMapPos(x: pointList.getLongitudeWith(jint(pointList.size()) - 1), y: pointList.getLatitudeWith(jint(pointList.size()) - 1))
         
+        // TODO: CALL METHOD UPDATE CURRENT INSTRUCTIONS STATUS
+        
         if (distanceBetween(startPoint: currentGeoPoint!, endPoint: lastPoint!) < 17 && !mDestinationArrived) {
             mDestinationArrived = true;
             
             return true
-            
         }
+        // TODO SI NO HAS LLEGADO AL DESTINO ENTONCES ACTUALIZA LAS INTSTRUCCIONES
         return false
     }
     
@@ -461,8 +421,7 @@ class RouteController: NSObject, RouteMapEventDelegate {
         return (2 * R * 1000 * asin(sqrt(a)));
     }
     
-    func computeDistanceAndBearing(lat1: Double, lon1: Double,
-                                   lat2 : Double, lon2 : Double) -> [Float]{
+    func computeDistanceAndBearing(lat1: Double, lon1: Double, lat2 : Double, lon2 : Double) -> [Float]{
         var results: [Float] = [0,0,0]
         // Based on http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
         // using the "Inverse Formula" (section 4)
@@ -590,6 +549,11 @@ class RouteController: NSObject, RouteMapEventDelegate {
     }
 }
 
-protocol RoutingStatusDelegate: class {
-    func updateStatusCV(percent: Double) -> Void
+protocol NextTurnDelegate {
+    
+    func instructionFound(current: Instruction, next: Instruction?)
+    
+    func routingFailed(info: String)
+    
+    func locationUpdated(result: NTRoutingResult)
 }

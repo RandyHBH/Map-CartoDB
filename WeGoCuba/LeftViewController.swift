@@ -52,7 +52,7 @@ extension LeftViewController: UITableViewDelegate {
             
         case "Navegación":
             let mapVC = MapViewController.newInstance()
-            self.navigationController?.present(mapVC, animated: true, completion: nil)
+            self.navigationController?.present(mapVC!, animated: true, completion: nil)
 //            self.navigationController?.pushViewController(mapVC, animated: true)
         case "Unidades de medida": break
         case "Idioma": break

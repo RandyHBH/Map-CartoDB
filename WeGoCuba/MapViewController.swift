@@ -10,18 +10,26 @@
  import CoreLocation
  
  
- class MapViewController: UIViewController, CLLocationManagerDelegate, RotationDelegate, BasicMapEventsDelgate, PTPButtonDelegate {
+ class MapViewController: UIViewController, CLLocationManagerDelegate, PTPButtonDelegate {
     
-    @IBOutlet var map: NTMapView!
+    var map: NTMapView!
+    @IBOutlet var mapContainer: UIView!
+    
+    
     @IBOutlet var rotationResetButton: RotationResetButton!
+    @IBOutlet weak var leftMenuButton: UIButton!
+    
     @IBOutlet var routeButtonsView: RouteButtonsView!
-    
-    // TODO: Verify where need to be. Now is in RouteButtonsView and here
+    @IBOutlet weak var menuContainer: UIView!
     @IBOutlet weak var routingChoices: RoutingChoices!
+    @IBOutlet weak var routingPositionsSelect: RoutingPositionsSelect!
+    @IBOutlet weak var ptpContainer: UIView!
     
-    // MARK: BASIC MAP DECLARATION
-    var projection: NTProjection!
-    var baseMap: BaseMap!
+    @IBOutlet weak var infoBar: InfoBar!
+    
+    var mapModel: MapModelController = DataContainer.instance.mapModel
+    
+    var showPtpContainer = false
     
     // MARK: LOCATIONS MARKERS
     var locationMarker: LocationMarker!
@@ -32,20 +40,11 @@
     // MARK: BASIC GPS LOCALIZATION DECLARATION
     var manager: CLLocationManager!
     var latestLocation: CLLocation!
-    var isUpdatingLocation: Bool = false
     
     // MARK: BASIC DECLARATION FOR OFFLINE ROUTE
-    var progressLabel: ProgressLabel!
+    //    var progressLabel: ProgressLabel!
     
     var routeController: RouteController!
-    
-    // MARK: TIMER
-    var timer = Timer()
-    var seconds = 5
-    var isTimerRunning = false
-    
-    // MARK:
-    var active = true
     
     // MARK: ROTATION FIX FOR MAP DISPLAYING BAD IN LANDSCAPE
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -54,7 +53,7 @@
     }
     
     // MARK: CLASS INSTANCE
-    class func newInstance() -> MapViewController {
+    class func newInstance() -> MapViewController? {
         let mapVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         return mapVC
     }
@@ -63,58 +62,43 @@
     func startLocationUpdates() {
         manager.startUpdatingLocation()
         manager.startUpdatingHeading()
-        
-        isUpdatingLocation = true
     }
     
     func stopLocationUpdates() {
         manager.stopUpdatingLocation()
         manager.stopUpdatingHeading()
-        
-        isUpdatingLocation = false
-    }
-    
-    // MARK: BASIC MAP EVENTS DELEGATE
-    func stopPositionSet(event: RouteMapEvent) {
-        
-        self.routeController?.onePointRoute(event: event)
-        
-        routeButtonsView.showHideRouteButton()
-        showHideNavigationBar()
-    }
-    
-    func stopPositionUnSet() {
-        
-        self.basicEvents?.stopPosition = nil
-        self.routeController?.finishRoute()
-        self.locationMarker?.modeFree()
-        
-        routeButtonsView.showHideRouteButton()
-        showHideNavigationBar()
-    }
-    
-    func longTap(){
-        // NO RESPONDER A LOS LONG-TAPS
     }
     
     // MARK: PTPBUTTON DELEGATE
-    func ptpButtonTapped() {
-        showHideNavigationBar()
+    var isRoutingChoisesViewActive = false
+    var isRoutingPositionsSelectViewActive = false
+    var isRotationButtonUp = true
+    
+    func ptpButtonTapped(first routingChoisesState: Bool, second routePointsSelectViewState: Bool) {
+        
+        hideRoutingChoicesView(state: routingChoisesState)
+        hideRoutePointsSelectionView(state: routePointsSelectViewState)
+        if (routingChoisesState == false) && (routePointsSelectViewState == true) {
+            return
+        } else {
+            if routingChoices.isDownButtonActive {
+               return
+            }
+            routingChoices.rotateDownButton()
+        }
     }
     
-    // MARK: ROUTE BUTTON DELEGATE
-    var navigationMode = false
-    var navigationInProgress = false
+    func hideRoutingChoicesView(state: Bool = true) {
+        DispatchQueue.main.async {
+            self.menuContainer.isHidden = state
+            self.routingChoices.isHidden = state
+        }
+    }
     
-    // TODO: NECESITO HACERLO EL DISEÑO EN EL STORYBOARD
-    func layoutProgressLabel() {
-        
-        let w: CGFloat = view.frame.width
-        let h: CGFloat = 40
-        let x: CGFloat = 0
-        let y: CGFloat = view.frame.height - h
-        
-        progressLabel.frame = CGRect(x: x, y: y, width: w, height: h)
+    func hideRoutePointsSelectionView(state: Bool = true) {
+        DispatchQueue.main.async {
+            self.routingPositionsSelect.isHidden = state
+        }
     }
     
     //MARK: CORE LOCATION MANAGER METHOD DELEGATE
@@ -128,7 +112,7 @@
         
         let location = locations[0]
         
-        latestLocation = DataContainer.sharedInstance.latestLocation
+        latestLocation = DataContainer.instance.latestLocation
         
         if (latestLocation != nil) {
             if (latestLocation.coordinate.latitude == location.coordinate.latitude) {
@@ -140,16 +124,14 @@
         }
         
         latestLocation = location
-        DataContainer.sharedInstance.latestLocation = latestLocation
+        DataContainer.instance.latestLocation = latestLocation
         
         guard !mFirstLocationUpdated else {
             
             locationMarker.showUserAt(location: location)
-            locationMarker.modeFree()
             mFirstLocationUpdated = false
             return
         }
-        
         
         locationMarker.showUserAt(location: location)
         
@@ -159,8 +141,7 @@
         // here correct course even if map is rotated
         
         let course = location.course;
-        let float = Float(exactly: course)!
-        
+        let float = Float(course)
         self.course = float
         
         // Only use course if it's available,
@@ -168,13 +149,6 @@
         if (hasCourse) {
             let angle = 180 - float - map.getRotation();
             locationMarker.rotate(rotation: angle)
-        }
-        
-        
-        if (self.routeController.result != nil) && (navigationMode == true) {
-            
-            self.routeController.updateRoute(location: location)
-            
         }
     }
     
@@ -185,11 +159,12 @@
             return
         }
         
-        // Only use heading if course isn't available.
         if (!hasCourse) {
             // Use true heading if it is valid.
             let heading = ((newHeading.trueHeading > 0) ? newHeading.trueHeading : newHeading.magneticHeading)
-            let angle = -Float(exactly: heading)!
+            
+            let angle = -Float(heading) - map.getRotation();
+            //        print("Angle: " + angle.description)
             locationMarker.rotate(rotation: angle)
         }
     }
@@ -208,6 +183,20 @@
     func onRotationCompleted() {
         isRotationInProgress = false
     }
+ }
+ 
+ extension MapViewController {
+    
+    func setupStatusBarColor() {
+        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
+        let statusBarView = statWindow.subviews[0] as UIView
+        statusBarView.backgroundColor = Colors.appBlue
+        statusBarView.tag = 100
+        self.navigationController?.view.addSubview(statusBarView)
+    }
+ }
+ 
+ extension MapViewController: RotationDelegate {
     
     func rotated(angle: CGFloat) {
         if (self.isRotationInProgress) {
@@ -220,6 +209,19 @@
     func zoomed(zoom: CGFloat) {
         
     }
+ }
+ 
+ extension MapViewController: GoButtonDelegate {
     
-    
+    func goButtonTapped(navigationVCInfo: NavigationInfo) {
+        if let navigationVC = NavigationViewController.newInstance() {
+            
+            navigationVC.map = self.map
+            navigationVC.locationMarker = self.locationMarker
+            navigationVC.routeController = self.routeController
+            navigationVC.routeInfo = navigationVCInfo.routeInfo
+            
+            present(navigationVC, animated: true, completion: nil)
+        }
+    }
  }

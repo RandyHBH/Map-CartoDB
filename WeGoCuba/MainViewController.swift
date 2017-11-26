@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         setupStatusBarColor()
+        setupNavigationControllerBarColor()
     }
     
     fileprivate func setupSideMenu() {
@@ -32,19 +33,10 @@ class MainViewController: UIViewController {
         SideMenuManager.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         
-        // Set up a cool background image for demo purposes
         SideMenuManager.menuAnimationBackgroundColor = Colors.appBlue
         
         SideMenuManager.menuPresentMode = .menuSlideIn
         SideMenuManager.menuWidth = max(round(min((self.view.frame.width), (self.view.frame.height)) * 0.85), 240)
-    }
-    
-    fileprivate func setupStatusBarColor() {
-        
-        let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-        statusBarView.backgroundColor = Colors.appBlue
-        statusBarView.tag = 100
-        self.navigationController?.view.addSubview(statusBarView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,5 +45,20 @@ class MainViewController: UIViewController {
         let statusBarView = self.navigationController?.view.viewWithTag(100)
         statusBarView?.removeFromSuperview()
     }
+}
+
+extension MainViewController {
+    fileprivate func setupStatusBarColor() {
+        
+        let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+        statusBarView.backgroundColor = Colors.appBlue
+        statusBarView.tag = 100
+        self.navigationController?.view.addSubview(statusBarView)
+    }
     
+    fileprivate func setupNavigationControllerBarColor() {
+        
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.tintColor = #colorLiteral(red: 0.9150560498, green: 0.9150775075, blue: 0.9150659442, alpha: 0.7017510776)
+    }
 }
