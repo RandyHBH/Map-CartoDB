@@ -24,6 +24,10 @@ class ShowStopMarker: UIView {
     }
     
     func showStopMarkerTapped(_ sender: UITapGestureRecognizer) {
+        delegate?.showStopMarker()
     }
+}
 
+protocol ShowStopMarkerDelegate {
+    func showStopMarker()
 }
