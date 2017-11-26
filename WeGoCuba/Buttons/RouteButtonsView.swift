@@ -312,6 +312,12 @@ extension RouteButtonsView {
         }
     }
     
+    func hideStopMarkerView(state: Bool = true) {
+        DispatchQueue.main.async {
+            self.stopMarkerView.isHidden = state
+        }
+    }
+    
     fileprivate func setImageToPTPButton() {
         ptpButton.setImage(UIImage(named: getVehicleIcon())?.withRenderingMode(.alwaysTemplate).tint(with: Colors.appBlue), for: .normal)
     }

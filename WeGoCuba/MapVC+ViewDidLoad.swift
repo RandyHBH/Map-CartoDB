@@ -34,8 +34,8 @@ extension MapViewController {
         routeButtonsView.hideInfoBar()
         routeButtonsView.hideRouteButton()
         routeButtonsView.hideGoNavigationButton()
+        routeButtonsView.hideStopMarkerView()
         
-
         if #available(iOS 9.0, *) {
             manager.requestAlwaysAuthorization()
         }
