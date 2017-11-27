@@ -125,6 +125,9 @@ class LocationMarker: NSObject {
             navigationPointer.setRotation(rotation)
             return
         }
+        if (userMarker == nil) {
+            return
+        }
         userMarker.setRotation(rotation)
     }
     
