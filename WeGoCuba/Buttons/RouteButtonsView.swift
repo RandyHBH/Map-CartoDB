@@ -415,7 +415,6 @@ extension RouteButtonsView: RouteMapEventDelegate {
     
     func showStopMarkerPosition() {
         let stopMarker = routeController?.getStopMarker()
-        print(stopMarker!.getBounds().getCenter().description)
         
         let screenWidth: Float = Float(map.frame.width) * 2
         let screenHeight: Float = Float(map.frame.height - 50) * 2
@@ -505,7 +504,7 @@ extension RouteButtonsView: RoutingChoicesDelegate {
             self.hideInfoBar()
             self.hideStopMarkerView()
             
-             AppState.instance.routeState = .CLEAN_ROUTE
+            AppState.instance.routeState = .CLEAN_ROUTE
         }
         
         NotificationCenter.default.removeObserver(self, name: .RoutingPositionsSelectStartNotification, object: self)

@@ -55,10 +55,10 @@ class Route {
                 return "\(distance)"
             case 1..<1000:
                 distanceType = .m
-                return "\(round( self.distance * 100) / 100)"
+                return "\(round(distance * 100) / 100)"
             default:
                 distanceType = .km
-                let distance = round( self.distance / 1000 * 100) / 100
+                let distance = round(distance / 1000 * 100) / 100
                 return "\(distance)"
             }
         } else {
