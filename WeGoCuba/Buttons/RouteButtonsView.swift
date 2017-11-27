@@ -135,10 +135,10 @@ class RouteButtonsView: UIView {
         
         // SET THE ROUTE STATE TO CALCULATING TO AVOID THE USER CHANGE THE MARKERS UNTIL CALCULATIONS FINISH
         AppState.instance.routeState = .CALCULATING_ROUTE
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(getSelectRouteModeUpdate), name: .RouteModeSelectNotification, object: nil)
         
         showRoute(start: startPosition!, stop: stopPosition!)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(getSelectRouteModeUpdate), name: .RouteModeSelectNotification, object: nil)
     }
     
     func fillLocationPoints(start: inout NTMapPos, end: inout NTMapPos) {
@@ -176,7 +176,7 @@ class RouteButtonsView: UIView {
         case .ROUTE_CALCULATED:
             start = map.getOptions().getBaseProjection().fromWgs84(start)
             end = endLocation
-
+            
         default:
             break
         }
@@ -193,46 +193,52 @@ class RouteButtonsView: UIView {
             if result == nil {
                 self.handle(error: NSError(domain: info!, code: 1, userInfo: nil))
                 return
+                
+            } else {
+                
+                self.routeController?.sendDrawroute(result: result!, complete: { route in
+                    
+                    route.startPos = self.map.getOptions().getBaseProjection().toWgs84(start)
+                    route.endPos = self.map.getOptions().getBaseProjection().toWgs84(stop)
+                    
+                    self.routeInfo = route
+                    
+                    self.infoBar.setUpInfo(routeInfo: self.routeInfo!, map: self.map)
+                    
+                    self.activityIndicator?.stopAnimating()
+                    
+                    // NEED TO GET THE STATE BEFORE THE ACTUAL ONE SOMETIMES FOR SOME BEHAVEIOR
+                    switch AppState.instance.previousRouteState! {
+                        
+                    case .ROUTE_FROM_ONE_POINT:
+                        self.hideGoNavigationButton(state: false)
+                        self.hidePTPContainer(state: true)
+                        self.ptpDelegate?.ptpButtonTapped(first: false, second: true)
+                        
+                    default:
+                        self.hideGoNavigationButton()
+                        self.ptpDelegate?.ptpButtonTapped(first: false, second: true)
+                    }
+                    
+                    self.switchWaterMarkState(active: true)
+                    self.hideInfoBar(state: false)
+                    
+                    // SET THE ROUTE STATE TO CALCULATED SO NOW THE USER CAN CHANGE THE FINAL MARKER UNTIL ROUTING FINISH
+                    AppState.instance.routeState = .ROUTE_CALCULATED
+                })
             }
-            
-            self.routeController?.sendDrawroute(result: result!, complete: { route in
-                
-                route.startPos = self.map.getOptions().getBaseProjection().toWgs84(start)
-                route.endPos = self.map.getOptions().getBaseProjection().toWgs84(stop)
-
-                self.routeInfo = route
-                
-                self.infoBar.setUpInfo(routeInfo: self.routeInfo!, map: self.map)
-                
-                self.activityIndicator?.stopAnimating()
-                
-                // NEED TO GET THE STATE BEFORE THE ACTUAL ONE SOMETIMES FOR SOME BEHAVEIOR
-                switch AppState.instance.previousRouteState! {
-                    
-                case .ROUTE_FROM_ONE_POINT:
-                    self.hideGoNavigationButton(state: false)
-                    self.hidePTPContainer(state: true)
-                    self.ptpDelegate?.ptpButtonTapped(first: false, second: true)
-                    
-                default:
-                    self.hideGoNavigationButton()
-                    self.hideRoutePointsSelectionView(true)
-                }
-                
-                self.switchWaterMarkState(active: true)
-                self.hideInfoBar(state: false)
-                
-                // SET THE ROUTE STATE TO CALCULATED SO NOW THE USER CAN CHANGE THE FINAL MARKER UNTIL ROUTING FINISH
-                AppState.instance.routeState = .ROUTE_CALCULATED
-            })
         })
     }
     
     // TODO: Is not complete yet, all error handling and info messages are made here
     func handle(error: Error) {
         
-        self.basicEvents?.cleaningLeftOvers()
-        self.activityIndicator?.stopAnimating()
+        endRouting()
+        DispatchQueue.main.async {
+            self.activityIndicator?.stopAnimating()
+        }
+        
+        AppState.instance.routeState = .CLEAN_ROUTE
     }
     
     @IBAction func locationButtonTapped (_ sender: UIButton) {
@@ -361,7 +367,7 @@ extension RouteButtonsView: RouteMapEventDelegate {
             
         case .ROUTE_CALCULATED:
             hideRouteButton(state: false)
-    
+            
         default:
             return
         }
@@ -493,10 +499,33 @@ extension RouteButtonsView: RoutingChoicesDelegate {
                     return
                 }
                 
-            default:
-                return
+            case .CALCULATING_ROUTE:
+                switch AppState.instance.previousRouteState! {
+                    
+                case .ROUTE_FROM_ONE_POINT:
+                    self.hidePTPButton(state: false)
+                    
+                case.ROUTE_FROM_TWO_POINT:
+                    self.isActivePTPButton = !self.isActivePTPButton
+                    
+                default:
+                    return
+                }
+                
+            case .CLEAN_ROUTE:
+                switch AppState.instance.previousRouteState! {
+                    
+                case .ROUTE_FROM_ONE_POINT:
+                    self.hidePTPButton(state: false)
+                    
+                case.ROUTE_FROM_TWO_POINT:
+                    self.isActivePTPButton = !self.isActivePTPButton
+                    
+                default:
+                    return
+                }
             }
-
+            
             self.hideRouteButton()
             self.hideGoNavigationButton()
             self.switchWaterMarkState()
