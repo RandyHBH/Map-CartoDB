@@ -374,6 +374,7 @@ extension RouteButtonsView: RouteMapEventDelegate {
             
         case .ROUTE_FROM_ONE_POINT:
             hideRouteButton()
+            hideStopMarkerView()
             hidePTPButton(state: false)
             
         case .ROUTE_FROM_TWO_POINT:
@@ -502,6 +503,7 @@ extension RouteButtonsView: RoutingChoicesDelegate {
             self.hideGoNavigationButton()
             self.switchWaterMarkState()
             self.hideInfoBar()
+            self.hideStopMarkerView()
             
              AppState.instance.routeState = .CLEAN_ROUTE
         }
