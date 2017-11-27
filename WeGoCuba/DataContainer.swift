@@ -18,7 +18,7 @@ class AppState {
     
     var routeState: RouteState = .CLEAN_ROUTE {
         didSet {
-            if oldValue != .ROUTE_CALCULATED && oldValue != .CALCULATING_ROUTE {
+            if oldValue != .ROUTE_CALCULATED && oldValue != .CALCULATING_ROUTE && oldValue != .CLEAN_ROUTE {
                 previousRouteState = oldValue
             }
         }
