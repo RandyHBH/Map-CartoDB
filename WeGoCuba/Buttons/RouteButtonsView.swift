@@ -424,6 +424,17 @@ extension RouteButtonsView: RouteMapEventDelegate {
         
         let contain = screenBounds!.contains(map.map(toScreen: stopMarker!.getBounds().getCenter()))
         
+        let midScreenPos = NTScreenPos(x: Float(map.frame.width), y: Float(map.frame.height - 50))
+        
+        if contain == false {
+            
+            let projection = map.getOptions().getBaseProjection()!
+            let pos1Wgs = projection.toWgs84(map.screen(toMap: midScreenPos))!
+            let pos2Wgs = projection.toWgs84(stopMarker!.getBounds().getCenter())!
+            
+            self.stopMarkerView.updateDistance(pos1Wgs: pos1Wgs, finalPos: pos2Wgs)
+        }
+        
         if stopMarkerView.isHidden != contain {
             DispatchQueue.main.async {
                 self.stopMarkerView.isHidden = contain

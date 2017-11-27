@@ -59,6 +59,13 @@ class RouteController: NSObject {
         routing.setStopMarker(position: event.stopPosition)
     }
     
+    func getStopMarker() -> NTMarker {
+        if let marker = routing.stopMarker {
+            return marker
+        }
+        return NTMarker()
+    }
+    
     func calculateRoute(event: RouteMapEvent) {
         let selectedVehicle = DataContainer.instance.selectedVehicle
         showRoute(start: event.startPosition, stop: event.stopPosition, vehicle: selectedVehicle!.rawValue, complete: {_ in })
