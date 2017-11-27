@@ -63,7 +63,7 @@ class ShowStopMarker: UIView {
                 return "\(distance)"
             case 1..<1000:
                 distanceType = .m
-                return "\(round(distance * 100) / 100)"
+                return String(format: "%.0f", distance)
             default:
                 distanceType = .km
                 let distance = round(distance / 1000 * 100) / 100
