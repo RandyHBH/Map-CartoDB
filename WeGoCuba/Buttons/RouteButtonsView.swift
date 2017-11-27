@@ -265,6 +265,7 @@ class RouteButtonsView: UIView {
         self.basicEvents?.delegate = self
         self.routingChoices.delegate = self
         self.infoBar.delegate = self
+        self.stopMarkerView.delegate = self
     }
 }
 
@@ -442,6 +443,16 @@ extension RouteButtonsView: RouteMapEventDelegate {
         }
     }
 }
+
+extension RouteButtonsView: ShowStopMarkerDelegate {
+    func showStopMarker(pos: NTMapPos) {
+        
+        let projection = map.getOptions().getBaseProjection()
+        let position = projection?.fromWgs84(pos)
+        
+        map.setZoom(16, durationSeconds: 2)
+        map.setFocus(position, durationSeconds: 1)
+    }
 }
 
 extension RouteButtonsView: RoutingChoicesDelegate {
