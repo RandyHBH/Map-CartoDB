@@ -46,9 +46,9 @@ extension MapViewController {
         //Creating GPS Marker
         locationMarker = mapModel.locationMarker
         
-        // FOCUS IN CUBA
+        // FOCUS IN CUBA THIS CAN BE CHANGED TO FOCUS TO USER MARKER POS
         map?.setFocus(mapModel.projection.fromWgs84(NTMapPos(x: -82.2906, y: 23.0469)), durationSeconds: 0)
-        map?.setZoom(8, durationSeconds: 3)
+        map?.setZoom(10, durationSeconds: 3)
     }
     
     private func initLocation() {

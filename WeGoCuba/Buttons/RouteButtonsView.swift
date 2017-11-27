@@ -403,7 +403,6 @@ extension RouteButtonsView: RouteMapEventDelegate {
         let maxScreenPos: NTScreenPos = NTScreenPos(x: screenWidth, y: screenHeight)
         let screenBounds = NTScreenBounds(min: minScreenPos, max: maxScreenPos)
         
-        
         let contain = screenBounds?.contains(map.map(toScreen: marker.getBounds().getCenter()))
         
         if locationContainer.isHidden != contain {

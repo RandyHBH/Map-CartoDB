@@ -134,7 +134,7 @@
 		8B273CBD1F61C1A6008FA023 /* AddMarkers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMarkers.swift; path = Marcadores/AddMarkers.swift; sourceTree = "<group>"; };
 		8B273CBF1F61C5C1008FA023 /* BasicMapEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicMapEvents.swift; path = Listeners/BasicMapEvents.swift; sourceTree = "<group>"; };
 		8B27B68D1F8C5748009F4722 /* RouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteController.swift; sourceTree = "<group>"; };
-		8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowStopMarker.swift; sourceTree = "<group>"; };
+		8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowStopMarker.swift; path = ../ShowStopMarker.swift; sourceTree = "<group>"; };
 		8B3E39F31FA26A0D006C0CD9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8B3E39F51FA2C750006C0CD9 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		8B3E39F91FA2D347006C0CD9 /* DRHTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DRHTableViewCell.swift; sourceTree = "<group>"; };
@@ -413,11 +413,10 @@
 		8B7F79D01FC33C1600E168B5 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
-				8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */,
+				8BFED7ED1F85143300544FB1 /* Buttons */,
 				8BD08F9B1FAEC8870073BE72 /* RoutingChoices.swift */,
 				8BE3211A1FB4C31500D65839 /* RoutingPositionsSelect.swift */,
 				8B3FBDBC1FACCCB3002EA3DB /* RouteButtonsView.swift */,
-				8BFED7ED1F85143300544FB1 /* Buttons */,
 				8BD4D4BE1FB9FA7200852B26 /* InfoBar.swift */,
 			);
 			name = Subview;
@@ -586,6 +585,7 @@
 		8BFED7ED1F85143300544FB1 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				8B2E3F401FCB309900D056AC /* ShowStopMarker.swift */,
 				8BFED7F01F85143300544FB1 /* RotationResetButton.swift */,
 			);
 			path = Buttons;
@@ -1024,7 +1024,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LJ9SF6A6MP;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
