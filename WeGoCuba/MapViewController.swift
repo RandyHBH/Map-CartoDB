@@ -79,13 +79,14 @@
         hideRoutePointsSelectionView(state: routePointsSelectViewState)
         
         if (routingChoisesState == false) && (routePointsSelectViewState == true) {
+            if routingChoices.isDownButtonActive {
+                return
+            }
+            routingChoices.rotateDownButton()
             return
         } else if (routingChoisesState == false) && (routePointsSelectViewState == false) {
             routingChoices.rotateDownButton()
         } else {
-//            if routingChoices.isDownButtonActive {
-//               return
-//            }
 //            routingChoices.rotateDownButton()
             return
         }
