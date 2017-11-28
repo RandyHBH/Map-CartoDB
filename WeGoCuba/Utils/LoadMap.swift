@@ -31,7 +31,10 @@ class BaseMap: NSObject {
        
         let newbaseLayer = NTCartoOfflineVectorTileLayer(dataSource: source, style: .CARTO_BASEMAP_STYLE_VOYAGER)
         
-        map.getLayers()?.add(newbaseLayer)
+        map.getLayers().insert(0, layer: newbaseLayer)
+        
+        let decoder = newbaseLayer?.getTileDecoder() as! NTMBVectorTileDecoder
+        decoder.setStyleParameter("buildings", value: "2")
     }
     
     func createTileDataSource() -> NTTileDataSource {
