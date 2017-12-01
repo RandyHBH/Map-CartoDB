@@ -401,9 +401,10 @@ extension RouteButtonsView: RouteMapEventDelegate {
     
     func hideLocationButton() {
         let marker = DataContainer.instance.mapModel.locationMarker.userMarker!
+        let scale = Float(UIScreen.main.scale)
         
-        let screenWidth: Float = Float(map.frame.width) * 2
-        let screenHeight: Float = Float(map.frame.height - 50) * 2
+        let screenWidth: Float = Float(map.frame.width) * scale
+        let screenHeight: Float = Float(map.frame.height - 50) * scale
         
         let minScreenPos: NTScreenPos = NTScreenPos(x: 0, y: 0)
         let maxScreenPos: NTScreenPos = NTScreenPos(x: screenWidth, y: screenHeight)
@@ -420,9 +421,10 @@ extension RouteButtonsView: RouteMapEventDelegate {
     
     func showStopMarkerPosition() {
         let stopMarker = routeController?.getStopMarker()
+        let scale = Float(UIScreen.main.scale)
         
-        let screenWidth: Float = Float(map.frame.width) * 2
-        let screenHeight: Float = Float(map.frame.height - 50) * 2
+        let screenWidth: Float = Float(map.frame.width) * scale
+        let screenHeight: Float = Float(map.frame.height - 50) * scale
         
         let minScreenPos: NTScreenPos = NTScreenPos(x: 0, y: 0)
         let maxScreenPos: NTScreenPos = NTScreenPos(x: screenWidth, y: screenHeight)
