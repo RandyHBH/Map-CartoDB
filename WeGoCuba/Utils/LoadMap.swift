@@ -17,24 +17,28 @@ class BaseMap: NSObject {
     let name: String = "cuba"
     let format : String = "mbtiles"
     
+    var currentLayer: NTTileLayer!
+    
     init(mapView : NTMapView) {
         super.init()
         
         self.map = mapView
         
         self.source = createTileDataSource()
-        loadVectorDataSource(source: source)
+        currentLayer = addBaseLayer(source: source)
     }
     
 
-    func loadVectorDataSource(source : NTTileDataSource) {
-       
-        let newbaseLayer = NTCartoOfflineVectorTileLayer(dataSource: source, style: .CARTO_BASEMAP_STYLE_VOYAGER)
+    func addBaseLayer(source : NTTileDataSource) -> NTCartoOfflineVectorTileLayer {
+        let baseLayer = NTCartoOfflineVectorTileLayer(dataSource: source, style: .CARTO_BASEMAP_STYLE_VOYAGER)
+        baseLayer?.setPreloading(true)
+        map.getLayers().add(baseLayer)
         
-        map.getLayers().insert(0, layer: newbaseLayer)
-        
-        let decoder = newbaseLayer?.getTileDecoder() as! NTMBVectorTileDecoder
+        // Set building in 3d could be a global variable so de user can tweak how would liket to see the buildings
+        let decoder = baseLayer?.getTileDecoder() as! NTMBVectorTileDecoder
         decoder.setStyleParameter("buildings", value: "2")
+        
+        return baseLayer!
     }
     
     func createTileDataSource() -> NTTileDataSource {
